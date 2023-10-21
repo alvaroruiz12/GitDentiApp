@@ -1,5 +1,6 @@
 package Main;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import BBDD.Conexion;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
@@ -20,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
@@ -35,7 +39,7 @@ public class Login extends JFrame {
 	private JButton btnNewButton;
 	JLabel lblNewLabel, lblNewLabel_1;
 	private boolean esUsuario = true; //tiene que ir en false
-	private String nombre, contra;
+	private String nombre, contra; 
 	private Conexion conex;
 
 	
@@ -80,6 +84,8 @@ public class Login extends JFrame {
 	
 	public Login() {
 		setResizable(false);
+
+		
 		
 		//iniciar toda la aplicacion
 		init();
@@ -98,7 +104,7 @@ public class Login extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1920, 1080);
 		
 		
 		contentPane = new JPanel();
@@ -110,25 +116,37 @@ public class Login extends JFrame {
 		
 		
 		//TEXTFIELD
-		textField.setBounds(155, 82, 86, 20);
+		textField.setBounds(942, 216, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		//JLABEL USUARIO
-		lblNewLabel.setBounds(165, 57, 58, 14);
+		lblNewLabel.setBounds(942, 191, 58, 14);
 		contentPane.add(lblNewLabel);
 		
 		//JLABEL CONTRASEÑA
-		lblNewLabel_1.setBounds(158, 112, 79, 14);
+		lblNewLabel_1.setBounds(949, 259, 79, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		//PASSWORDFIELD
-		passwordField.setBounds(155, 138, 86, 20);
+		passwordField.setBounds(937, 284, 86, 20);
 		contentPane.add(passwordField);
 		
 		//BOTON INICIAR SESION
-		btnNewButton.setBounds(132, 173, 126, 23);
+		btnNewButton.setBounds(931, 333, 126, 23);
 		contentPane.add(btnNewButton);
+		
+		
+        
+        
+		JLabel fondo = new JLabel("");
+		fondo.setBounds(0, 0, 657, 466);
+		fondo.setSize(1920,1080);
+		ImageIcon imagen= new ImageIcon(getClass().getResource("fondologin	ººº.jpg"));
+		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen2);
+		contentPane.add(fondo);
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						
