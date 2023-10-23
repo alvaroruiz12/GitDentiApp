@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BBDD.Conexion;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.SystemColor;
@@ -13,9 +16,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
 import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.JTable;
@@ -29,14 +35,20 @@ public class InicioAdmin extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+
 	public static void main(String[] args) {
+		
+		ArrayList<String> b = null;
+		Conexion con = null;
+		 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InicioAdmin frame = new InicioAdmin();
+					InicioAdmin frame = new InicioAdmin(b, con);
 					//metodo para que la pantalla sea en pantalla completa
-					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-					frame.setVisible(true);
+			        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+			        frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,7 +59,16 @@ public class InicioAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioAdmin() {
+	
+	public InicioAdmin(ArrayList<String> a, Conexion con) {
+		
+		
+
+	    
+		ArrayList<String> usuario = a;
+		Conexion conexion = con;
+		
+		ArrayList<String> usuario_actual = a;
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +83,7 @@ public class InicioAdmin extends JFrame {
 	
 		//boton para hacer pedido
 		JButton btnHacerPedido = new JButton("HACER PEDIDO");
-		btnHacerPedido.setBackground(new Color(0, 255, 255));
+		btnHacerPedido.setBackground(new Color(134, 215, 253));
 		btnHacerPedido.setBounds(0, 0, 380, 90);
 		btnHacerPedido.setForeground(new Color(255, 255, 255));
 		btnHacerPedido.setFont(new Font("Arial", Font.ITALIC, 33));
@@ -72,7 +93,16 @@ public class InicioAdmin extends JFrame {
 		
 		//boton de altas 
 		JButton btnAltas = new JButton("ALTAS");
-		btnAltas.setBackground(new Color(0, 255, 255));
+		btnAltas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				InicioAltas altas = new InicioAltas(usuario,conexion);
+				altas.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnAltas.setBackground(new Color(134, 215, 253));
 		btnAltas.setBounds(380, 0, 380, 90);
 		btnAltas.setForeground(new Color(255, 255, 255));
 		btnAltas.setFont(new Font("Arial", Font.ITALIC, 33));
@@ -82,7 +112,7 @@ public class InicioAdmin extends JFrame {
 
 		//boton de pedeidos
 		JButton btnPedidos = new JButton("PEDIDOS");
-		btnPedidos.setBackground(new Color(0, 255, 255));
+		btnPedidos.setBackground(new Color(134, 215, 253));
 		btnPedidos.setBounds(1536, 0, 380, 90);
 		btnPedidos.setForeground(new Color(255, 255, 255));
 		btnPedidos.setFont(new Font("Arial", Font.ITALIC, 33));
@@ -92,7 +122,7 @@ public class InicioAdmin extends JFrame {
 		
 		//boton de inventario
 		JButton btnInventario = new JButton("INVENTARIO");
-		btnInventario.setBackground(new Color(0, 255, 255));
+		btnInventario.setBackground(new Color(134, 215, 253));
 		btnInventario.setBounds(1158, 0, 380, 90);
 		btnInventario.setForeground(new Color(255, 255, 255));
 		btnInventario.setFont(new Font("Arial", Font.ITALIC, 33));
@@ -102,7 +132,7 @@ public class InicioAdmin extends JFrame {
 		
 		//boton consulta
 		JButton consulta = new JButton("CONSULTA");
-		consulta.setBackground(new Color(0, 255, 255));
+		consulta.setBackground(new Color(134, 215, 253));
 		consulta.setBounds(1158, 0, 380, 90);
 		consulta.setForeground(new Color(255, 255, 255));
 		consulta.setFont(new Font("Arial", Font.ITALIC, 33));
@@ -118,7 +148,7 @@ public class InicioAdmin extends JFrame {
 		//combobox mes
 		JComboBox comboMes = new JComboBox();
 		comboMes.setForeground(new Color(255, 255, 255));
-		comboMes.setBackground(new Color(0, 255, 255));
+		comboMes.setBackground(new Color(134, 215, 253));
 		comboMes.setFont(new Font("Arial Black", Font.PLAIN, 33));
 		comboMes.setBounds(81, 159, 1300, 70);
 		((JLabel)comboMes.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
@@ -142,6 +172,7 @@ public class InicioAdmin extends JFrame {
 		//doctor 1
 		//boton
 		JButton btnDoctor1 = new JButton("Doctor Ramirez");
+		btnDoctor1.setBackground(new Color(134, 215, 253));
 		btnDoctor1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -159,6 +190,7 @@ public class InicioAdmin extends JFrame {
 		//doctor 2
 		//boton
 		JButton btnDoctor2 = new JButton("Doctor Gutierrez");
+		btnDoctor2.setBackground(new Color(134, 215, 253));
 		btnDoctor2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -173,6 +205,7 @@ public class InicioAdmin extends JFrame {
 		//doctor 3
 		//boton
 		JButton btnDoctor3 = new JButton("Doctora Martinez");
+		btnDoctor3.setBackground(new Color(134, 215, 253));
 		btnDoctor3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -186,6 +219,7 @@ public class InicioAdmin extends JFrame {
 		//doctor 4
 		//boton
 		JButton btnDoctor4 = new JButton("Doctor Márquez");
+		btnDoctor4.setBackground(new Color(134, 215, 253));
 		btnDoctor4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -200,6 +234,7 @@ public class InicioAdmin extends JFrame {
 		//doctor 5
 		//boton
 		JButton btnDoctor5 = new JButton("Doctor Ayarza");
+		btnDoctor5.setBackground(new Color(134, 215, 253));
 		btnDoctor5.setBounds(1429, 609, 400, 60);
 		contentPane.add(btnDoctor5);
 		//progreso
@@ -210,6 +245,7 @@ public class InicioAdmin extends JFrame {
 		//boton
 		JButton btnDoctor6 = new JButton("Doctor Lavado");
 		btnDoctor6.setBounds(1429, 696, 400, 60);
+		btnDoctor6.setBackground(new Color(134, 215, 253));
 		contentPane.add(btnDoctor6);
 		//progreso
 		JProgressBar progressBarDoctor6 = new JProgressBar();
@@ -229,4 +265,5 @@ public class InicioAdmin extends JFrame {
 		
 		
 	}
+	
 }

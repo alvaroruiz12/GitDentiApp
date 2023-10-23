@@ -40,10 +40,11 @@ public class Login extends JFrame {
 	private JTextField txUsuario;
 	private JPasswordField pfContra;
 	private JButton btnInicioSesion;
-	JLabel lblNewLabel, lblNewLabel_1;
+	JLabel lblUsuario, lblContra;
 	private boolean esUsuario = true; //tiene que ir en false
 	private String nombre, contra; 
-	private Conexion conex;
+	private Conexion conexion;
+	private JLabel lblFotoUser;
 
 	
 
@@ -73,17 +74,17 @@ public class Login extends JFrame {
 		btnInicioSesion.setHorizontalAlignment(SwingConstants.LEFT);
 		btnInicioSesion.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		txUsuario = new JTextField();
-		lblNewLabel= new JLabel("USUARIO");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 11));
-		lblNewLabel_1 = new JLabel("CONTRASEÑA");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		lblUsuario= new JLabel("USUARIO");
+		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuario.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		lblContra = new JLabel("CONTRASEÑA");
+		lblContra.setHorizontalAlignment(SwingConstants.CENTER);
+		lblContra.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		pfContra = new JPasswordField();
 		
 		//conexion
-		conex = new Conexion();
-		conex.conectar();
+		conexion = new Conexion();
+		conexion.conectar();
 
 	}
 	
@@ -132,15 +133,17 @@ public class Login extends JFrame {
 		txUsuario.setColumns(10);
 		
 		//JLABEL USUARIO
-		lblNewLabel.setBounds(701, 276, 135, 25);
-		contentPane.add(lblNewLabel);
+		lblUsuario.setBounds(701, 276, 135, 25);
+		lblUsuario.setForeground(new Color(255,255,255));
+		contentPane.add(lblUsuario);
 		
 		//JLABEL CONTRASEÑA
-		lblNewLabel_1.setBounds(701, 348, 135, 25);
-		contentPane.add(lblNewLabel_1);
+		lblContra.setBounds(701, 348, 135, 25);
+		contentPane.add(lblContra);
 		
 		//PASSWORDFIELD
 		pfContra.setBounds(701, 384, 135, 25);
+		lblContra.setForeground(new Color(255,255,255));
 		contentPane.add(pfContra);
 		
 		//BOTON INICIAR SESION
@@ -161,50 +164,64 @@ public class Login extends JFrame {
 		version.setForeground(new Color(255, 255, 255));
 		contentPane.add(version);
         
+		
+		//foto usuario
+		lblFotoUser = new JLabel();
+		lblFotoUser.setBounds(742, 215, 50, 50);
+		ImageIcon imagen= new ImageIcon(getClass().getResource("user.png"));
+		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(lblFotoUser.getWidth(), lblFotoUser.getHeight(), Image.SCALE_SMOOTH));
+		lblFotoUser.setIcon(imagen2);
+		contentPane.add(lblFotoUser);
+		
+		
+		
         //JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 900, 700);
 	
-		ImageIcon imagen= new ImageIcon(getClass().getResource("fondologin.jpg"));
-		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
-		fondo.setIcon(imagen2);
+		ImageIcon imagen3= new ImageIcon(getClass().getResource("fondologin.jpg"));
+		ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen4);
 		contentPane.add(fondo);
 		
+
 	
-		
+
 	// inicio de sesion 
 		btnInicioSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						
 				nombre = txUsuario.getText();
-				contra = pfContra.getPassword().toString();
-				
-				String sentenciaSQL="Select * from usuarios where user='"+nombre+"' & password='"+contra+"';";
-				
-				ArrayList<String> intento = new ArrayList<String>();
-				intento.add(nombre);
-				intento.add(contra);
+				contra = pfContra.getText();
+				String sentenciaSQL="Select * from usuarios where user = '"+nombre+"' AND password='"+contra+"';";
 				
 				ArrayList<String> res = new ArrayList<String>();
-				res= conex.seleccionarUsuarios(conex,sentenciaSQL);
+				res= conexion.seleccionarUsuarios(conexion,sentenciaSQL);
+				System.out.println(res);
+				
+			if (res.isEmpty()) {
+		        JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);			
+		        }else {
 				
 				
 				
-				
-			/*	if(res.get(3) == "true") {
+				if(res.get(3) == "true") {
 					
 					//crear ventana admin
+					
+					InicioAdmin ventana_admin = new InicioAdmin(res,conexion);
+					ventana_admin.setVisible(true);
+					dispose();
 					
 					
 				} else if (res.get(3) == "false") {
 					
-					//crear ventana doctor
+					InicioDoctor ventana_doctor = new InicioDoctor(); 
+					ventana_doctor.setVisible(true);
+					dispose();
 					
-				}*/
-				
-				
-				
-				
+				}
+		        }
 				
 			}
 		});

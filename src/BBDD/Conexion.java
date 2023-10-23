@@ -29,10 +29,9 @@ public class Conexion {
 
 	}
 	
-	public static ArrayList<String> seleccionarUsuarios(Conexion con, String sentencia){
+	public ArrayList<String> seleccionarUsuarios(Conexion con, String sentencia){
 		
 		ArrayList<String> res = new ArrayList<String>();
-		res=null;
 		
 		
 		Conexion conexion = con;
@@ -55,10 +54,7 @@ public class Conexion {
 				Boolean rol = rs.getBoolean(4);
 				res.add(Boolean.toString(rol));
 
-			}	
-			
-		return res;
-			
+			}			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -68,6 +64,29 @@ public class Conexion {
 		
 		return res;
 		
+	}
+	
+	public boolean insertar(Conexion con, String sentencia) {
+		
+		boolean res= false;
+		
+		Conexion conexion = con;
+		Connection cn = null;
+		Statement stm = null;
+		int rs = 0;
+		
+		try {
+			cn=conexion.conectar();
+			stm = cn.createStatement();
+			rs= stm.executeUpdate(sentencia);
+					
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return res;
 	}
 	
 	public boolean comprobar(String n, String c) {
