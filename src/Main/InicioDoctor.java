@@ -154,19 +154,23 @@ public class InicioDoctor extends JFrame {
 			//titulo de la tabla
 			//Dia
 			JLabel lblDia = new JLabel("Día");
-			lblDia.setBounds(165, 179, 46, 14);
+			lblDia.setBounds(165, 159, 389, 40);
+			lblDia.setFont(new Font("Arial", Font.PLAIN, 33));
 			contentPane.add(lblDia);
 			//paciente
 			JLabel lblPaciente = new JLabel("Paciente");
-			lblPaciente.setBounds(564, 179, 46, 14);
+			lblPaciente.setBounds(436, 166, 390, 40);
+			lblPaciente.setFont(new Font("Arial", Font.PLAIN, 33));
 			contentPane.add(lblPaciente);
 			//fecha
 			JLabel lblFecha = new JLabel("Fecha");
-			lblFecha.setBounds(964, 179, 46, 14);
+			lblFecha.setBounds(841, 166, 389, 40);
+			lblFecha.setFont(new Font("Arial", Font.PLAIN, 33));
 			contentPane.add(lblFecha);
 			//Tratamiento
 			JLabel lblTratamiento = new JLabel("Tratamiento");
-			lblTratamiento.setBounds(1362, 179, 46, 14);
+			lblTratamiento.setBounds(1198, 166, 389, 40);
+			lblTratamiento.setFont(new Font("Arial", Font.PLAIN, 33));
 			contentPane.add(lblTratamiento);
 
 	     
