@@ -5,9 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JToolBar;
 
-public class InicioDoctor extends JFrame {
+public class InicioAltas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -19,7 +18,7 @@ public class InicioDoctor extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InicioDoctor frame = new InicioDoctor();
+					InicioAltas frame = new InicioAltas();
 					//metodo para que la pantalla sea en pantalla completa
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 					frame.setVisible(true);
@@ -33,37 +32,14 @@ public class InicioDoctor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioDoctor() {
-	setResizable(false);
-	
-
-		
-		
-		//iniciar toda la aplicacion
-		
-		
-		//conectarse a la baes de datos
-
-		
-		
-		
-		
-		/*
-		 * 
-		 * COMIENZO DE JFRAME
-		 * 
-		 */
-		
-		
+	public InicioAltas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 700);
-		
+		setBounds(100, 100, 1920, 1080);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
 	}
+
 }

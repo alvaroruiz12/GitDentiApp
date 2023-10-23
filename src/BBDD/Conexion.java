@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 public class Conexion {
 
 	private static final String CONTROLADOR="com.mysql.jbdc.Driver";
@@ -31,7 +32,8 @@ public class Conexion {
 	public static ArrayList<String> seleccionarUsuarios(Conexion con, String sentencia){
 		
 		ArrayList<String> res = new ArrayList<String>();
-		res = null;
+		res=null;
+		
 		
 		Conexion conexion = con;
 		Connection cn = null;
@@ -74,5 +76,6 @@ public class Conexion {
 		
 		return res;
 	}
+	
 
 }
