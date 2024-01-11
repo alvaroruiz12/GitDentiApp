@@ -138,7 +138,6 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Insertar Alta");
 		mntmNewMenuItem.setMargin(margenes);
-
 		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
