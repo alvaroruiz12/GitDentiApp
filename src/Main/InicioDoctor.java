@@ -196,8 +196,11 @@ public class InicioDoctor extends JFrame {
 		table_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1);
 
-		citas.CargarTabla(model, table_1);
+		citas.CargarTablaDoctor(model, table_1);
 
+		
+		
+		
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1920, 1080);

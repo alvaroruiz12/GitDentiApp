@@ -8,5 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="lib" path="lib/T.eclipse.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luisi/OneDrive/Escritorio/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,11 +1,12 @@
 package BBDD;
 
+import java.net.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.swing.JOptionPane;
 
@@ -438,4 +439,35 @@ public boolean insertar(Conexion con, String sentencia) {
 		
 		return nombre;
 	}
+	public String seleccionarDoctor(Conexion con, String nombre) {
+		Conexion conexion = con;
+		Connection cn = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		
+		String sentencia="Select Nombre from doctor";
+		try {
+			cn=conexion.conectar();
+			stm = cn.createStatement();
+			rs= stm.executeQuery(sentencia);
+			
+			List<String> nombresDoctores = new ArrayList<>();
+
+			
+			while (rs.next()) {
+                String nombreDoctor = rs.getString("Nombre");
+                nombresDoctores.add(nombreDoctor);
+            }
+					
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return nombre;
+	}
+	
+
+	
 }

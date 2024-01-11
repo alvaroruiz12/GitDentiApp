@@ -79,7 +79,8 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
    		InicioAdmin frame = this;
-
+   		
+   		//easter egg control + O mensaje medi
 		KeyStroke keystroke = KeyStroke.getKeyStroke("control O");
 		int condition = JComponent.WHEN_IN_FOCUSED_WINDOW;
 		InputMap inputmap = getRootPane().getInputMap(condition);
@@ -114,10 +115,11 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		table_1.setSelectionForeground(Color.BLACK);
 		DefaultTableModel model;
 		table_1.setModel(model = new DefaultTableModel(new Object[][] {
-		}, new String[] { "idCitas", "Hora", "Fecha", "IdPagos", "DNI paciente", "DNI doctor","Observaciones" }));
+			//datos de la tabla
+		}, new String[] { "Hora", "Fecha", "IdPagos", "DNI paciente", "DNI doctor","Observaciones" }));
 		table_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1);
-		
+		//metodo de cargar la tabla
 		citas.CargarTabla(model, table_1);
 		 Insets margenes = new Insets(15, 15, 15, 15);
 
@@ -138,6 +140,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Insertar Alta");
 		mntmNewMenuItem.setMargin(margenes);
+
 		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));

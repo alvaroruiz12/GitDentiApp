@@ -1,6 +1,7 @@
 package Main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -18,22 +19,28 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import BBDD.Conexion;
 
 public class EditarCitas extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel lblPagos;
 	private JTextField txHora;
 	private JTextField txFecha;
 	private JTextField txDoctor;
-	private JTextField txPagos;
 	private JTextField txPacientes;
 	private JTextField txObservaciones;
-	private JTextField txID;
+	private JTable table_1;
+	DefaultTableModel model;
+	Citas citas = new Citas();
+
 	/**
 	 * Launch the application.
 	 */
@@ -60,7 +67,7 @@ public class EditarCitas extends JDialog {
 		setBounds(100, 100, 1100, 650);
 		
 		JLabel lblHora = new JLabel("Hora");
-		lblHora.setBounds(318, 152, 200, 50);
+		lblHora.setBounds(27, 91, 200, 50);
 		lblHora.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblHora.setForeground(Color.white);
 
@@ -68,7 +75,7 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(lblHora);
 		
 		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setBounds(318, 201, 200, 50);
+		lblFecha.setBounds(27, 152, 200, 50);
 		lblFecha.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblFecha.setForeground(Color.white);
 
@@ -76,23 +83,15 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(lblFecha);
 		
 		JLabel lblDoctor = new JLabel("Doctor");
-		lblDoctor.setBounds(318, 262, 200, 50);
+		lblDoctor.setBounds(27, 213, 200, 50);
 		lblDoctor.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblDoctor.setForeground(Color.white);
 
 		lblDoctor.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblDoctor);
 		
-		lblPagos = new JLabel("Pagos");
-		lblPagos.setBounds(318, 323, 200, 50);
-		lblPagos.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPagos.setForeground(Color.white);
-
-		lblPagos.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblPagos);
-		
 		JLabel lblTratamientos = new JLabel("Tratamientos");
-		lblTratamientos.setBounds(318, 384, 200, 50);
+		lblTratamientos.setBounds(37, 274, 200, 50);
 		lblTratamientos.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblTratamientos.setForeground(Color.white);
 
@@ -100,7 +99,7 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(lblTratamientos);
 		
 		JLabel lblObservaciones = new JLabel("Observaciones");
-		lblObservaciones.setBounds(318, 518, 200, 50);
+		lblObservaciones.setBounds(37, 396, 200, 50);
 		lblObservaciones.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblObservaciones.setForeground(Color.white);
 
@@ -108,66 +107,74 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(lblObservaciones);
 		
 		JLabel lblPacientes = new JLabel("Pacientes");
-		lblPacientes.setBounds(318, 444, 200, 50);
+		lblPacientes.setBounds(47, 335, 200, 50);
 		lblPacientes.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblPacientes.setForeground(Color.white);
 		lblPacientes.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblPacientes);
-		
-		JLabel lblID = new JLabel("ID");
-		lblID.setBounds(318, 91, 200, 50);
-		lblID.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblID.setForeground(Color.white);
-
-		lblID.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblID);
 		//jtextField
 		txHora = new JTextField();
-		txHora.setBounds(540, 165, 150, 30);
+		txHora.setBounds(237, 104, 150, 30);
 		getContentPane().add(txHora);
 		txHora.setColumns(10);
 		
 		txFecha = new JTextField();
-		txFecha.setBounds(540, 214, 150, 30);
+		txFecha.setBounds(237, 165, 150, 30);
 		getContentPane().add(txFecha);
 		txFecha.setColumns(10);
 		
 		txDoctor = new JTextField();
-		txDoctor.setBounds(540, 275, 150, 30);
+		txDoctor.setBounds(237, 226, 150, 30);
 		getContentPane().add(txDoctor);
 		txDoctor.setColumns(10);
 		
-		txPagos = new JTextField();
-		txPagos.setBounds(540, 336, 150, 30);
-		getContentPane().add(txPagos);
-		txPagos.setColumns(10);
-		
 		txPacientes = new JTextField();
-		txPacientes.setBounds(540, 457, 150, 30);
+		txPacientes.setBounds(237, 348, 150, 30);
 		getContentPane().add(txPacientes);
 		txPacientes.setColumns(10);
 		
 		txObservaciones = new JTextField();
-		txObservaciones.setBounds(540, 506, 200, 80);
+		txObservaciones.setBounds(237, 396, 200, 80);
 		getContentPane().add(txObservaciones);
 		txObservaciones.setColumns(10);
-		
-		txID = new JTextField();
-		txID.setBounds(540, 104, 150, 30);
-		getContentPane().add(txID);
-		txID.setColumns(10);
 		
 // combobox tratamientos
 		
 		JComboBox cbTratamientos = new JComboBox();
-		cbTratamientos.setBounds(540, 397, 150, 30);
+		cbTratamientos.setBounds(237, 287, 150, 30);
 		getContentPane().add(cbTratamientos);
 		cbTratamientos.addItem("Limpieza dental");
 		cbTratamientos.addItem("Ortodoncia");
 		cbTratamientos.addItem("Empaste");
 		cbTratamientos.addItem("Extracción");
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(469, 104, 583, 363);
+		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
+		getContentPane().add(scrollPane);
+
+		// Personalizo la tabla
+		table_1 = new JTable();
+		// objeto para editar encabezado
+		JTableHeader header = table_1.getTableHeader();
+		header.setForeground(Color.black);
+		header.setFont(new Font("Arial", Font.PLAIN, 20));
+
+		header.setBackground(new Color(207, 241, 255));
+		table_1.setIntercellSpacing(new Dimension(4, 4));
+		// ajusta el alto de las columnas de la tabla
+		table_1.setRowHeight(30);
+		// Cambia el color de fondo de las filas seleccionadas
+		table_1.setSelectionBackground(new Color(217, 217, 217));
+		table_1.setSelectionForeground(Color.BLACK);
+		table_1.setModel(model = new DefaultTableModel(new Object[][] {},
+				new String[] { "Hora", "Fecha", "DNI paciente", "DNI doctor", "Observaciones" }));
+		table_1.getColumnModel().getColumn(1).setMinWidth(23);
+		scrollPane.setViewportView(table_1);
+
+		citas.CargarTablaDoctor(model, table_1);
 		
+		//boton volver
 		JButton btnVolver = new JButton("VOLVER");
 		
 		btnVolver.addActionListener(new ActionListener() {
@@ -202,23 +209,7 @@ public class EditarCitas extends JDialog {
 				int pagosId=0;
 				//declaracion de variables
 				int tratamientosId=0;
-				String pagos=txPagos.getText().toString();
-				if (pagos.isEmpty()) {
-			        JOptionPane.showMessageDialog(null, "Introduce un id de pago", "Error", JOptionPane.ERROR_MESSAGE);
 
-				}else{
-					 pagosId=Integer.parseInt(txPagos.getText().toString());
-
-				}
-				int nid=0;
-				String id=txID.getText().toString();
-				if (id.isEmpty()) {
-			        JOptionPane.showMessageDialog(null, "Introduce un id", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}else{
-					 nid=Integer.parseInt(txID.getText().toString());
-
-				}
 				//seleccion del combobox de tratamientos
 				if(cbTratamientos.getSelectedItem().equals("Limpieza dental")) {
 					 tratamientosId=5;

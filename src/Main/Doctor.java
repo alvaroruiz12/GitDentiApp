@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -77,5 +78,32 @@ public class Doctor {
    	 }
 
     }
+    public void CargarDoctorCitas(ArrayList<String> NombreList) {
+      	 try {
+      		 Connection cn = null;
+      		 Statement stm = null;
+      		 ResultSet rs = null;
+      		 Conexion controlador = new Conexion();
+      		 cn = controlador.conectar();
+      		 stm = cn.createStatement();
+      		 String consulta = "Select Nombre from doctor";
+      		 rs = stm.executeQuery(consulta);
+      	   if (NombreList == null) {
+               NombreList = new ArrayList<>();
+           }
+      		 while (rs.next()) {
+      			 String Nombre = rs.getString("Nombre");
+
+      			 NombreList.add(Nombre);
+      			 // Agregar los datos a la tabla
+      			 // tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+      			 // que va a recibir todo tipo de datos.
+      		 }
+
+      	 } catch (SQLException e) {
+      		 e.printStackTrace();
+      	 }
+
+       }
 }
 

@@ -111,11 +111,6 @@ public class DoctorModificar extends JDialog {
 				contentPane.add(tfDNI);
 				tfDNI.setColumns(10);
 				
-			
-			
-
-		
-				
 				//SEGUNDA SELECCION
 				
 				tfNombre = new JTextField();
@@ -276,7 +271,7 @@ public class DoctorModificar extends JDialog {
 				
 				
                 JScrollPane scrollPane = new JScrollPane();
-                scrollPane.setBounds(407, 222, 560, 326);
+                scrollPane.setBounds(406, 160, 560, 326);
                 scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
                 getContentPane().add(scrollPane);
 
@@ -311,7 +306,7 @@ public class DoctorModificar extends JDialog {
                 //BOTON FUNCIONALIDAD
                 
                 JButton btnAnadir = new JButton("Modificar");
-                btnAnadir.setBounds(407, 162, 560, 30);
+                btnAnadir.setBounds(406, 510, 560, 30);
                 contentPane.add(btnAnadir);
                 btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 22));
                 btnAnadir.setForeground(new Color(0, 0, 0));

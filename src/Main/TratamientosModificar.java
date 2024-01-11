@@ -243,7 +243,7 @@ public class TratamientosModificar extends JDialog {
 				
 				
                 JScrollPane scrollPane = new JScrollPane();
-                scrollPane.setBounds(407, 222, 560, 326);
+                scrollPane.setBounds(410, 164, 560, 326);
                 scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
                 getContentPane().add(scrollPane);
 
@@ -265,7 +265,7 @@ public class TratamientosModificar extends JDialog {
                 table_1.setSelectionForeground(Color.BLACK);
                 DefaultTableModel model;
 				table_1.setModel(model = new DefaultTableModel(new Object[][] {
-                }, new String[] { "idtratamientos", "Coste", "Nombre"}));
+                }, new String[] {	"Coste", "Nombre"}));
                 table_1.getColumnModel().getColumn(1).setMinWidth(23);
                 scrollPane.setViewportView(table_1);
                 tratamiento.CargarTabla(model,table_1);
@@ -278,7 +278,7 @@ public class TratamientosModificar extends JDialog {
                 //BOTON FUNCIONALIDAD
                 
                 JButton btnAnadir = new JButton("Modificar");
-                btnAnadir.setBounds(407, 162, 560, 30);
+                btnAnadir.setBounds(410, 513, 560, 30);
                 contentPane.add(btnAnadir);
                 btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 22));
                 btnAnadir.setForeground(new Color(0, 0, 0));

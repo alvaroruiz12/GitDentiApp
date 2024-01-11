@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class InicioCitas extends JDialog {
 
@@ -143,6 +144,9 @@ public class InicioCitas extends JDialog {
 		getContentPane().add(txObservaciones);
 		txObservaciones.setColumns(10);
 		
+
+		
+		//boton insertar
 		JButton btnInsertar = new JButton("Insertar");
 		btnInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,6 +164,8 @@ public class InicioCitas extends JDialog {
 		});
 		btnInsertar.setBounds(870, 313, 108, 73);
 		getContentPane().add(btnInsertar);
+		
+	
 		
 		
 	
