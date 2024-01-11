@@ -1,6 +1,7 @@
 package Main;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,19 +16,24 @@ import javax.swing.border.EmptyBorder;
 import BBDD.Conexion;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 	
@@ -71,7 +77,6 @@ public class Login extends JFrame {
 	private void init() {
 		
 		btnInicioSesion = new JButton("INICIAR SESIÓN");
-		btnInicioSesion.setHorizontalAlignment(SwingConstants.LEFT);
 		btnInicioSesion.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		txUsuario = new JTextField();
 		lblUsuario= new JLabel("USUARIO");
@@ -125,8 +130,6 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
 		//TEXTFIELD
 		txUsuario.setBounds(701, 312, 135, 25);
 		contentPane.add(txUsuario);
@@ -147,7 +150,7 @@ public class Login extends JFrame {
 		contentPane.add(pfContra);
 		
 		//BOTON INICIAR SESION
-		btnInicioSesion.setBounds(701, 426, 135, 25);
+		btnInicioSesion.setBounds(669, 432, 204, 53);
 		contentPane.add(btnInicioSesion);
 		
 		//TITULO
@@ -158,7 +161,7 @@ public class Login extends JFrame {
 		contentPane.add(titulo);
 		
 		//VERSION
-		JLabel version = new JLabel("Versión 0.1");
+		JLabel version = new JLabel("Versión 0.2");
 		version.setBounds(348, 366, 77, 14);
 		version.setFont(new Font("Arial Black", Font.ITALIC, 10));
 		version.setForeground(new Color(255, 255, 255));
@@ -173,8 +176,8 @@ public class Login extends JFrame {
 		lblFotoUser.setIcon(imagen2);
 		contentPane.add(lblFotoUser);
 		
-		
-		
+
+
         //JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 900, 700);
@@ -185,7 +188,23 @@ public class Login extends JFrame {
 		contentPane.add(fondo);
 		
 
-	
+		
+//		btnInicioSesion.setMnemonic(VK_ENTER);
+
+		//personalizar boton de inicio de sesion
+		ImageIcon inicio= new ImageIcon(getClass().getResource("boton.png"));
+		//ImageIcon sesion= new ImageIcon(inicio.getImage().getScaledInstance(btnInicioSesion.getWidth(), btnInicioSesion.getHeight(), Image.SCALE_SMOOTH));
+        Image foto=inicio.getImage().getScaledInstance(btnInicioSesion.getWidth(), btnInicioSesion.getHeight(), Image.SCALE_SMOOTH);
+		ImageIcon sesion= new ImageIcon(foto);
+        // Eliminar el borde del botón para que la imagen sea visible
+		btnInicioSesion.setBorderPainted(false);
+		btnInicioSesion.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		btnInicioSesion.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnInicioSesion.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnInicioSesion.setIcon(sesion);
 
 	// inicio de sesion 
 		btnInicioSesion.addActionListener(new ActionListener() {
@@ -224,6 +243,18 @@ public class Login extends JFrame {
 		        }
 				
 			}
-		});
-	}
+		});		
+		AbstractAction accionBoton = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Realiza la acción deseada al presionar el atajo de teclado
+                btnInicioSesion.doClick(); // Simula un clic en el botón
+                
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "presionarBoton");
+
+        getRootPane().getActionMap().put("presionarBoton", accionBoton);
+	}	
+	
 }

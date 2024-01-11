@@ -3,20 +3,26 @@ package Main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
 import BBDD.Conexion;
@@ -29,6 +35,9 @@ public class InicioDoctor extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tablaDia;
+	private JTable table_1;
+	DefaultTableModel model;
+	Citas citas = new Citas();
 
 	/**
 	 * Launch the application.
@@ -58,7 +67,7 @@ public class InicioDoctor extends JFrame {
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 1080);
+		setBounds(0, 0, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(235, 235, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,8 +80,21 @@ public class InicioDoctor extends JFrame {
 		btnInfoClientes.setBackground(new Color(134, 215, 253));
 		btnInfoClientes.setBounds(0, 0, 380, 90);
 		btnInfoClientes.setForeground(new Color(255, 255, 255));
-		btnInfoClientes.setFont(new Font("Arial", Font.ITALIC, 33));
+		btnInfoClientes.setFont(new Font("Arial", Font.BOLD, 30));
 		btnInfoClientes.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		ImageIcon imagen= new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(btnInfoClientes.getWidth(), btnInfoClientes.getHeight(), Image.SCALE_SMOOTH));
+        // Eliminar el borde del botón para que la imagen sea visible
+		btnInfoClientes.setBorderPainted(false);
+		btnInfoClientes.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		btnInfoClientes.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnInfoClientes.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnInfoClientes.setIcon(imagen2);
+		
 		contentPane.add(btnInfoClientes);
 		
 		
@@ -81,8 +103,18 @@ public class InicioDoctor extends JFrame {
 		btnSolicitarMaterial.setBackground(new Color(134, 215, 253));
 		btnSolicitarMaterial.setBounds(380, 0, 380, 90);
 		btnSolicitarMaterial.setForeground(new Color(255, 255, 255));
-		btnSolicitarMaterial.setFont(new Font("Arial", Font.ITALIC, 33));
+		btnSolicitarMaterial.setFont(new Font("Arial", Font.BOLD, 30));
 		btnSolicitarMaterial.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		btnSolicitarMaterial.setBorderPainted(false);
+		btnSolicitarMaterial.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		btnSolicitarMaterial.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnSolicitarMaterial.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnSolicitarMaterial.setIcon(imagen2);
 		contentPane.add(btnSolicitarMaterial);
 		
 
@@ -91,8 +123,18 @@ public class InicioDoctor extends JFrame {
 		btnCalendario.setBackground(new Color(134, 215, 253));
 		btnCalendario.setBounds(1536, 0, 380, 90);
 		btnCalendario.setForeground(new Color(255, 255, 255));
-		btnCalendario.setFont(new Font("Arial", Font.ITALIC, 33));
+		btnCalendario.setFont(new Font("Arial", Font.BOLD, 30));
 		btnCalendario.setHorizontalAlignment(SwingConstants.CENTER);
+		//quitar bordes y fondo
+		btnCalendario.setBorderPainted(false);
+		btnCalendario.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		btnCalendario.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCalendario.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnCalendario.setIcon(imagen2);
+		
 		contentPane.add(btnCalendario);
 		
 		
@@ -101,18 +143,37 @@ public class InicioDoctor extends JFrame {
 		btnCrearTratamiento.setBackground(new Color(134, 215, 253));
 		btnCrearTratamiento.setBounds(1158, 0, 380, 90);
 		btnCrearTratamiento.setForeground(new Color(255, 255, 255));
-		btnCrearTratamiento.setFont(new Font("Arial", Font.ITALIC, 33));
+		btnCrearTratamiento.setFont(new Font("Arial", Font.BOLD, 30));
 		btnCrearTratamiento.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		btnCrearTratamiento.setBorderPainted(false);
+		btnCrearTratamiento.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		btnCrearTratamiento.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCrearTratamiento.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnCrearTratamiento.setIcon(imagen2);
 		contentPane.add(btnCrearTratamiento);
 		
 		
 		//boton citas hoy
 		JButton citasHoy = new JButton("<html><p>CITAS</p><p>HOY</p></html>");
 		citasHoy.setBackground(new Color(134, 215, 253));
-		citasHoy.setBounds(1158, 0, 380, 90);
+		citasHoy.setBounds(745, 0, 413, 90);
 		citasHoy.setForeground(new Color(255, 255, 255));
-		citasHoy.setFont(new Font("Arial", Font.ITALIC, 33));
+		citasHoy.setFont(new Font("Arial", Font.BOLD, 30));
 		citasHoy.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		citasHoy.setBorderPainted(false);
+		citasHoy.setContentAreaFilled(false);
+		// Establecer el texto sobre la imagen
+		citasHoy.setHorizontalTextPosition(SwingConstants.CENTER);
+		citasHoy.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		citasHoy.setIcon(imagen2);
+		
 		citasHoy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -120,61 +181,43 @@ public class InicioDoctor extends JFrame {
 		citasHoy.setBounds(758, 0, 400, 90);
 		contentPane.add(citasHoy);
 			
-		//array bidimencional de objetos con los datos de la tabla
-		 Object[][] rowData = {
-		 {"15/10/2023", "Álvaro Ruiz Lavado", "18:00", "Problemas de ortodoncia severa debido a una mala mordida y malos habitos"},
-		 {"15/10/2023", "Ana Elena Ayarza Bueno", "19:00", "Problemas de ortodoncia severa debido a una mala mordida y malos habitos"},
-		 {"15/10/2023", "Dani Fernadez Martinez", "14:00", "Problemas de ortodoncia severa debido a una mala mordida y malos habitos"},
-	
-		 };
-		 
 
-		//array String para las columnas de la tabla
-		String[] columnNames = {"Día", "Pacientes", "Horas", "Tratamiento"};
-		//tabla con la información del dia
-		tablaDia = new JTable(rowData,columnNames);
-			    
-		
-		tablaDia.setBounds(165, 204, 1600, 760);
-		
-		tablaDia.setFont(new Font("Arial", Font.PLAIN, 20));
-	
-		contentPane.add(tablaDia);
-		
-		//cambiar tamaño de las columnas
-	     tablaDia.getColumnModel().getColumn(0).setPreferredWidth(200);
-	     tablaDia.getColumnModel().getColumn(1).setPreferredWidth(500);
-	     tablaDia.getColumnModel().getColumn(2).setPreferredWidth(200);
-	     tablaDia.getColumnModel().getColumn(3).setPreferredWidth(800);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(48, 168, 993, 386);
+		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
+		getContentPane().add(scrollPane);
 
-			//cambiar altura de las filas
-			tablaDia.setRowHeight(40);
+		// Personalizo la tabla
+		table_1 = new JTable();
+		//objeto para editar encabezado
+		JTableHeader header = table_1.getTableHeader(); 
+		header.setForeground(Color.black); 
+		header.setFont(new Font("Arial", Font.PLAIN, 20));
+
+		header.setBackground(new Color(207, 241, 255));
+		table_1.setIntercellSpacing(new Dimension(4, 4));
+		// ajusta el alto de las columnas de la tabla
+		table_1.setRowHeight(30);
+		// Cambia el color de fondo de las filas seleccionadas
+		table_1.setSelectionBackground(new Color(217, 217, 217)); 
+		table_1.setSelectionForeground(Color.BLACK);
+		table_1.setModel(model = new DefaultTableModel(new Object[][] {
+		}, new String[] { "Hora", "Fecha", "IdPagos", "DNI paciente", "DNI doctor","Observaciones" }));
+		table_1.getColumnModel().getColumn(1).setMinWidth(23);
+		scrollPane.setViewportView(table_1);
+		
+		citas.CargarTabla(model, table_1);
+
+		
+		//JLabel de fondo
+				JLabel fondo = new JLabel();
+				fondo.setBounds(0, 0, 1920, 1080);
 			
-			
-			//titulo de la tabla
-			//Dia
-			JLabel lblDia = new JLabel("Día");
-			lblDia.setBounds(165, 159, 389, 40);
-			lblDia.setFont(new Font("Arial", Font.PLAIN, 33));
-			contentPane.add(lblDia);
-			//paciente
-			JLabel lblPaciente = new JLabel("Paciente");
-			lblPaciente.setBounds(436, 166, 390, 40);
-			lblPaciente.setFont(new Font("Arial", Font.PLAIN, 33));
-			contentPane.add(lblPaciente);
-			//fecha
-			JLabel lblFecha = new JLabel("Fecha");
-			lblFecha.setBounds(841, 166, 389, 40);
-			lblFecha.setFont(new Font("Arial", Font.PLAIN, 33));
-			contentPane.add(lblFecha);
-			//Tratamiento
-			JLabel lblTratamiento = new JLabel("Tratamiento");
-			lblTratamiento.setBounds(1198, 166, 389, 40);
-			lblTratamiento.setFont(new Font("Arial", Font.PLAIN, 33));
-			contentPane.add(lblTratamiento);
-
-	     
-
+				ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
+				ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+				fondo.setIcon(imagen6);
+				contentPane.add(fondo);
+		
 
 		
 		
