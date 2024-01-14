@@ -17,6 +17,8 @@ public class Conexion {
 	private static final String URL="jdbc:mysql://localhost:3306/dentiapp?useSSL=false";
 	private static final String USUARIO="root";
 	private static final String CLAVE="1234";
+	
+	
 public boolean insertar(Conexion con, String sentencia) {
 		
 		boolean res= false;
@@ -467,7 +469,105 @@ public boolean insertar(Conexion con, String sentencia) {
 		
 		return nombre;
 	}
-	
+	public boolean comprobarCitasDoctor(String horaIn, String fechaIn,String doctorIn) {
+	    ArrayList<String> res = new ArrayList<>();
+	    Connection cn = null;
+	    Statement stm = null;
+	    ResultSet rs = null;
+	    try {
+	        cn = this.conectar();
+	        stm = cn.createStatement();
+	        rs = stm.executeQuery("SELECT * FROM citas "
+	        		+ "WHERE Hora = '"+horaIn+"' AND "
+	        		+ "Fecha = '"+fechaIn+"' AND "
+	        		+ "doctor_DNI = '"+doctorIn+"'");
+
+	        while (rs.next()) {
+	            int idCitas = rs.getInt("idcitas");
+	            res.add(String.valueOf(idCitas));
+	            String hora = rs.getString("Hora");
+	            res.add(hora);
+	            String fecha = rs.getString("Fecha");
+	            res.add(fecha);
+	            int idDoctor = rs.getInt("doctor_DNI");
+	            res.add(String.valueOf(idDoctor));
+	            int idPagos = rs.getInt("pagos_idpagos");
+	            res.add(String.valueOf(idPagos));
+	            int idTratamientos = rs.getInt("tratamientos_idtratamientos");
+	            res.add(String.valueOf(idTratamientos));
+	            int idPacientes = rs.getInt("pacientes_idpacientes");
+	            res.add(String.valueOf(idPacientes));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stm != null) stm.close();
+	            if (cn != null) cn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    boolean existe=false;
+	    if (res!=null) {
+	    	existe=true;
+	    	return existe;
+	    }else {
+	    	existe=false;
+	    	return existe;
+	    }
+	}
+	public boolean comprobarCitasPaciente(String horaIn, String fechaIn,String doctorIn) {
+	    ArrayList<String> res = new ArrayList<>();
+	    Connection cn = null;
+	    Statement stm = null;
+	    ResultSet rs = null;
+	    try {
+	        cn = this.conectar();
+	        stm = cn.createStatement();
+	        rs = stm.executeQuery("SELECT * FROM citas "
+	        		+ "WHERE Hora = '"+horaIn+"' AND "
+	        		+ "Fecha = '"+fechaIn+"' AND "
+	        		+ "pacientes_DNIpaciente = '"+doctorIn+"'");
+
+	        while (rs.next()) {
+	            int idCitas = rs.getInt("idcitas");
+	            res.add(String.valueOf(idCitas));
+	            String hora = rs.getString("Hora");
+	            res.add(hora);
+	            String fecha = rs.getString("Fecha");
+	            res.add(fecha);
+	            int idDoctor = rs.getInt("doctor_iddoctor");
+	            res.add(String.valueOf(idDoctor));
+	            int idPagos = rs.getInt("pagos_idpagos");
+	            res.add(String.valueOf(idPagos));
+	            int idTratamientos = rs.getInt("tratamientos_idtratamientos");
+	            res.add(String.valueOf(idTratamientos));
+	            int idPacientes = rs.getInt("pacientes_idpacientes");
+	            res.add(String.valueOf(idPacientes));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stm != null) stm.close();
+	            if (cn != null) cn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    boolean existe=false;
+	    if (res!=null) {
+	    	existe=true;
+	    	return existe;
+	    }else {
+	    	existe=false;
+	    	return existe;
+	    }
+	}
+
 
 	
 }

@@ -65,14 +65,14 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select * from citas";
+			String consulta = "Select Hora,Fecha,pacientes_DNIpaciente,"
+					+ "doctor_DNI,Observaciones"
+					+ " from citas ORDER BY Fecha";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
-				int idCitas = rs.getInt("idcitas");
 				String Hora = rs.getString("Hora");
 				String Fecha = rs.getString("Fecha");
-				int IdPagos = rs.getInt("pagos_idpagos");
 				String DNIpacientes = rs.getString("pacientes_DNIpaciente");
 				String DNIdoctor = rs.getString("doctor_DNI");
 				String Observaciones = rs.getString("Observaciones");
@@ -80,7 +80,7 @@ public class Citas {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = { idCitas, Hora, Fecha, IdPagos, DNIpacientes, DNIdoctor, Observaciones };
+				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
 				tableModel.addRow(rowData);
 			}
 
@@ -94,21 +94,20 @@ public class Citas {
 	
 	public void CargarTablaDoctor(DefaultTableModel tableModel, JTable table_1) {
 		try {
-
 			Connection cn = null;
 			Statement stm = null;
 			ResultSet rs = null;
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select * from citas ORDER BY Fecha";
+			String consulta = "Select Hora,Fecha,pacientes_DNIpaciente,"
+					+ "doctor_DNI,Observaciones"
+					+ " from citas ORDER BY Fecha";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
-				int idCitas = rs.getInt("idcitas");
 				String Hora = rs.getString("Hora");
 				String Fecha = rs.getString("Fecha");
-				int IdPagos = rs.getInt("pagos_idpagos");
 				String DNIpacientes = rs.getString("pacientes_DNIpaciente");
 				String DNIdoctor = rs.getString("doctor_DNI");
 				String Observaciones = rs.getString("Observaciones");
@@ -116,7 +115,7 @@ public class Citas {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = { idCitas, Hora, Fecha, IdPagos, DNIpacientes, DNIdoctor, Observaciones };
+				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
 				tableModel.addRow(rowData);
 			}
 
@@ -152,7 +151,7 @@ public class Citas {
 	}
 
 	// metodo editar citas NO TERMINADO
-	public void EditarCitas(JTable jTable, Conexion conexion) throws SQLException {
+	public void EditarCitas(JTable jTable, Conexion conexion, String hora,String fecha, String DNIpaciente, String DNIdoctor,String observaciones) throws SQLException {
 		// voy a coger la fila selecccionada.
 		int filaSeleccionada = jTable.getSelectedRow();
 		if (filaSeleccionada == -1) {
@@ -165,7 +164,15 @@ public class Citas {
 			int idCitas = Integer.parseInt(valorId.toString());
 
 			// consulta SQL para borrar
-			String consulta = "UPDATE set WHERE idcitas= " + idCitas;
+			String consulta = "UPDATE nombre_de_tabla"
+					+ "SET "
+					+ "    Hora = '"+hora+"',"
+					+ "    Fecha = '"+fecha+"',"
+					+ "    pacientes_DNIpaciente = '"+DNIpaciente+"',"
+					+ "    doctor_DNI = '"+DNIdoctor+"',"
+					+ "    observaciones = '"+observaciones+"'"
+					+ "WHERE\n"
+					+ "    idcitas = "+idCitas+";";
 			conexion.ejecutarInsertDeleteUpdate(consulta);
 			// borramos de la tabla ahora.
 			DefaultTableModel model = (DefaultTableModel) jTable.getModel();

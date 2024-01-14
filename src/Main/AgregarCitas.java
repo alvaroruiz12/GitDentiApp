@@ -48,7 +48,6 @@ public class AgregarCitas extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel lblPagos;
-	private JTextField txHora;
 	private JTextField txDoctor;
 	private JTextField txPagos;
 	private JTextField txPacientes;
@@ -148,12 +147,6 @@ public class AgregarCitas extends JDialog {
 		lblPacientes.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblPacientes);
 
-		// jtextField
-		txHora = new JTextField();
-		txHora.setBounds(246, 82, 150, 30);
-		getContentPane().add(txHora);
-		txHora.setColumns(10);
-
 		txDoctor = new JTextField();
 		txDoctor.setBounds(246, 204, 150, 30);
 		getContentPane().add(txDoctor);
@@ -220,12 +213,25 @@ public class AgregarCitas extends JDialog {
 		scrollPane.setViewportView(table_1);
 		paciente.CargarTabla(model, table_1);
 
+		// combobox hora
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(246, 81, 150, 30);
+		getContentPane().add(comboBox);
+
+		for (int hour = 9; hour <= 20; hour++) {
+			for (int minute = 0; minute < 60; minute += 30) {
+				String formattedHour = String.format("%02d:%02d", hour, minute);
+				comboBox.addItem(formattedHour);
+			}
+		}
+
 		// boton insertar
 		JButton btnInsertar = new JButton("Insertar");
 		btnInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fecha = formatoBBDD.format(dateChooser.getDate());
-
+				String horadeverdad = (String) comboBox.getSelectedItem();
 				int pagosId = 0;
 				// declaracion de variables
 				int tratamientosId = 0;
@@ -265,11 +271,7 @@ public class AgregarCitas extends JDialog {
 					JOptionPane.showMessageDialog(null, "Escribe un DNI de doctor", "Error", JOptionPane.ERROR_MESSAGE);
 
 				}
-				String hora = txHora.getText();
-				if (hora.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Introduce una hora", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
+	
 				if (fecha.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Introduce una fecha", "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -277,23 +279,25 @@ public class AgregarCitas extends JDialog {
 				String observaciones = txObservaciones.getText();
 				if (observaciones.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
+				}
+				boolean comprobarDoctor=con.comprobarCitasDoctor(horadeverdad,fecha,txDoctor.getText().toString());
+				boolean comprobarPaciente=con.comprobarCitasPaciente(horadeverdad,fecha,txDoctor.getText().toString());
+
+				if (comprobarDoctor==false && comprobarPaciente==false) {
 					// sentencia sql
 					String sentencia = "Insert into dentiapp.citas (Hora,Fecha,pagos_idpagos,tratamientos_idtratamientos,"
-							+ "observaciones,pacientes_DNIpaciente,doctor_DNI)values('" + txHora.getText().toString()
+							+ "observaciones,pacientes_DNIpaciente,doctor_DNI)values('" + horadeverdad
 							+ "'," + "'" + fecha + "'," + pagosId + "," + tratamientosId + ",'"
 							+ txObservaciones.getText().toString() + "'" + ",'" + txPacientes.getText().toString()
 							+ "','" + txDoctor.getText().toString() + "')";
 
 					boolean status = false;
 					status = conexion.insertar(conexion, sentencia);
-//				//vaciar todo
-//				txHora.setText("");
-//				txPagos.setText("");
-//				txObservaciones.setText("");
-//				txPacientes.setText("");
-//				txDoctor.setText("");
+				}else {
+					JOptionPane.showMessageDialog(null, "Ya existe una cita con ese doctor o ese paciente a esa hora", "Error", JOptionPane.ERROR_MESSAGE);
+
 				}
+				
 			}
 
 		});
@@ -341,24 +345,27 @@ public class AgregarCitas extends JDialog {
 		btnVolver.setForeground(Color.WHITE); // Color del texto
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnVolver);
-		
-		//combobox doctor
-		JComboBox comboBoxDoctor = new JComboBox();
-		//cargar datos al combobox
-		ArrayList <String> Nombre = null;
-		   if (Nombre == null) {
-			   Nombre = new ArrayList<>();
-	        }
-		doctor.CargarDoctorCitas(Nombre);
-		comboBoxDoctor = new JComboBox<>(new DefaultComboBoxModel<>(Nombre.toArray(new String[0])));
-		
-		comboBoxDoctor.setBounds(406, 208, 157, 33);
-		getContentPane().add(comboBoxDoctor);
-		//añadir doctor
-		
-		
 
-		
+		// combobox doctor
+		JComboBox comboBoxDoctor = new JComboBox();
+		// cargar datos al combobox
+		ArrayList<String> Nombre = null;
+		if (Nombre == null) {
+			Nombre = new ArrayList<>();
+		}
+		ArrayList<String> Dni = null;
+		if (Dni == null) {
+			Dni = new ArrayList<>();
+		}
+		// metodo recoge el nombre y el dni
+		doctor.CargarDoctorCitas(Nombre, Dni);
+		// mete los nombres en el combobox
+		comboBoxDoctor = new JComboBox<>(new DefaultComboBoxModel<>(Nombre.toArray(new String[0])));
+
+		comboBoxDoctor.setBounds(411, 203, 157, 33);
+		getContentPane().add(comboBoxDoctor);
+		// añadir doctor
+
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1100, 650);
 
@@ -367,7 +374,6 @@ public class AgregarCitas extends JDialog {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		getContentPane().add(fondo);
-		
 
 	}
 }
