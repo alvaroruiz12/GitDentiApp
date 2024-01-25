@@ -25,9 +25,10 @@ import BBDD.Conexion;
 public class ConsultarDoctor extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JTable table_1;
+
+	JTable table_1 = new JTable();
 	DefaultTableModel model;
-	Doctor doctor = new Doctor();
+	Doctor doctor= new Doctor();
 	
 	/**
 	 * Launch the application.
@@ -84,7 +85,7 @@ public class ConsultarDoctor extends JDialog {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(669, 500, 105, 50);
+		btnVolver.setBounds(454, 21, 105, 50);
 		ImageIcon imagen3= new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
         btnVolver.setIcon(imagen4);
@@ -101,7 +102,9 @@ public class ConsultarDoctor extends JDialog {
 		btnVolver.setForeground(Color.WHITE); // Color del texto
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnVolver);
+		
 		JLabel fondo = new JLabel();
+		fondo.setBounds(0, 0, 600, 400);
 
 		ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
