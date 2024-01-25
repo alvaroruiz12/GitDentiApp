@@ -280,6 +280,22 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Baja doctor");
+		
+		
+		mntmNewMenuItem.setMargin(margenes);
+		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem.setForeground(Color.black);
+		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				BajaDoctor pp = new BajaDoctor(a, con, padre, modal);
+				pp.setVisible(modal);
+			}
+		});
+		mnNewMenu_6.add(mntmNewMenuItem);
+		
 		JMenu mnNewMenu_7 = new JMenu("Proveedores");
 		mnNewMenu_7.setMargin(margenes);
 

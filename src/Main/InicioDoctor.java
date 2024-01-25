@@ -173,7 +173,7 @@ public class InicioDoctor extends JFrame {
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(48, 168, 1223, 529);
+		scrollPane.setBounds(0, 151, 1223, 529);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -198,9 +198,34 @@ public class InicioDoctor extends JFrame {
 
 		citas.CargarTablaDoctor(model, table_1);
 
+		JButton btnCerrarSesion = new JButton("");
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login();
+				dispose();
+				login.setVisible(true);
+			}
+		});
+		btnCerrarSesion.setBounds(1839, 913, 55, 55);
+		ImageIcon cerra = new ImageIcon(getClass().getResource("botonapagarsolo.png"));
+		ImageIcon sesion = new ImageIcon(cerra.getImage().getScaledInstance(btnCerrarSesion.getWidth(),
+				btnCerrarSesion.getHeight(), Image.SCALE_SMOOTH));
+		btnCerrarSesion.setIcon(sesion);
 		
-		
-		
+		// boton cerrar sesion
+				JButton btnCerra = new JButton("");
+				btnCerrarSesion.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Login login = new Login();
+						dispose();
+						login.setVisible(true);
+					}
+				});
+				btnCerrarSesion.setBounds(1639, 913, 55, 55);
+				ImageIcon ca = new ImageIcon(getClass().getResource("botonapagarsolo.png"));
+				ImageIcon sasa = new ImageIcon(ca.getImage().getScaledInstance(btnCerrarSesion.getWidth(),
+						btnCerrarSesion.getHeight(), Image.SCALE_SMOOTH));
+				btnCerrarSesion.setIcon(sesion);
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1920, 1080);

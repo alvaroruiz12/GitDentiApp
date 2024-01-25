@@ -53,19 +53,18 @@ public class Doctor {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select * from doctor";
+			String consulta = "Select DNIdoctor,nombre_doctor from doctor";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
-				String DNIdoctor = rs.getString("DNI");
-				String Nombre = rs.getString("Nombre");
-				String idusuario = rs.getString("usuarios_idusuarios");
-				String idespecialidad = rs.getString("especialidad_idespecialidad");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Nombre = rs.getString("nombre_doctor");
+
 
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = { DNIdoctor, Nombre, idusuario, idespecialidad };
+				Object[] rowData = { DNIdoctor, Nombre,};
 				tableModel.addRow(rowData);
 			}
 
@@ -77,7 +76,9 @@ public class Doctor {
 
 	}
 
-	public void CargarDoctorCitas(ArrayList<String> NombreList, ArrayList<String> DNI) {
+	public ArrayList<String> CargarDNIDoctorCitas() {
+
+		ArrayList<String> DNIList = null;
 		try {
 			Connection cn = null;
 			Statement stm = null;
@@ -85,22 +86,21 @@ public class Doctor {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select DNI,Nombre from doctor";
+			String consulta = "Select DNIdoctor from doctor";
 			rs = stm.executeQuery(consulta);
-			if (NombreList == null) {
-				NombreList = new ArrayList<>();
-			}
-			if (DNI == null) {
-				DNI= new ArrayList<>();
+		
+
+			if (DNIList == null) {
+				DNIList= new ArrayList<>();
 			}
 			while (rs.next()) {
-				String StringDNI = rs.getString("DNI");
+				String StringDNI = rs.getString("DNIdoctor");
 
-				String Nombre = rs.getString("Nombre");
-
-				NombreList.add(Nombre);
-				DNI.add(StringDNI);
-
+				
+				
+				DNIList.add(StringDNI);
+				System.out.println(DNIList);
+				
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
@@ -109,6 +109,67 @@ public class Doctor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return DNIList;
+		
 
 	}
+	public ArrayList<String> CargarNombreDoctorCitas() {
+
+		ArrayList<String> NombreList = null;
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select nombre_doctor from doctor";
+			rs = stm.executeQuery(consulta);
+		
+
+			if (NombreList== null) {
+				NombreList= new ArrayList<>();
+			}
+			while (rs.next()) {
+	
+				String Nombre = rs.getString("nombre_doctor");
+				
+				
+				NombreList.add(Nombre);
+				
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return NombreList;
+		
+
+	}
+	
+	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
+		// voy a coger la fila selecccionada.
+		int filaSeleccionada = jTable.getSelectedRow();
+		if (filaSeleccionada == -1) {
+			JOptionPane.showMessageDialog(null, "Selecciona un doctor");
+		} else {
+			// obtenemos el valor de la columna Id que es la 0.
+			Object valorId = jTable.getValueAt(filaSeleccionada, 0);
+
+			// hacemos casting a int porque la recibimos como String.
+			String idDoctor = valorId.toString();
+
+			// consulta SQL para borrar
+			String consulta = "DELETE FROM doctor WHERE DNIdoctor= '" + idDoctor+"';";
+			conexion.ejecutarInsertDeleteUpdate(consulta);
+			// borramos de la tabla ahora.
+			DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+			model.removeRow(filaSeleccionada);
+
+		}
+	}
+	
 }

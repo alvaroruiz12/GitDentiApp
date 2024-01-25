@@ -140,6 +140,43 @@ public boolean insertar(Conexion con, String sentencia) {
 			return res;
 			
 		}
+	
+	//recuperar contraseña
+	public ArrayList<String> recuperarContraseña(Conexion con, String sentencia){
+		
+		ArrayList<String> res = new ArrayList<String>();
+		
+		
+		Conexion conexion = con;
+		Connection cn = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		try {
+			cn=conexion.conectar();
+			stm = cn.createStatement();
+			rs= stm.executeQuery(sentencia);
+			
+			while(rs.next()) {
+				
+				
+				
+
+				String contrausuario = rs.getString(1);
+				res.add(contrausuario);
+			
+
+			}			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		
+		return res;
+		
+	}
+	
 	public ArrayList<String> seleccionarMateriales() {
 	    ArrayList<String> res = new ArrayList<>();
 	    Connection cn = null;
@@ -416,7 +453,8 @@ public boolean insertar(Conexion con, String sentencia) {
 		
 	}
 	
-	
+	//recuperar contraseña
+
 	
 	
 	
@@ -471,6 +509,7 @@ public boolean insertar(Conexion con, String sentencia) {
 	}
 	public boolean comprobarCitasDoctor(String horaIn, String fechaIn,String doctorIn) {
 	    ArrayList<String> res = new ArrayList<>();
+	    res=null;
 	    Connection cn = null;
 	    Statement stm = null;
 	    ResultSet rs = null;
@@ -478,24 +517,22 @@ public boolean insertar(Conexion con, String sentencia) {
 	        cn = this.conectar();
 	        stm = cn.createStatement();
 	        rs = stm.executeQuery("SELECT * FROM citas "
-	        		+ "WHERE Hora = '"+horaIn+"' AND "
-	        		+ "Fecha = '"+fechaIn+"' AND "
-	        		+ "doctor_DNI = '"+doctorIn+"'");
+	        		+ "WHERE hora = '"+horaIn+"' AND "
+	        		+ "fecha = '"+fechaIn+"' AND "
+	        		+ "DNIdoctor = '"+doctorIn+"'");
 
 	        while (rs.next()) {
 	            int idCitas = rs.getInt("idcitas");
 	            res.add(String.valueOf(idCitas));
-	            String hora = rs.getString("Hora");
+	            String hora = rs.getString("hora");
 	            res.add(hora);
-	            String fecha = rs.getString("Fecha");
+	            String fecha = rs.getString("fecha");
 	            res.add(fecha);
-	            int idDoctor = rs.getInt("doctor_DNI");
+	            int idDoctor = rs.getInt("DNIdoctor");
 	            res.add(String.valueOf(idDoctor));
-	            int idPagos = rs.getInt("pagos_idpagos");
-	            res.add(String.valueOf(idPagos));
-	            int idTratamientos = rs.getInt("tratamientos_idtratamientos");
+	            int idTratamientos = rs.getInt("idtratamiento");
 	            res.add(String.valueOf(idTratamientos));
-	            int idPacientes = rs.getInt("pacientes_idpacientes");
+	            int idPacientes = rs.getInt("DNIpaciente");
 	            res.add(String.valueOf(idPacientes));
 	        }
 	    } catch (SQLException e) {
@@ -520,6 +557,7 @@ public boolean insertar(Conexion con, String sentencia) {
 	}
 	public boolean comprobarCitasPaciente(String horaIn, String fechaIn,String doctorIn) {
 	    ArrayList<String> res = new ArrayList<>();
+	    res=null;
 	    Connection cn = null;
 	    Statement stm = null;
 	    ResultSet rs = null;
@@ -527,24 +565,22 @@ public boolean insertar(Conexion con, String sentencia) {
 	        cn = this.conectar();
 	        stm = cn.createStatement();
 	        rs = stm.executeQuery("SELECT * FROM citas "
-	        		+ "WHERE Hora = '"+horaIn+"' AND "
-	        		+ "Fecha = '"+fechaIn+"' AND "
-	        		+ "pacientes_DNIpaciente = '"+doctorIn+"'");
+	        		+ "WHERE hora = '"+horaIn+"' AND "
+	        		+ "fecha = '"+fechaIn+"' AND "
+	        		+ "DNIpaciente = '"+doctorIn+"'");
 
 	        while (rs.next()) {
 	            int idCitas = rs.getInt("idcitas");
 	            res.add(String.valueOf(idCitas));
-	            String hora = rs.getString("Hora");
+	            String hora = rs.getString("hora");
 	            res.add(hora);
-	            String fecha = rs.getString("Fecha");
+	            String fecha = rs.getString("fecha");
 	            res.add(fecha);
-	            int idDoctor = rs.getInt("doctor_iddoctor");
+	            int idDoctor = rs.getInt("DNIdoctor");
 	            res.add(String.valueOf(idDoctor));
-	            int idPagos = rs.getInt("pagos_idpagos");
-	            res.add(String.valueOf(idPagos));
-	            int idTratamientos = rs.getInt("tratamientos_idtratamientos");
+	            int idTratamientos = rs.getInt("idtratamiento");
 	            res.add(String.valueOf(idTratamientos));
-	            int idPacientes = rs.getInt("pacientes_idpacientes");
+	            int idPacientes = rs.getInt("DNIpaciente");
 	            res.add(String.valueOf(idPacientes));
 	        }
 	    } catch (SQLException e) {

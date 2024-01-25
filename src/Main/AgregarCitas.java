@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -34,7 +35,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,11 +47,11 @@ import javax.swing.JComboBox;
 public class AgregarCitas extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel lblPagos;
-	private JTextField txDoctor;
-	private JTextField txPagos;
+
 	private JTextField txPacientes;
 	private JTextField txObservaciones;
+	Date hoy = new Date();
+	Tratamiento tratamiento = new Tratamiento();
 
 	/**
 	 * Launch the application.
@@ -116,16 +116,10 @@ public class AgregarCitas extends JDialog {
 		lblDoctor.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblDoctor);
 
-		lblPagos = new JLabel("Pagos");
-		lblPagos.setBounds(36, 241, 200, 50);
-		lblPagos.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPagos.setForeground(Color.white);
-
-		lblPagos.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblPagos);
+		
 
 		JLabel lblTratamientos = new JLabel("Tratamientos");
-		lblTratamientos.setBounds(36, 306, 200, 50);
+		lblTratamientos.setBounds(36, 262, 200, 50);
 		lblTratamientos.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblTratamientos.setForeground(Color.white);
 
@@ -133,7 +127,7 @@ public class AgregarCitas extends JDialog {
 		getContentPane().add(lblTratamientos);
 
 		JLabel lblObservaciones = new JLabel("Observaciones");
-		lblObservaciones.setBounds(36, 428, 200, 50);
+		lblObservaciones.setBounds(36, 384, 200, 50);
 		lblObservaciones.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblObservaciones.setForeground(Color.white);
 
@@ -141,52 +135,50 @@ public class AgregarCitas extends JDialog {
 		getContentPane().add(lblObservaciones);
 
 		JLabel lblPacientes = new JLabel("Pacientes");
-		lblPacientes.setBounds(36, 367, 200, 50);
+		lblPacientes.setBounds(36, 323, 200, 50);
 		lblPacientes.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblPacientes.setForeground(Color.white);
 		lblPacientes.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblPacientes);
 
-		txDoctor = new JTextField();
-		txDoctor.setBounds(246, 204, 150, 30);
-		getContentPane().add(txDoctor);
-		txDoctor.setColumns(10);
-
-		txPagos = new JTextField();
-		txPagos.setBounds(246, 254, 150, 30);
-		getContentPane().add(txPagos);
-		txPagos.setColumns(10);
+	
 
 		txPacientes = new JTextField();
-		txPacientes.setBounds(246, 380, 150, 30);
+		txPacientes.setBounds(246, 336, 150, 30);
 		getContentPane().add(txPacientes);
 		txPacientes.setColumns(10);
 
 		txObservaciones = new JTextField();
-		txObservaciones.setBounds(246, 437, 200, 80);
+		txObservaciones.setBounds(246, 384, 236, 154);
 		getContentPane().add(txObservaciones);
 		txObservaciones.setColumns(10);
 // combobox tratamientos
 
 		JComboBox cbTratamientos = new JComboBox();
-		cbTratamientos.setBounds(246, 319, 150, 30);
+		cbTratamientos.setBounds(246, 275, 150, 30);
 		getContentPane().add(cbTratamientos);
-		cbTratamientos.addItem("Limpieza dental");
-		cbTratamientos.addItem("Ortodoncia");
-		cbTratamientos.addItem("Empaste");
-		cbTratamientos.addItem("Extracción");
 
+		// relleno
+
+		ArrayList<String> nombreTratamiento = tratamiento.CargarNombreTratamiento();
+		ArrayList<String> nTratamiento = tratamiento.CargarNumeroTratamiento();
+
+		for (int i = 0; i < nombreTratamiento.size(); i++) {
+			cbTratamientos.addItem(nombreTratamiento.get(i).toString());
+		}
+		
 		// formato se aplica en el boton
 		SimpleDateFormat formatoBBDD = new SimpleDateFormat("dd-MM-yyyy");
 
 		// calendar
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(246, 137, 150, 30);
+		dateChooser.setMinSelectableDate(hoy);
 
 		getContentPane().add(dateChooser);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(520, 293, 343, 160);
+		scrollPane.setBounds(429, 204, 439, 161);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 //tabla pacientes
@@ -226,100 +218,6 @@ public class AgregarCitas extends JDialog {
 			}
 		}
 
-		// boton insertar
-		JButton btnInsertar = new JButton("Insertar");
-		btnInsertar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String fecha = formatoBBDD.format(dateChooser.getDate());
-				String horadeverdad = (String) comboBox.getSelectedItem();
-				int pagosId = 0;
-				// declaracion de variables
-				int tratamientosId = 0;
-				String pagos = txPagos.getText().toString();
-				if (pagos.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Introduce un id de pago", "Error", JOptionPane.ERROR_MESSAGE);
-
-				} else {
-					pagosId = Integer.parseInt(txPagos.getText().toString());
-
-				}
-				// seleccion del combobox de tratamientos
-				if (cbTratamientos.getSelectedItem().equals("Limpieza dental")) {
-					tratamientosId = 5;
-				} else if (cbTratamientos.getSelectedItem().equals("Ortodoncia")) {
-					tratamientosId = 6;
-
-				} else if (cbTratamientos.getSelectedItem().equals("Empaste")) {
-					tratamientosId = 7;
-
-				} else if (cbTratamientos.getSelectedItem().equals("Extracción")) {
-					tratamientosId = 8;
-				}
-				if (tratamientosId == 0) {
-					JOptionPane.showMessageDialog(null, "Selecciona un tratamiento", "Error",
-							JOptionPane.ERROR_MESSAGE);
-
-				}
-				// comprobaciones
-				String dnipaciente = txPacientes.getText();
-				if (dnipaciente.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Escribe un DNI en pacientes", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
-				String dnidoctor = txDoctor.getText();
-				if (dnidoctor.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Escribe un DNI de doctor", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-	
-				if (fecha.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Introduce una fecha", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-				String observaciones = txObservaciones.getText();
-				if (observaciones.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
-				}
-				boolean comprobarDoctor=con.comprobarCitasDoctor(horadeverdad,fecha,txDoctor.getText().toString());
-				boolean comprobarPaciente=con.comprobarCitasPaciente(horadeverdad,fecha,txDoctor.getText().toString());
-
-				if (comprobarDoctor==false && comprobarPaciente==false) {
-					// sentencia sql
-					String sentencia = "Insert into dentiapp.citas (Hora,Fecha,pagos_idpagos,tratamientos_idtratamientos,"
-							+ "observaciones,pacientes_DNIpaciente,doctor_DNI)values('" + horadeverdad
-							+ "'," + "'" + fecha + "'," + pagosId + "," + tratamientosId + ",'"
-							+ txObservaciones.getText().toString() + "'" + ",'" + txPacientes.getText().toString()
-							+ "','" + txDoctor.getText().toString() + "')";
-
-					boolean status = false;
-					status = conexion.insertar(conexion, sentencia);
-				}else {
-					JOptionPane.showMessageDialog(null, "Ya existe una cita con ese doctor o ese paciente a esa hora", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
-				
-			}
-
-		});
-		btnInsertar.setBounds(966, 530, 108, 70);
-		ImageIcon imagen = new ImageIcon(getClass().getResource("boton.png"));
-		ImageIcon imagen2 = new ImageIcon(imagen.getImage().getScaledInstance(btnInsertar.getWidth(),
-				btnInsertar.getHeight(), Image.SCALE_SMOOTH));
-
-		// Establecer el texto sobre la imagen
-		btnInsertar.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnInsertar.setVerticalTextPosition(SwingConstants.CENTER);
-
-		// Personalizar el estilo del texto
-		btnInsertar.setForeground(Color.WHITE); // Color del texto
-		btnInsertar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
-		btnInsertar.setIcon(imagen2);
-
-		// Eliminar el borde del botón para que la imagen sea visible
-		btnInsertar.setBorderPainted(false);
-		btnInsertar.setContentAreaFilled(false);
-		getContentPane().add(btnInsertar);
-
 		JButton btnVolver = new JButton("VOLVER");
 
 		btnVolver.addActionListener(new ActionListener() {
@@ -349,22 +247,119 @@ public class AgregarCitas extends JDialog {
 		// combobox doctor
 		JComboBox comboBoxDoctor = new JComboBox();
 		// cargar datos al combobox
-		ArrayList<String> Nombre = null;
-		if (Nombre == null) {
-			Nombre = new ArrayList<>();
-		}
-		ArrayList<String> Dni = null;
-		if (Dni == null) {
-			Dni = new ArrayList<>();
-		}
-		// metodo recoge el nombre y el dni
-		doctor.CargarDoctorCitas(Nombre, Dni);
-		// mete los nombres en el combobox
-		comboBoxDoctor = new JComboBox<>(new DefaultComboBoxModel<>(Nombre.toArray(new String[0])));
 
-		comboBoxDoctor.setBounds(411, 203, 157, 33);
+		// esto da null
+
+		int tamañoNombre = 0;
+		// metodo recoge el nombre y el dni
+		ArrayList<String> Dni = doctor.CargarDNIDoctorCitas();
+		ArrayList<String> Nombre = doctor.CargarNombreDoctorCitas();
+
+		System.out.println(Nombre);
+		// mete los nombres en el combobox
+		for (int i = 0; i < Nombre.size(); i++) {
+			comboBoxDoctor.addItem(Nombre.get(i).toString());
+		}
+
+		comboBoxDoctor.setBounds(239, 203, 157, 33);
 		getContentPane().add(comboBoxDoctor);
 		// añadir doctor
+
+		// boton insertar
+		JButton btnInsertar = new JButton("Insertar");
+		btnInsertar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fecha = formatoBBDD.format(dateChooser.getDate());
+				String horadeverdad = (String) comboBox.getSelectedItem();
+				String doc = "";
+				String numTratamiento;
+				int NumeroTratamiento = 0;
+				// comprobacion tratamiento
+				for (int i = 0; i < nombreTratamiento.size(); i++) {
+					String nomTra = nombreTratamiento.get(i).toString();
+
+					if (nomTra.equals(cbTratamientos.getSelectedItem().toString())) {
+						
+						 numTratamiento = nTratamiento.get(i);
+
+						NumeroTratamiento=Integer.parseInt(numTratamiento);
+						
+					}
+				}
+				// comprobacion doctor
+				for (int i = 0; i < Nombre.size(); i++) {
+
+					String nomDoc = Nombre.get(i).toString();
+					if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
+						doc = Dni.get(i);
+						System.out.println("El puta:"+doc);
+
+					}
+				}
+				int pagosId = 0;
+				// declaracion de variables
+				int tratamientosId = 0;
+				
+
+				// comprobaciones
+				String dnipaciente = txPacientes.getText();
+				if (dnipaciente.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Escribe un DNI en pacientes", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+
+				if (fecha.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Introduce una fecha", "Error", JOptionPane.ERROR_MESSAGE);
+
+				}
+				String observaciones = txObservaciones.getText();
+				if (observaciones.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				boolean comprobarDoctor = con.comprobarCitasDoctor(horadeverdad, fecha, doc);
+				boolean comprobarPaciente = con.comprobarCitasPaciente(horadeverdad, fecha,
+						doc);
+				System.out.print(comprobarDoctor);
+				System.out.print(comprobarPaciente);
+				if (comprobarDoctor == false && comprobarPaciente == false) {
+					// sentencia sql
+					String sentencia = "INSERT into citas (hora,fecha,"
+							+ "observaciones_cita,DNIpaciente,idtratamiento,DNIdoctor)values('" + horadeverdad + "'," + "'"
+							+ fecha + "' ,'"
+							+ txObservaciones.getText().toString() + "','" + txPacientes.getText().toString()
+							+ "', "+ NumeroTratamiento +" ,'" + doc + "')";
+
+					boolean status = false;
+					System.out.println(sentencia);
+					status = conexion.insertar(conexion, sentencia);
+				} else {
+					JOptionPane.showMessageDialog(null, "Ya existe una cita con ese doctor o ese paciente a esa hora",
+							"Error", JOptionPane.ERROR_MESSAGE);
+
+				}
+
+			}
+
+		});
+		btnInsertar.setBounds(966, 530, 108, 70);
+		ImageIcon imagen = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen2 = new ImageIcon(imagen.getImage().getScaledInstance(btnInsertar.getWidth(),
+				btnInsertar.getHeight(), Image.SCALE_SMOOTH));
+
+		// Establecer el texto sobre la imagen
+		btnInsertar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnInsertar.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnInsertar.setForeground(Color.WHITE); // Color del texto
+		btnInsertar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		btnInsertar.setIcon(imagen2);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnInsertar.setBorderPainted(false);
+		btnInsertar.setContentAreaFilled(false);
+		getContentPane().add(btnInsertar);
 
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1100, 650);

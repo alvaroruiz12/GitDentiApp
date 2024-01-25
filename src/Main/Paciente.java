@@ -61,8 +61,8 @@ public class Paciente {
 
    		 while (rs.next()) {
    			 String DNIpaciente = rs.getString("DNIpaciente");
-   			 String Nombre = rs.getString("Nombre");
-   			 String Apellidos= rs.getString("Apellidos");
+   			 String Nombre = rs.getString("nombre_paciente");
+   			 String Apellidos= rs.getString("apellido_paciente");
    			 String correo= rs.getString("correo");
    			 int telefono = rs.getInt("telefono");
    			 int edad = rs.getInt("edad");

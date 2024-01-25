@@ -65,17 +65,17 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select Hora,Fecha,pacientes_DNIpaciente,"
-					+ "doctor_DNI,Observaciones"
-					+ " from citas ORDER BY Fecha";
+			String consulta = "Select hora,fecha,DNIpaciente,"
+					+ "DNIdoctor,observaciones_cita"
+					+ " from citas ORDER BY fecha";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
-				String Hora = rs.getString("Hora");
-				String Fecha = rs.getString("Fecha");
-				String DNIpacientes = rs.getString("pacientes_DNIpaciente");
-				String DNIdoctor = rs.getString("doctor_DNI");
-				String Observaciones = rs.getString("Observaciones");
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
 
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
@@ -100,17 +100,17 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select Hora,Fecha,pacientes_DNIpaciente,"
-					+ "doctor_DNI,Observaciones"
-					+ " from citas ORDER BY Fecha";
+			String consulta = "Select hora,fecha,DNIpaciente,"
+					+ "DNIdoctor,observaciones_cita"
+					+ " from citas ORDER BY fecha";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
-				String Hora = rs.getString("Hora");
-				String Fecha = rs.getString("Fecha");
-				String DNIpacientes = rs.getString("pacientes_DNIpaciente");
-				String DNIdoctor = rs.getString("doctor_DNI");
-				String Observaciones = rs.getString("Observaciones");
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
 
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
@@ -166,11 +166,11 @@ public class Citas {
 			// consulta SQL para borrar
 			String consulta = "UPDATE nombre_de_tabla"
 					+ "SET "
-					+ "    Hora = '"+hora+"',"
-					+ "    Fecha = '"+fecha+"',"
-					+ "    pacientes_DNIpaciente = '"+DNIpaciente+"',"
-					+ "    doctor_DNI = '"+DNIdoctor+"',"
-					+ "    observaciones = '"+observaciones+"'"
+					+ "    hora = '"+hora+"',"
+					+ "    fecha = '"+fecha+"',"
+					+ "    DNIpaciente = '"+DNIpaciente+"',"
+					+ "    DNIdoctor = '"+DNIdoctor+"',"
+					+ "    observaciones_cita = '"+observaciones+"'"
 					+ "WHERE\n"
 					+ "    idcitas = "+idCitas+";";
 			conexion.ejecutarInsertDeleteUpdate(consulta);
