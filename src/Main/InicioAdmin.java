@@ -281,9 +281,14 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Baja doctor");
+<<<<<<< Updated upstream
 		
 		
 		mntmNewMenuItem.setMargin(margenes);
+=======
+		mntmNewMenuItem.setMargin(margenes);
+
+>>>>>>> Stashed changes
 		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -294,6 +299,10 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				pp.setVisible(modal);
 			}
 		});
+<<<<<<< Updated upstream
+=======
+		
+>>>>>>> Stashed changes
 		mnNewMenu_6.add(mntmNewMenuItem);
 		
 		JMenu mnNewMenu_7 = new JMenu("Proveedores");

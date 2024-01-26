@@ -59,7 +59,12 @@ public class Doctor {
 			while (rs.next()) {
 				String DNIdoctor = rs.getString("DNIdoctor");
 				String Nombre = rs.getString("nombre_doctor");
+<<<<<<< Updated upstream
 
+=======
+				String idusuario = rs.getString("idusuarios");
+				String idespecialidad = rs.getString("idespecialidad");
+>>>>>>> Stashed changes
 
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
@@ -149,8 +154,12 @@ public class Doctor {
 		
 
 	}
+<<<<<<< Updated upstream
 	
 	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
+=======
+	public void EliminarDoctor(JTable jTable, Conexion conexion) throws SQLException {
+>>>>>>> Stashed changes
 		// voy a coger la fila selecccionada.
 		int filaSeleccionada = jTable.getSelectedRow();
 		if (filaSeleccionada == -1) {
@@ -160,10 +169,17 @@ public class Doctor {
 			Object valorId = jTable.getValueAt(filaSeleccionada, 0);
 
 			// hacemos casting a int porque la recibimos como String.
+<<<<<<< Updated upstream
 			String idDoctor = valorId.toString();
 
 			// consulta SQL para borrar
 			String consulta = "DELETE FROM doctor WHERE DNIdoctor= '" + idDoctor+"';";
+=======
+			String idCitas = valorId.toString();
+
+			// consulta SQL para borrar
+			String consulta = "DELETE FROM doctor WHERE DNIdoctor= '" + idCitas+"';";
+>>>>>>> Stashed changes
 			conexion.ejecutarInsertDeleteUpdate(consulta);
 			// borramos de la tabla ahora.
 			DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -171,5 +187,8 @@ public class Doctor {
 
 		}
 	}
+<<<<<<< Updated upstream
 	
+=======
+>>>>>>> Stashed changes
 }

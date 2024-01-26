@@ -118,7 +118,7 @@ public class BajaDoctor extends JDialog {
 
 						if (respuesta == JOptionPane.YES_OPTION) {
 							// Código para la acción si el usuario selecciona "Sí"
-							doctor.EliminarCitas(table_1,con);
+							doctor.EliminarDoctor(table_1,con);
 							doctor.CargarTabla(model, table_1);
 
 						}

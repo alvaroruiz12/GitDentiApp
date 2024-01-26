@@ -519,7 +519,11 @@ public boolean insertar(Conexion con, String sentencia) {
 	        rs = stm.executeQuery("SELECT * FROM citas "
 	        		+ "WHERE hora = '"+horaIn+"' AND "
 	        		+ "fecha = '"+fechaIn+"' AND "
+<<<<<<< Updated upstream
 	        		+ "DNIdoctor = '"+doctorIn+"'");
+=======
+	        		+ "DNIdoctor= '"+doctorIn+"'");
+>>>>>>> Stashed changes
 
 	        while (rs.next()) {
 	            int idCitas = rs.getInt("idcitas");
@@ -530,6 +534,10 @@ public boolean insertar(Conexion con, String sentencia) {
 	            res.add(fecha);
 	            int idDoctor = rs.getInt("DNIdoctor");
 	            res.add(String.valueOf(idDoctor));
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	            int idTratamientos = rs.getInt("idtratamiento");
 	            res.add(String.valueOf(idTratamientos));
 	            int idPacientes = rs.getInt("DNIpaciente");
