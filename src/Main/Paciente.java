@@ -13,12 +13,12 @@ import BBDD.Conexion;
 
 public class Paciente {
 
-    String DNIpaciente;
-    String nombre;
-    String Apellidos;
-    String correo;   
-    int telefono;
-    int edad;
+    private String DNIpaciente;
+    private String nombre;
+    private String Apellidos;
+    private String correo;   
+    private int telefono;
+    private int edad;
     
     private Conexion conexion;
     
@@ -116,6 +116,50 @@ public class Paciente {
       	 }
 
     }
+	public String getDNIpaciente() {
+		return DNIpaciente;
+	}
+	public void setDNIpaciente(String dNIpaciente) {
+		DNIpaciente = dNIpaciente;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return Apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		Apellidos = apellidos;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	public int getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public Conexion getConexion() {
+		return conexion;
+	}
+	public void setConexion(Conexion conexion) {
+		this.conexion = conexion;
+	}
+    
+    
 }
 
 
