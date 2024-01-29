@@ -1,0 +1,4 @@
+<map version="1.0">
+    <!--tantos mapID como paginas tenga cada html es un id-->
+    <mapID target="prueba" url="html/main.html"/>
+</map>
