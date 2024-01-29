@@ -180,11 +180,24 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal3 = true;
+				ConsultarCitas consultarCitas = new ConsultarCitas(a, con, padre, modal3);
+				consultarCitas.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
+		JMenuItem  mntmNewMenuItem_1= new JMenuItem("New menu item");
+		mntmNewMenuItem_1.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_1.setForeground(Color.black);
+		mntmNewMenuItem_1.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal3 = true;
 				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
 				eliminarCitas.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_6);
+		mnNewMenu_2.add(mntmNewMenuItem_1);
 
 		JMenu mnNewMenu_3 = new JMenu("Inventario");
 		mnNewMenu_3.setMargin(margenes);
@@ -281,14 +294,11 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Baja doctor");
-<<<<<<< Updated upstream
 		
 		
 		mntmNewMenuItem.setMargin(margenes);
-=======
 		mntmNewMenuItem.setMargin(margenes);
 
->>>>>>> Stashed changes
 		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -299,10 +309,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				pp.setVisible(modal);
 			}
 		});
-<<<<<<< Updated upstream
-=======
-		
->>>>>>> Stashed changes
+
 		mnNewMenu_6.add(mntmNewMenuItem);
 		
 		JMenu mnNewMenu_7 = new JMenu("Proveedores");

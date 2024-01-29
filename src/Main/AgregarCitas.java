@@ -51,11 +51,8 @@ public class AgregarCitas extends JDialog {
 	private JTextField txPacientes;
 	private JTextField txObservaciones;
 	Date hoy = new Date();
-<<<<<<< Updated upstream
 	Tratamiento tratamiento = new Tratamiento();
-=======
-	Tratamiento tratamiento= new Tratamiento();
->>>>>>> Stashed changes
+
 
 	/**
 	 * Launch the application.
@@ -162,7 +159,6 @@ public class AgregarCitas extends JDialog {
 		cbTratamientos.setBounds(246, 275, 150, 30);
 		getContentPane().add(cbTratamientos);
 
-<<<<<<< Updated upstream
 		// relleno
 
 		ArrayList<String> nombreTratamiento = tratamiento.CargarNombreTratamiento();
@@ -172,14 +168,12 @@ public class AgregarCitas extends JDialog {
 			cbTratamientos.addItem(nombreTratamiento.get(i).toString());
 		}
 		
-=======
 		ArrayList<String> NombreTratamiento=tratamiento.CargarNombreTratamiento();
 		ArrayList<String> NumTratamiento=tratamiento.CargarNumeroTratamiento();
 		
 		for (int i = 0; i < NombreTratamiento.size(); i++) {
 			cbTratamientos.addItem(NombreTratamiento.get(i).toString());
 		}
->>>>>>> Stashed changes
 		// formato se aplica en el boton
 		SimpleDateFormat formatoBBDD = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -265,13 +259,9 @@ public class AgregarCitas extends JDialog {
 
 		int tamañoNombre = 0;
 		// metodo recoge el nombre y el dni
-<<<<<<< Updated upstream
-		ArrayList<String> Dni = doctor.CargarDNIDoctorCitas();
-		ArrayList<String> Nombre = doctor.CargarNombreDoctorCitas();
-=======
+
 		ArrayList<String> Dni=doctor.CargarDNIDoctorCitas();
 		ArrayList<String> Nombre=doctor.CargarNombreDoctorCitas();
->>>>>>> Stashed changes
 
 		System.out.println(Nombre);
 		// mete los nombres en el combobox
@@ -290,7 +280,6 @@ public class AgregarCitas extends JDialog {
 				String fecha = formatoBBDD.format(dateChooser.getDate());
 				String horadeverdad = (String) comboBox.getSelectedItem();
 				String doc = "";
-<<<<<<< Updated upstream
 				String numTratamiento;
 				int NumeroTratamiento = 0;
 				// comprobacion tratamiento
@@ -306,7 +295,6 @@ public class AgregarCitas extends JDialog {
 					}
 				}
 				// comprobacion doctor
-=======
 				String numTra="";
 				int nTra=0;
 				for (int i = 0; i < NombreTratamiento.size(); i++) {
@@ -318,7 +306,6 @@ public class AgregarCitas extends JDialog {
 					}
 				}
 				
->>>>>>> Stashed changes
 				for (int i = 0; i < Nombre.size(); i++) {
 
 					String nomDoc = Nombre.get(i).toString();
@@ -328,18 +315,15 @@ public class AgregarCitas extends JDialog {
 
 					}
 				}
-<<<<<<< Updated upstream
 				int pagosId = 0;
 				// declaracion de variables
 				int tratamientosId = 0;
 				
 
-=======
 				
 				
 				
 				
->>>>>>> Stashed changes
 				// comprobaciones
 				String dnipaciente = txPacientes.getText();
 				if (dnipaciente.isEmpty()) {
@@ -363,19 +347,12 @@ public class AgregarCitas extends JDialog {
 				System.out.print(comprobarPaciente);
 				if (comprobarDoctor == false && comprobarPaciente == false) {
 					// sentencia sql
-<<<<<<< Updated upstream
 					String sentencia = "INSERT into citas (hora,fecha,"
 							+ "observaciones_cita,DNIpaciente,idtratamiento,DNIdoctor)values('" + horadeverdad + "'," + "'"
 							+ fecha + "' ,'"
 							+ txObservaciones.getText().toString() + "','" + txPacientes.getText().toString()
 							+ "', "+ NumeroTratamiento +" ,'" + doc + "')";
-=======
-					String sentencia = "Insert into dentiapp.citas (hora,fecha,"
-							+ "observaciones_cita,DNIpaciente,idtratamiento,DNIdoctor)values('" + horadeverdad + "'," + "'"
-							+ fecha + "','"
-							+ txObservaciones.getText().toString() + "'" + ",'" + txPacientes.getText().toString()
-							+ "',"+nTra+",'" + doc+ "')";
->>>>>>> Stashed changes
+
 
 					boolean status = false;
 					System.out.println(sentencia);
