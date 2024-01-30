@@ -202,6 +202,8 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		JMenu mnNewMenu_3 = new JMenu("Inventario");
 		mnNewMenu_3.setMargin(margenes);
 		//hola mi nombre es pepe
+		
+		//pabloesfeo
 
 		mnNewMenu_3.setBackground(new Color(207, 241, 255));
 		mnNewMenu_3.setForeground(Color.black);
