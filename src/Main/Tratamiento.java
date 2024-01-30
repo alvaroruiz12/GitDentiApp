@@ -152,4 +152,41 @@ public class Tratamiento {
 		
 
 	}
+    
+    public int CargarCosteTratamiento(String nombre) {
+
+		int costeTratamiento=0;
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select coste_tratamiento from tratamientos where nombre_tratamiento = '" + nombre + "'";
+			rs = stm.executeQuery(consulta);
+		
+
+			while (rs.next()) {
+				String coste = rs.getString("coste_tratamiento");
+
+				costeTratamiento = Integer.parseInt(coste);
+				
+			
+			
+				
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return costeTratamiento;
+		
+
+	}
+    
+    
 }

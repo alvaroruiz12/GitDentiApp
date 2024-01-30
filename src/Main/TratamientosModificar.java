@@ -29,20 +29,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import BBDD.Conexion;
+import javax.swing.JComboBox;
 
 public class TratamientosModificar extends JDialog {
 
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tftratamiento;
 	private JTextField tfCoste;
 	private JTextField tfnombre;
  Tratamiento tratamiento = new Tratamiento();
 	
 	
 	
-	private String stf1="Introduzca Nombre",stf2= "Introduzca Coste";
+	
 	
 
 	/**
@@ -81,7 +81,8 @@ public class TratamientosModificar extends JDialog {
 		
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
-		
+		tfCoste = new JTextField();
+		tfnombre = new JTextField();
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1100, 650);
 		
@@ -92,44 +93,44 @@ public class TratamientosModificar extends JDialog {
 		setContentPane(contentPane);
 				contentPane.setLayout(null);
 				
+				JComboBox cbTratamientos = new JComboBox();
+				cbTratamientos.setBounds(129, 180, 173, 22);
+				contentPane.add(cbTratamientos);
+				ArrayList<String> nombreTratamiento = tratamiento.CargarNombreTratamiento();
 				
 				
 				
-				//AÑADIR EN LA TABLA EL SELECCIONADO
-				
-				//DISEÑO
-				
-				//PRIMERA SELECCION
-				
-				tftratamiento = new JTextField();
-				tftratamiento.setForeground(new Color(192, 192, 192));
-				tftratamiento.setText("Introduzca idtratamiento");
-				tftratamiento.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tftratamiento.setBounds(124, 241, 189, 30);
-				contentPane.add(tftratamiento);
-				tftratamiento.setColumns(10);
-				
+				cbTratamientos.addActionListener(new ActionListener()  {
+					public void actionPerformed(ActionEvent e) {
+						
+						String datos= (String)cbTratamientos.getSelectedItem();
+		                tfnombre.setText(datos);
+		           int costeTratamiento = tratamiento.CargarCosteTratamiento(datos);
+		                String coste=String.valueOf(costeTratamiento);
+		                tfCoste.setText(coste);
+					}
+				});
 			
-			
-
+				
 		
+
+				for (int i = 0; i < nombreTratamiento.size(); i++) {
+					cbTratamientos.addItem(nombreTratamiento.get(i).toString());
+					
+			
+				}
+				
 				
 				//SEGUNDA SELECCION
 				
-				tfCoste = new JTextField();
-				tfCoste.setForeground(new Color(192, 192, 192));
-				tfCoste.setText("Introduzca Coste");
+				
+				tfCoste.setForeground(new Color(0, 0, 0));
+			
 				tfCoste.setFont(new Font("Calibri", Font.PLAIN, 15));
 				tfCoste.setBounds(124, 304, 189, 30);
 				contentPane.add(tfCoste);
 				tfCoste.setColumns(10);
-				
-				JLabel lblFotoUser = new JLabel();
-				lblFotoUser.setBounds(154, 72, 120, 120);
 				ImageIcon imagen= new ImageIcon(getClass().getResource("user.png"));
-				ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(lblFotoUser.getWidth(), lblFotoUser.getHeight(), Image.SCALE_SMOOTH));
-				lblFotoUser.setIcon(imagen2);
-				contentPane.add(lblFotoUser);
 				
 				JButton btnVolver = new JButton("Volver");
 				btnVolver.setBounds(23, 10, 76, 64);
@@ -146,73 +147,14 @@ public class TratamientosModificar extends JDialog {
 				btnVolver.setIcon(i8);
 				contentPane.add(btnVolver);
 				
-				tfnombre = new JTextField();
-				tfnombre.setForeground(new Color(192, 192, 192));
-				tfnombre.setText("Introduzca Nombre");
+				
+				tfnombre.setForeground(new Color(0, 0, 0));
+			
 				tfnombre.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tfnombre.setBounds(124, 360, 189, 30);
+				tfnombre.setBounds(124, 244, 189, 30);
 				contentPane.add(tfnombre);
 				tfnombre.setColumns(10);
 				
-				
-		
-				
-				
-				
-				
-				//-----------------------Para que desaparezca y aparezca cuando este vacio----------------
-				
-				
-				tftratamiento.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-							tftratamiento.setText("");
-							tftratamiento.setForeground(new Color(0,0,0));
-							
-						
-					}
-					
-				});
-				
-				tftratamiento.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tftratamiento.getText().isEmpty()) {
-							
-							
-							tftratamiento.setText(stf1);
-							tftratamiento.setForeground(new Color(192,192,192));
-							
-						}
-					}
-				});
-				tfCoste.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-						tfCoste.setText("");
-						tfCoste.setForeground(new Color(0,0,0));
-						
-					}
-					
-				});
-				
-				tfCoste.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfCoste.getText().isEmpty()) {
-							
-							
-							tfCoste.setText(stf2);
-							tfCoste.setForeground(new Color(192,192,192));
-						}
-					}
-				});
 				
 				
 				
@@ -262,13 +204,13 @@ public class TratamientosModificar extends JDialog {
                 	public void actionPerformed(ActionEvent e) {
                 	
                 		String nombre = tfnombre.getText();
-                		int idtratamientos= Integer.parseInt(tftratamiento.getText());
+                		
                 		int Coste =Integer.parseInt(tfCoste.getText());
                 		String sentencia = "UPDATE dentiapp.tratamientos " +
                                 "SET " +
                                 "coste_tratamiento=" + Coste + ", " +
                                 "nombre_tratamiento='" + nombre + "' " +
-                                "WHERE idtratamiento=" + idtratamientos + ";";           			
+                                "WHERE nombre_tratamiento='" + nombre + "';";           			
                 		boolean status = false;
             			status = conexion.insertar(conexion,sentencia);
             			if (status=true) {
