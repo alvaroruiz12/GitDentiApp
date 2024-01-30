@@ -90,7 +90,7 @@ public class TratamientosModificar extends JDialog {
 		contentPane.setBackground(new Color(235, 235, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
+		setContentPane(contentPane);    
 				contentPane.setLayout(null);
 				
 				JComboBox cbTratamientos = new JComboBox();
@@ -202,7 +202,7 @@ public class TratamientosModificar extends JDialog {
                 btnAnadir.setBackground(new Color (207, 241, 255));
                 btnAnadir.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
-                	
+                	//
                 		String nombre = tfnombre.getText();
                 		
                 		int Coste =Integer.parseInt(tfCoste.getText());
