@@ -6,12 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.47-bin.jar"/>
-	<classpathentry kind="lib" path="lib/T.eclipse.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javahelp"/>
-	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/jgoodies-common-1.2.0.jar"/>
-	<classpathentry kind="lib" path="lib/javax.mail.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/todojar"/>
+	<classpathentry kind="lib" path="src/librerias/javax.mail.jar"/>
+	<classpathentry kind="lib" path="src/librerias/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="src/librerias/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="src/librerias/mysql-connector-java-5.1.47-bin.jar"/>
+	<classpathentry kind="lib" path="src/librerias/T.eclipse.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
