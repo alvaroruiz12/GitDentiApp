@@ -74,8 +74,12 @@ public class SolicitarMaterial extends JDialog {
 		Material material = new Material();
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
+		setBounds(100, 100, 800, 600);
+		
+		contentPanel.setBounds(0, 0, 0, 0);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		DefaultTableModel model;
 
@@ -152,7 +156,7 @@ public class SolicitarMaterial extends JDialog {
 		table_1_1.setSelectionBackground(new Color(217, 217, 217));
 		table_1_1.setSelectionForeground(Color.BLACK);
 		table_1_1.setModel(model = new DefaultTableModel(new Object[][] {},
-				new String[] { "NombreMaterial", "Cantidad", "Precio", "Proveedor_CIF" }));
+				new String[] { "Nombre", "Cantidad", "Precio", "Proveedor_CIF" }));
 		table_1_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1_1);
 		material.CargarTabla(model, table_1_1);
