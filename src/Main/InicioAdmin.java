@@ -180,21 +180,22 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal3 = true;
-				ConsultarCitas consultarCitas = new ConsultarCitas(a, con, padre, modal3);
-				consultarCitas.setVisible(true);
+				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
+				eliminarCitas.setVisible(true);
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_6);
 		
-		JMenuItem  mntmNewMenuItem_1= new JMenuItem("New menu item");
+		JMenuItem  mntmNewMenuItem_1= new JMenuItem("Consultar citas");
 		mntmNewMenuItem_1.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem_1.setForeground(Color.black);
 		mntmNewMenuItem_1.setFont(new Font("Arial", Font.PLAIN, 25));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal3 = true;
-				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
-				eliminarCitas.setVisible(true);
+				ConsultarCitas consultarCitas = new ConsultarCitas(a, con, padre, modal3);
+				consultarCitas.setVisible(true);
+
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_1);

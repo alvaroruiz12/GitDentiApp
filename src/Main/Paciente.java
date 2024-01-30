@@ -82,40 +82,8 @@ public class Paciente {
    		 e.printStackTrace();
    	 }
    	 }
-   	public void CargarTablaCitas(DefaultTableModel tableModel, JTable table_1) {
-      	 try {
-
-      		 Connection cn = null;
-      		 Statement stm = null;
-      		 ResultSet rs = null;
-      		 Conexion controlador = new Conexion();
-      		 cn = controlador.conectar();
-      		 stm = cn.createStatement();
-      		 String consulta = "Select DNI,Nombre,Apellidos from pacientes";
-      		 rs = stm.executeQuery(consulta);
-
-      		 while (rs.next()) {
-      			 String DNIpaciente = rs.getString("DNIpaciente");
-      			 String Nombre = rs.getString("Nombre");
-      			 String Apellidos= rs.getString("Apellidos");
-
-      			
-      			 
-
-      			 // Agregar los datos a la tabla
-      			 // tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
-      			 // que va a recibir todo tipo de datos.
-      			 Object[] rowData = { DNIpaciente, Nombre, Apellidos};
-      			 tableModel.addRow(rowData);
-      		 }
-
-      		 // Crear un JTable con el modelo de tabla
-      		 table_1 = new JTable(tableModel);
-      	 } catch (SQLException e) {
-      		 e.printStackTrace();
-      	 }
-
-    }
+   	
+    
 	public String getDNIpaciente() {
 		return DNIpaciente;
 	}
