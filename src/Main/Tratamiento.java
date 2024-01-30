@@ -56,9 +56,9 @@ public class Tratamiento {
    		 rs = stm.executeQuery(consulta);
 
    		 while (rs.next()) {
-   			 int idtratamientos = Integer.parseInt(rs.getString("idtratamientos"));
-   			 int Coste = Integer.parseInt(rs.getString("Coste"));
-   			 String Nombre= rs.getString("Nombre");
+   			 String Nombre= rs.getString("nombre_tratamiento");
+   			 int Coste = Integer.parseInt(rs.getString("coste_tratamiento"));
+   			 
    		
    			
    			
@@ -67,7 +67,7 @@ public class Tratamiento {
    			 // Agregar los datos a la tabla
    			 // tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
    			 // que va a recibir todo tipo de datos.
-   			 Object[] rowData = { idtratamientos, Coste,Nombre};
+   			 Object[] rowData = { Nombre,Coste};
    			 tableModel.addRow(rowData);
    		 }
 

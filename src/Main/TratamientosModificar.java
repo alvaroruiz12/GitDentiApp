@@ -42,8 +42,7 @@ public class TratamientosModificar extends JDialog {
 	
 	
 	
-	private String stf1="Introduzca DNI",stf2= "Introduzca Nombre",
-			stf3 = "Introduzca idusuario",stf4 = "Introduzca idespecialidad";
+	private String stf1="Introduzca Nombre",stf2= "Introduzca Coste";
 	
 
 	/**
@@ -215,31 +214,7 @@ public class TratamientosModificar extends JDialog {
 					}
 				});
 				
-				tfnombre.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-						tfnombre.setText("");
-					
-						tfnombre.setForeground(new Color(0,0,0));
-						
-					}
-					
-				});
 				
-				tfnombre.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfnombre.getText().isEmpty()) {
-							
-							
-							tfnombre.setText(stf3);
-							tfnombre.setForeground(new Color(192,192,192));
-						}
-					}
-				});
 				
 				
                 JScrollPane scrollPane = new JScrollPane();
@@ -265,7 +240,7 @@ public class TratamientosModificar extends JDialog {
                 table_1.setSelectionForeground(Color.BLACK);
                 DefaultTableModel model;
 				table_1.setModel(model = new DefaultTableModel(new Object[][] {
-                }, new String[] {	"Coste", "Nombre"}));
+                }, new String[] {	"Nombre", "Coste"}));
                 table_1.getColumnModel().getColumn(1).setMinWidth(23);
                 scrollPane.setViewportView(table_1);
                 tratamiento.CargarTabla(model,table_1);
@@ -291,9 +266,9 @@ public class TratamientosModificar extends JDialog {
                 		int Coste =Integer.parseInt(tfCoste.getText());
                 		String sentencia = "UPDATE dentiapp.tratamientos " +
                                 "SET " +
-                                "Coste=" + Coste + ", " +
-                                "Nombre='" + nombre + "' " +
-                                "WHERE idtratamientos=" + idtratamientos + ";";           			
+                                "coste_tratamiento=" + Coste + ", " +
+                                "nombre_tratamiento='" + nombre + "' " +
+                                "WHERE idtratamiento=" + idtratamientos + ";";           			
                 		boolean status = false;
             			status = conexion.insertar(conexion,sentencia);
             			if (status=true) {
