@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -165,109 +166,26 @@ public class DoctorModificar extends JDialog {
 				
 				
 				
-				//-----------------------Para que desaparezca y aparezca cuando este vacio----------------
-				
-				
-				tfDNI.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-							tfDNI.setText("");
-							tfDNI.setForeground(new Color(0,0,0));
-							
-						
-					}
-					
-				});
-				
-				tfDNI.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfDNI.getText().isEmpty()) {
-							
-							
-							tfDNI.setText(stf1);
-							tfDNI.setForeground(new Color(192,192,192));
-							
-						}
-					}
-				});
-				tfNombre.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-						tfNombre.setText("");
-						tfNombre.setForeground(new Color(0,0,0));
-						
-					}
-					
-				});
-				
-				tfNombre.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfNombre.getText().isEmpty()) {
-							
-							
-							tfNombre.setText(stf2);
-							tfNombre.setForeground(new Color(192,192,192));
-						}
-					}
-				});
-				
-				tfidusuario.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-						tfidusuario.setText("");
-					
-						tfidusuario.setForeground(new Color(0,0,0));
-						
-					}
-					
-				});
-				
-				tfidusuario.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfidusuario.getText().isEmpty()) {
-							
-							
-							tfidusuario.setText(stf3);
-							tfidusuario.setForeground(new Color(192,192,192));
-						}
-					}
-				});
-				tfidespecialidad.addMouseListener(new MouseAdapter() {
-					
-					public void mouseClicked(MouseEvent e) {
-						
-						tfidespecialidad.setText("");
-						tfidespecialidad.setForeground(new Color(0,0,0));
-						
-					}
-					
-				});
-				
-				tfidespecialidad.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusLost(FocusEvent e) {
-						
-						
-						if(tfidespecialidad.getText().isEmpty()) {
-							
-							
-							tfidespecialidad.setText(stf4);
-							tfidespecialidad.setForeground(new Color(192,192,192));
-						}
-					}
-				});
+				// combobox doctor
+				JComboBox comboBoxDoctor = new JComboBox();
+				// cargar datos al combobox
+
+				// esto da null
+
+				int tamañoNombre = 0;
+				// metodo recoge el nombre y el dni
+
+				ArrayList<String> Dni=doctor.CargarDNIDoctorCitas();
+				ArrayList<String> Nombre=doctor.CargarNombreDoctorCitas();
+
+				System.out.println(Nombre);
+				// mete los nombres en el combobox
+				for (int i = 0; i < Nombre.size(); i++) {
+					comboBoxDoctor.addItem(Nombre.get(i).toString());
+				}
+
+				comboBoxDoctor.setBounds(406, 107, 157, 33);
+				getContentPane().add(comboBoxDoctor);
 				
 				
                 JScrollPane scrollPane = new JScrollPane();
@@ -293,13 +211,30 @@ public class DoctorModificar extends JDialog {
                 table_1.setSelectionForeground(Color.BLACK);
                 DefaultTableModel model;
 				table_1.setModel(model = new DefaultTableModel(new Object[][] {
-                }, new String[] { "DNIdoctor", "Nombre", "idusuario", "idespecialidad"}));
+                }, new String[] { "DNIdoctor", "Nombre"}));
                 table_1.getColumnModel().getColumn(1).setMinWidth(23);
                 scrollPane.setViewportView(table_1);
                 doctor.CargarTabla(model,table_1);
                 
-		
-                
+                //boton para rellenar todo los datos automaticamente
+				JButton btnRelleno = new JButton("RELLENAR");
+				btnRelleno.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String doc = "";
+						//coger el dni
+						for (int i = 0; i < Nombre.size(); i++) {
+
+							String nomDoc = Nombre.get(i).toString();
+							if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
+								doc = Dni.get(i);
+							}
+						}
+						//
+						
+					}
+				});
+				btnRelleno.setBounds(572, 112, 89, 23);
+				contentPane.add(btnRelleno);
 		
                 
                 
@@ -338,6 +273,8 @@ public class DoctorModificar extends JDialog {
 				ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 				fondo.setIcon(imagen6);
 				contentPane.add(fondo);
+				
+
 				
 				
 	}public void clearTxtField(JTextField text) {

@@ -311,7 +311,6 @@ public class AgregarCitas extends JDialog {
 					String nomDoc = Nombre.get(i).toString();
 					if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
 						doc = Dni.get(i);
-						System.out.println("El puta:"+doc);
 
 					}
 				}
