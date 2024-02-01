@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -15,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +57,7 @@ public class ConsultarPaciente extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(28, 197, 439, 161);
+		scrollPane.setBounds(28, 197, 725, 242);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 //tabla pacientes
@@ -80,6 +83,34 @@ public class ConsultarPaciente extends JDialog {
 		table_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1);
 		paciente.CargarTabla(model, table_1);
+		
+		
+		
+		// boton para volver a inicio
+		JButton btnVolver = new JButton("VOLVER");
+
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnVolver.setBounds(669, 11, 105, 50);
+		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen4 = new ImageIcon(imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+		btnVolver.setIcon(imagen4);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnVolver.setBorderPainted(false);
+		btnVolver.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnVolver.setForeground(Color.WHITE); // Color del texto
+		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		getContentPane().add(btnVolver);
 		
 		
 		JLabel fondo = new JLabel();

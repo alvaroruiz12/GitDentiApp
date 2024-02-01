@@ -259,6 +259,21 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_5.add(menuItem);
 		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Consultar paciente");
+		mntmNewMenuItem_3.setMargin(margenes);
+
+		mntmNewMenuItem_3.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_3.setForeground(Color.black);
+		mntmNewMenuItem_3.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarPaciente cp = new ConsultarPaciente(a, con, padre, modal);
+				cp.setVisible(modal);
+			}
+		});
+		mnNewMenu_5.add(mntmNewMenuItem_3);
+		
 		JMenu mnNewMenu_6 = new JMenu("Doctores");
 		mnNewMenu_6.setMargin(margenes);
 
@@ -361,6 +376,22 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				pp.setVisible(modal);
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Alta tratamiento");
+		mntmNewMenuItem_12.setMargin(margenes);
+
+		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_12.setForeground(Color.black);
+		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
+				at.setVisible(modal);
+			}
+		});
+		
+		mnNewMenu_8.add(mntmNewMenuItem_12);
 		mnNewMenu_8.add(mntmNewMenuItem_11);
 		
 		
@@ -554,6 +585,10 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		contentPane.add(fondo);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		mntmNewMenuItem_2.setBounds(631, 111, 137, 26);
+		contentPane.add(mntmNewMenuItem_2);
 
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),

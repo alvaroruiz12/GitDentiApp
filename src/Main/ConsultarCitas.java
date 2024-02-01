@@ -28,7 +28,7 @@ public class ConsultarCitas extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField textoNombre;
 	private JTextField textoApellidos;
-
+	Paciente paciente= new Paciente();
 	/**
 	 * Launch the application.
 	 */
@@ -90,7 +90,7 @@ public class ConsultarCitas extends JDialog {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(879, 0, 105, 50);
+		btnVolver.setBounds(869, 11, 105, 50);
 		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen4 = new ImageIcon(
 				imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
@@ -110,33 +110,45 @@ public class ConsultarCitas extends JDialog {
 		getContentPane().add(btnVolver);
 
 		textoNombre = new JTextField();
-		textoNombre.setBounds(106, 79, 86, 20);
+		textoNombre.setBounds(52, 137, 150, 30);
 		getContentPane().add(textoNombre);
 		textoNombre.setColumns(10);
+
+		
+		
+		textoApellidos = new JTextField();
+		textoApellidos.setBounds(212, 137, 250, 30);
+		getContentPane().add(textoApellidos);
+		textoApellidos.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		lblNewLabel.setBounds(52, 96, 150, 30);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setForeground(Color.white);
+
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Apellidos");
+		lblNewLabel_1.setBounds(212, 96, 158, 30);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setForeground(Color.white);
+
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel_1);
 
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
+				
+				citas.CargarTablaBusqueda(model, table_1, DNI);
+				
 			}
 		});
-		btnBuscar.setBounds(431, 78, 89, 23);
+		btnBuscar.setBounds(472, 137, 100, 30);
 		getContentPane().add(btnBuscar);
 
-		
-		textoApellidos = new JTextField();
-		textoApellidos.setBounds(224, 79, 86, 20);
-		getContentPane().add(textoApellidos);
-		textoApellidos.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(106, 54, 46, 14);
-		getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(214, 53, 46, 14);
-		getContentPane().add(lblNewLabel_1);
-
-		
 		
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
