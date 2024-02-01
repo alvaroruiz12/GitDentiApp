@@ -46,6 +46,9 @@ public boolean insertar(Conexion con, String sentencia) {
 		
 		return res;
 	}
+
+
+
 	
 	public boolean comprobar(String n, String c) {
 		boolean res = false;
@@ -64,6 +67,8 @@ public boolean insertar(Conexion con, String sentencia) {
 	        int rowCount = stm.executeUpdate(sentencia);
 	        if (rowCount > 0) {
 	            res = true;
+	           
+
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -87,12 +92,25 @@ public boolean insertar(Conexion con, String sentencia) {
 	    try {
 	        cn = conexion.conectar();
 	        stm = cn.createStatement();
-	        int rowCount = stm.executeUpdate(sentencia);
+	        int rowCount=0;
+	        
+	        int opcion =JOptionPane.showConfirmDialog(null, "¿Quieres realizar esta actualizacion?", "Confirmación", JOptionPane.OK_CANCEL_OPTION);
+            if (opcion == JOptionPane.OK_OPTION) {
+            	 rowCount = stm.executeUpdate(sentencia);
+                System.out.println("Ha sido actualizado con exito");
+                
+            } else if (opcion == JOptionPane.CANCEL_OPTION) {
+                System.out.println("Has cancelado el proceso");
+               
+            } 
 	        if (rowCount > 0) {
 	            res = true;
+	            
+	            
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
+	        
 	    } finally {
 	        // Cerrar recursos
 	        try {

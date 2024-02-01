@@ -149,10 +149,10 @@ public class TratamientosModificar extends JDialog {
 				tfCoste.setColumns(10);
 				ImageIcon imagen= new ImageIcon(getClass().getResource("user.png"));
 				
-				JButton btnVolver = new JButton("Volver");
-				btnVolver.setBounds(23, 10, 76, 64);
-				btnVolver.setBackground(new Color(207, 241, 255));
-				btnVolver.setForeground(new Color(255, 255, 255));
+				JButton btnVolver = new JButton("");
+				btnVolver.setBounds(32, 25, 71, 45);
+				btnVolver.setBackground(new Color(192, 192, 192));
+				btnVolver.setForeground(new Color(0, 0, 0));
 				btnVolver.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -270,17 +270,17 @@ public class TratamientosModificar extends JDialog {
                 	public void actionPerformed(ActionEvent e) {
                 	//
                 		String datos= (String)cbTratamientos.getSelectedItem();
-		            
+		                String nombre = tfnombre.getText();
                 		
                 		int Coste =Integer.parseInt(tfCoste.getText());
                 		String sentencia = "UPDATE dentiapp.tratamientos " +
                                 "SET " +
                                 "coste_tratamiento=" + Coste + ", " +
-                                "nombre_tratamiento='" + datos + "' " +
+                                "nombre_tratamiento='" + nombre + "' " +
                                 "WHERE nombre_tratamiento='" + datos + "';";           			
                 		boolean status = false;
                
-            			status = conexion.insertar(conexion,sentencia);
+            			status = conexion.actualizar(conexion,sentencia);
             			if (status=true) {
             				
             			}
@@ -291,7 +291,6 @@ public class TratamientosModificar extends JDialog {
 
                 JLabel fondo = new JLabel();
                 fondo.setBounds(new Rectangle(0, 0, 2, 2));
-                fondo.setBorder(new EmptyBorder(0, 0, 2, 0));
                 fondo.setForeground(new Color(192, 192, 192));
 				fondo.setBounds(0, 0, 1100, 650);
 
