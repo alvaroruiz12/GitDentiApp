@@ -31,6 +31,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -38,7 +39,10 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+
+import javax.help.HelpBroker;
 import javax.help.HelpSet;
+import javax.help.HelpSetException;
 
 public class Login extends JFrame {
 
@@ -126,16 +130,28 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				File fichero = new File("src/help/help_set.hs");
-				URL hsURL = fichero.toURI().toURL();
+				URL hsURL;
+				try {
+					hsURL = fichero.toURI().toURL();
+					HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+					HelpBroker hb = helpset.createHelpBroker();
+					
+					hb.enableHelpOnButton(btnNewButton,"prueba",helpset);
+					
+					Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+					Point p = new Point((int) pantalla.getWidth()/3,(int) pantalla.getHeight()/3);
+					hb.setLocation(p);
+					
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (HelpSetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
-				HelpBroker hb = helpset.createHelpBroker();
 				
-				hb.enableHelpOnButton(btnNewButton,"aplicacion",helpset);
 				
-				Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-				Point p = new Point((int) pantalla.getWidth()/3,(int) pantalla.getHeight()/3);
-				hb.setLocation(p);
 				
 			}
 		});
