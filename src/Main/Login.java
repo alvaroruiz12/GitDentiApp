@@ -2,6 +2,7 @@ package Main;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,11 +31,14 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import javax.help.HelpSet;
 
 public class Login extends JFrame {
 
@@ -51,6 +55,7 @@ public class Login extends JFrame {
 	private Conexion conexion;
 	private JLabel lblFotoUser;
 	private Login padre;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -115,6 +120,27 @@ public class Login extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		btnNewButton = new JButton("PRUEBA AYUDA");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				File fichero = new File("src/help/help_set.hs");
+				URL hsURL = fichero.toURI().toURL();
+				
+				HelpSet helpset = new HelpSet(getClass().getClassLoader(), hsURL);
+				HelpBroker hb = helpset.createHelpBroker();
+				
+				hb.enableHelpOnButton(btnNewButton,"aplicacion",helpset);
+				
+				Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+				Point p = new Point((int) pantalla.getWidth()/3,(int) pantalla.getHeight()/3);
+				hb.setLocation(p);
+				
+			}
+		});
+		btnNewButton.setBounds(597, 157, 89, 23);
+		contentPane.add(btnNewButton);
 
 		// TEXTFIELD
 		txUsuario.setBounds(701, 312, 135, 25);
@@ -185,7 +211,7 @@ public class Login extends JFrame {
 
 			}
 		});
-		botonRecuperar.setBounds(679, 485, 184, 42);
+		botonRecuperar.setBounds(679, 496, 184, 42);
 		contentPane.add(botonRecuperar);
 		
 		// JLabel de fondo
