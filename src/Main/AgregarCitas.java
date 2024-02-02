@@ -168,12 +168,7 @@ public class AgregarCitas extends JDialog {
 			cbTratamientos.addItem(nombreTratamiento.get(i).toString());
 		}
 		
-		ArrayList<String> NombreTratamiento=tratamiento.CargarNombreTratamiento();
-		ArrayList<String> NumTratamiento=tratamiento.CargarNumeroTratamiento();
-		
-		for (int i = 0; i < NombreTratamiento.size(); i++) {
-			cbTratamientos.addItem(NombreTratamiento.get(i).toString());
-		}
+	
 		// formato se aplica en el boton
 		SimpleDateFormat formatoBBDD = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -297,10 +292,10 @@ public class AgregarCitas extends JDialog {
 				// comprobacion doctor
 				String numTra="";
 				int nTra=0;
-				for (int i = 0; i < NombreTratamiento.size(); i++) {
-					String nomTratamiento = NombreTratamiento.get(i).toString();
+				for (int i = 0; i < nombreTratamiento.size(); i++) {
+					String nomTratamiento = nombreTratamiento.get(i).toString();
 					if (nomTratamiento.equals(cbTratamientos.getSelectedItem().toString())) {
-						numTra = NumTratamiento.get(i).toString();
+						numTra = nTratamiento.get(i).toString();
 						 nTra = Integer.parseInt(numTra);
 
 					}
