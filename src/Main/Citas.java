@@ -126,7 +126,42 @@ public class Citas {
 		}
 
 	}
+	public void CargarTablaBusqueda(DefaultTableModel tableModel, JTable table_1,String DNI) {
+		try {
 
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select hora,fecha,DNIpaciente,"
+					+ "DNIdoctor,observaciones_cita"
+					+ " from citas WHERE DNIpaciente='"+DNI+"' ORDER BY fecha";
+			rs = stm.executeQuery(consulta);
+
+			while (rs.next()) {
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
+
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
+				tableModel.addRow(rowData);
+			}
+
+			// Crear un JTable con el modelo de tabla
+			table_1 = new JTable(tableModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 
 	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
 		// voy a coger la fila selecccionada.

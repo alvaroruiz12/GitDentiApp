@@ -180,21 +180,22 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal3 = true;
-				ConsultarCitas consultarCitas = new ConsultarCitas(a, con, padre, modal3);
-				consultarCitas.setVisible(true);
+				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
+				eliminarCitas.setVisible(true);
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_6);
 		
-		JMenuItem  mntmNewMenuItem_1= new JMenuItem("New menu item");
+		JMenuItem  mntmNewMenuItem_1= new JMenuItem("Consultar citas");
 		mntmNewMenuItem_1.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem_1.setForeground(Color.black);
 		mntmNewMenuItem_1.setFont(new Font("Arial", Font.PLAIN, 25));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal3 = true;
-				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
-				eliminarCitas.setVisible(true);
+				ConsultarCitas consultarCitas = new ConsultarCitas(a, con, padre, modal3);
+				consultarCitas.setVisible(true);
+
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_1);
@@ -258,6 +259,21 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_5.add(menuItem);
 		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Consultar paciente");
+		mntmNewMenuItem_3.setMargin(margenes);
+
+		mntmNewMenuItem_3.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_3.setForeground(Color.black);
+		mntmNewMenuItem_3.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarPaciente cp = new ConsultarPaciente(a, con, padre, modal);
+				cp.setVisible(modal);
+			}
+		});
+		mnNewMenu_5.add(mntmNewMenuItem_3);
+		
 		JMenu mnNewMenu_6 = new JMenu("Doctores");
 		mnNewMenu_6.setMargin(margenes);
 
@@ -296,12 +312,8 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_6.add(mntmNewMenuItem_9);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Baja doctor");
-		
-		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Baja doctor");		
 		mntmNewMenuItem.setMargin(margenes);
-		mntmNewMenuItem.setMargin(margenes);
-
 		mntmNewMenuItem.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -315,6 +327,20 @@ public class InicioAdmin extends JFrame implements ActionListener {
 
 		mnNewMenu_6.add(mntmNewMenuItem);
 		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Consultar doctor");
+		mntmNewMenuItem_13.setMargin(margenes);
+		mntmNewMenuItem_13.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_13.setForeground(Color.black);
+		mntmNewMenuItem_13.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarDoctor cd = new ConsultarDoctor(a, con, padre, modal);
+				cd.setVisible(modal);
+			}
+		});
+		mnNewMenu_6.add(mntmNewMenuItem_13);
+		
 		JMenu mnNewMenu_7 = new JMenu("Proveedores");
 		mnNewMenu_7.setMargin(margenes);
 
@@ -324,7 +350,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		
 		menuBar.add(mnNewMenu_7);
 		
-		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Añadir prooveedores");
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Añadir proveedores");
 		mntmNewMenuItem_10.setMargin(margenes);
 
 		mntmNewMenuItem_10.setBackground(new Color(207, 241, 255));
@@ -338,6 +364,21 @@ public class InicioAdmin extends JFrame implements ActionListener {
 			}
 		});
 		mnNewMenu_7.add(mntmNewMenuItem_10);
+		
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("Consultar proveedor");
+		mntmNewMenuItem_14.setMargin(margenes);
+
+		mntmNewMenuItem_14.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_14.setForeground(Color.black);
+		mntmNewMenuItem_14.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarProveedor cp = new ConsultarProveedor(a, con, padre, modal);
+				cp.setVisible(modal);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_14);
 		
 		JMenu mnNewMenu_8 = new JMenu("Tratamientos");
 		mnNewMenu_8.setMargin(margenes);
@@ -361,6 +402,92 @@ public class InicioAdmin extends JFrame implements ActionListener {
 			}
 		});
 		mnNewMenu_8.add(mntmNewMenuItem_11);
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Alta tratamiento");
+		mntmNewMenuItem_12.setMargin(margenes);
+
+		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_12.setForeground(Color.black);
+		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
+				at.setVisible(modal);
+			}
+		});
+		
+		mnNewMenu_8.add(mntmNewMenuItem_12);
+
+		
+		JMenu mnNewMenu = new JMenu("Especialidad");
+		mnNewMenu.setMargin(margenes);
+
+		mnNewMenu.setBackground(new Color(207, 241, 255));
+		mnNewMenu.setForeground(Color.black);
+		mnNewMenu.setFont(new Font("Arial", Font.PLAIN, 25));
+		
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem_15 = new JMenuItem("Alta especialidad");
+		mntmNewMenuItem_15.setMargin(margenes);
+
+		mntmNewMenuItem_15.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_15.setForeground(Color.black);
+		mntmNewMenuItem_15.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				AltaEspecialidad ae = new AltaEspecialidad(a, con, padre, modal);
+				ae.setVisible(modal);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_15);
+		
+		JMenuItem mntmNewMenuItem_16 = new JMenuItem("New menu item");
+		mntmNewMenuItem_16.setMargin(margenes);
+		mntmNewMenuItem_16.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_16.setForeground(Color.black);
+		mntmNewMenuItem_16.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
+				at.setVisible(modal);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_16);
+		
+
+		
+		JMenuItem mntmNewMenuItem_17 = new JMenuItem("Consultar especialidad");
+		mntmNewMenuItem_17.setMargin(margenes);
+
+		mntmNewMenuItem_17.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_17.setForeground(Color.black);
+		mntmNewMenuItem_17.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarEspecialidad ce = new ConsultarEspecialidad(a, con, padre, modal);
+				ce.setVisible(modal);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_17);
+		
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("New menu item");
+		mntmNewMenuItem_18.setMargin(margenes);
+
+		mntmNewMenuItem_18.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_18.setForeground(Color.black);
+		mntmNewMenuItem_18.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
+				at.setVisible(modal);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_18);
 		
 		
 
@@ -553,6 +680,10 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		contentPane.add(fondo);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		mntmNewMenuItem_2.setBounds(631, 111, 137, 26);
+		contentPane.add(mntmNewMenuItem_2);
 
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
 				KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),

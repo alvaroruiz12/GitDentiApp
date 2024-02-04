@@ -22,14 +22,13 @@ import javax.swing.table.JTableHeader;
 
 import BBDD.Conexion;
 
-public class ConsultarDoctor extends JDialog {
-
-	private static final long serialVersionUID = 1L;
-
+public class ConsultarProveedor extends JDialog {
 	JTable table_1 = new JTable();
+	Proveedor proveedor= new Proveedor();
+	private static final long serialVersionUID = 1L;
 	DefaultTableModel model;
-	Doctor doctor= new Doctor();
-	
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +38,7 @@ public class ConsultarDoctor extends JDialog {
 			Conexion con = null;
 			public void run() {
 				try {
-					ConsultarDoctor dialog = new ConsultarDoctor(b,con,null,true);
+					ConsultarProveedor dialog = new ConsultarProveedor(b,con,null,true);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -52,14 +51,14 @@ public class ConsultarDoctor extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConsultarDoctor(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
-		setBounds(100, 100, 600, 400);
+	public ConsultarProveedor(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
+		setBounds(100, 100, 800, 500);
 		getContentPane().setLayout(null);
-		// scroll panel de la tabla
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 97, 505, 234);
+		scrollPane.setBounds(38, 97, 707, 330);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
+
 
 		// Personalizo la tabla
 		//objeto para editar encabezado
@@ -73,10 +72,10 @@ public class ConsultarDoctor extends JDialog {
 		table_1.setSelectionBackground(new Color(217, 217, 217)); 
 		table_1.setSelectionForeground(Color.BLACK);
 		table_1.setModel(model = new DefaultTableModel(new Object[][] {
-		}, new String[] { "DNI","Nombre" }));
+		}, new String[] { "CIF","Nombre","Telefono","Correo" }));
 		table_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1);
-		doctor.CargarTabla(model, table_1);
+		proveedor.CargarTabla(model, table_1);
 		//boton para volver a inicio
 		JButton btnVolver = new JButton("VOLVER");
 		
@@ -85,7 +84,7 @@ public class ConsultarDoctor extends JDialog {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(454, 21, 105, 50);
+		btnVolver.setBounds(669, 11, 105, 50);
 		ImageIcon imagen3= new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
         btnVolver.setIcon(imagen4);
@@ -104,7 +103,7 @@ public class ConsultarDoctor extends JDialog {
 		getContentPane().add(btnVolver);
 		
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 600, 400);
+		fondo.setBounds(0, 0, 784, 461);
 
 		ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));

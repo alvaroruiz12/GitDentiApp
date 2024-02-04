@@ -17,19 +17,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import BBDD.Conexion;
+import javax.swing.JTextField;
 
-public class ConsultarDoctor extends JDialog {
+public class EliminarEspecialidad extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-
 	JTable table_1 = new JTable();
 	DefaultTableModel model;
-	Doctor doctor= new Doctor();
-	
+	Especialidad especialidad= new Especialidad();
+	private JTextField textoNombre;
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +40,7 @@ public class ConsultarDoctor extends JDialog {
 			Conexion con = null;
 			public void run() {
 				try {
-					ConsultarDoctor dialog = new ConsultarDoctor(b,con,null,true);
+					EliminarEspecialidad dialog = new EliminarEspecialidad(b,con,null,true);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -52,12 +53,11 @@ public class ConsultarDoctor extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConsultarDoctor(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
+	public EliminarEspecialidad(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
 		setBounds(100, 100, 600, 400);
 		getContentPane().setLayout(null);
-		// scroll panel de la tabla
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 97, 505, 234);
+		scrollPane.setBounds(38, 97, 506, 199);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -73,10 +73,15 @@ public class ConsultarDoctor extends JDialog {
 		table_1.setSelectionBackground(new Color(217, 217, 217)); 
 		table_1.setSelectionForeground(Color.BLACK);
 		table_1.setModel(model = new DefaultTableModel(new Object[][] {
-		}, new String[] { "DNI","Nombre" }));
-		table_1.getColumnModel().getColumn(1).setMinWidth(23);
+		}, new String[] {"Nombre"}));
+		table_1.getColumnModel().getColumn(0).setMinWidth(23);
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+
+		table_1.getColumnModel().getColumn(0).setCellRenderer(tcr);
 		scrollPane.setViewportView(table_1);
-		doctor.CargarTabla(model, table_1);
+		especialidad.CargarTabla(model, table_1);
 		//boton para volver a inicio
 		JButton btnVolver = new JButton("VOLVER");
 		
@@ -85,7 +90,7 @@ public class ConsultarDoctor extends JDialog {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(454, 21, 105, 50);
+		btnVolver.setBounds(469, 11, 105, 50);
 		ImageIcon imagen3= new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
         btnVolver.setIcon(imagen4);
@@ -103,13 +108,35 @@ public class ConsultarDoctor extends JDialog {
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnVolver);
 		
+		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		lblNewLabel.setBounds(57, 47, 46, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textoNombre = new JTextField();
+		textoNombre.setBounds(152, 44, 86, 20);
+		getContentPane().add(textoNombre);
+		textoNombre.setColumns(10);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnEliminar.setBounds(239, 327, 89, 23);
+		getContentPane().add(btnEliminar);
+		
+		
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 600, 400);
+		fondo.setBounds(0, 0, 584, 361);
 
 		ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		getContentPane().add(fondo);
+	
 	}
 
 }

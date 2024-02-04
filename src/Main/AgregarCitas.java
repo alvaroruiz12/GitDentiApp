@@ -311,7 +311,6 @@ public class AgregarCitas extends JDialog {
 					String nomDoc = Nombre.get(i).toString();
 					if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
 						doc = Dni.get(i);
-						System.out.println("El puta:"+doc);
 
 					}
 				}
@@ -355,7 +354,6 @@ public class AgregarCitas extends JDialog {
 
 
 					boolean status = false;
-					System.out.println(sentencia);
 					status = conexion.insertar(conexion, sentencia);
 				} else {
 					JOptionPane.showMessageDialog(null, "Ya existe una cita con ese doctor o ese paciente a esa hora",
