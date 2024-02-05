@@ -188,6 +188,7 @@ public class Doctor {
 			// consulta SQL para borrar
 			String consulta = "DELETE FROM doctor WHERE DNIdoctor= '" + idDoctor + "';";
 			String idCitas = valorId.toString();
+			conexion.ejecutarInsertDeleteUpdate(consulta);
 
 			// borramos de la tabla ahora.
 			DefaultTableModel model = (DefaultTableModel) jTable.getModel();

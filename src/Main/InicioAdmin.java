@@ -378,6 +378,48 @@ public class InicioAdmin extends JFrame implements ActionListener {
 				cp.setVisible(modal);
 			}
 		});
+		
+		JMenuItem mntmNewMenuItem_19 = new JMenuItem("Modificar proveedores");
+		mntmNewMenuItem_19.setMargin(margenes);
+
+		mntmNewMenuItem_19.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_19.setForeground(Color.black);
+		mntmNewMenuItem_19.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ModificarProveedor mp = new ModificarProveedor(a, con, padre, modal);
+				mp.setVisible(modal);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_19);
+		
+		JMenuItem mntmNewMenuItem_20 = new JMenuItem("Dar de baja proveedores");
+		mntmNewMenuItem_20.setMargin(margenes);
+
+		mntmNewMenuItem_20.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_20.setForeground(Color.black);
+		mntmNewMenuItem_20.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				BajaProveedor bp = new BajaProveedor(a, con, padre, modal);
+				bp.setVisible(modal);
+			}
+		});
+		mntmNewMenuItem_14.setMargin(margenes);
+
+		mntmNewMenuItem_14.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_14.setForeground(Color.black);
+		mntmNewMenuItem_14.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarProveedor cp = new ConsultarProveedor(a, con, padre, modal);
+				cp.setVisible(modal);
+			}
+		});
+		mnNewMenu_7.add(mntmNewMenuItem_20);
 		mnNewMenu_7.add(mntmNewMenuItem_14);
 		
 		JMenu mnNewMenu_8 = new JMenu("Tratamientos");
@@ -474,7 +516,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu.add(mntmNewMenuItem_17);
 		
-		JMenuItem mntmNewMenuItem_18 = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem_18 = new JMenuItem("Dar de baja una especialidad");
 		mntmNewMenuItem_18.setMargin(margenes);
 
 		mntmNewMenuItem_18.setBackground(new Color(207, 241, 255));
@@ -483,8 +525,8 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal = true;
-				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
-				at.setVisible(modal);
+				BajaEspecialidad be = new BajaEspecialidad(a, con, padre, modal);
+				be.setVisible(modal);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_18);

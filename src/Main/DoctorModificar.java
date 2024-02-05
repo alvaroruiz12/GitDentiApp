@@ -39,7 +39,7 @@ public class DoctorModificar extends JDialog {
 	private JTextField tfDNI;
 	private JTextField tfNombre;
 	private JTextField tfIDusuario;
-	private JTextField tfIDespecialidad;
+	Especialidad especialidad = new Especialidad();
  Doctor doctor = new Doctor();
 	
 	
@@ -147,13 +147,6 @@ public class DoctorModificar extends JDialog {
 				contentPane.add(tfIDusuario);
 				tfIDusuario.setColumns(10);
 				
-				tfIDespecialidad = new JTextField();
-				tfIDespecialidad.setText("Introduzca idespecialidad");
-				tfIDespecialidad.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tfIDespecialidad.setBounds(124, 418, 189, 30);
-				contentPane.add(tfIDespecialidad);
-				tfIDespecialidad.setColumns(10);
-				
 				
 		
 				JLabel textoDNI = new JLabel("New label");
@@ -182,6 +175,23 @@ public class DoctorModificar extends JDialog {
 
 				comboBoxDoctor.setBounds(406, 107, 157, 33);
 				getContentPane().add(comboBoxDoctor);
+				
+				JComboBox comboEspecialidad = new JComboBox();
+				int tamañoNombreEspecialidad = 0;
+				// metodo recoge el nombre y el dni
+
+				ArrayList<String> idEspecialidad=especialidad.CargarNumeroEspecialidad();
+				ArrayList<String> NombreEspecialidad=especialidad.CargarNombreEspecialidad();
+
+				// mete los nombres en el combobox
+				for (int i = 0; i < NombreEspecialidad.size(); i++) {
+					comboEspecialidad.addItem(NombreEspecialidad.get(i).toString());
+				}
+
+				
+				comboEspecialidad.setBounds(124, 420, 189, 30);
+				contentPane.add(comboEspecialidad);
+				
 				
 				
                 JScrollPane scrollPane = new JScrollPane();
@@ -224,17 +234,15 @@ public class DoctorModificar extends JDialog {
 							String nomDoc = Nombre.get(i).toString();
 							if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
 								doc = Dni.get(i);
-							}
-							System.out.println(doc);
-							datos=doctor.RellenarDatosModificar(doc);
-							textoDNI.setText(datos.get(0));
-							tfNombre.setText(datos.get(1));
-							tfIDusuario.setText(datos.get(2));
-							tfIDespecialidad.setText(datos.get(3));
-							
-							
+							}	
 						}
 						
+						System.out.println(doc);
+						datos=doctor.RellenarDatosModificar(doc);
+						textoDNI.setText(datos.get(0));
+						tfNombre.setText(datos.get(1));
+						tfIDusuario.setText(datos.get(2));
+						//tfIDespecialidad.setText(datos.get(3));
 						
 					}
 				});
@@ -253,15 +261,23 @@ public class DoctorModificar extends JDialog {
                 btnAnadir.setBackground(new Color (207, 241, 255));
                 btnAnadir.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent e) {
-                		String dni=tfDNI.getText();
+                		String espe = "";
+						//coger el dni
+						for (int i = 0; i < NombreEspecialidad.size(); i++) {
+
+							String nomEspe = NombreEspecialidad.get(i).toString();
+							if (nomEspe.equals(comboEspecialidad.getSelectedItem().toString())) {
+								espe = idEspecialidad.get(i);
+							}	
+						}
+                		String dni=textoDNI.getText();
                 		String nombre = tfNombre.getText();
                 		int idusuario= Integer.parseInt(tfIDusuario.getText());
-                		int idespecialidad =Integer.parseInt(tfIDespecialidad.getText());
                 		String sentencia = "UPDATE dentiapp.doctor " +
-                                "SET DNI='" + dni + "', " +
-                                "Nombre='" + nombre + "', " +
-                                "usuarios_idusuarios=" + idusuario + ", " +
-                                "especialidad_idespecialidad="+idespecialidad+ ";";            			
+                                "SET DNIdoctor='" + dni + "', " +
+                                "nombre_doctor='" + nombre + "', " +
+                                "idusuarios=" + idusuario + ", " +
+                                "idespecialidad="+espe+ ";";            			
                 		boolean status = false;
             			status = conexion.insertar(conexion,sentencia);
             			if (status=true) {
@@ -270,6 +286,20 @@ public class DoctorModificar extends JDialog {
             			doctor.CargarTabla(model, table_1);
                 	}
                 });
+                
+				
+				JLabel lblNewLabel = new JLabel("Nombre");
+				lblNewLabel.setBounds(23, 310, 46, 14);
+				
+				contentPane.add(lblNewLabel);
+				
+				JLabel lblNewLabel_1 = new JLabel("Id Usuarios");
+				lblNewLabel_1.setBounds(23, 366, 46, 14);
+				contentPane.add(lblNewLabel_1);
+				
+				JLabel lblNewLabel_2 = new JLabel("Especialidad");
+				lblNewLabel_2.setBounds(23, 424, 46, 14);
+				contentPane.add(lblNewLabel_2);
 
                 JLabel fondo = new JLabel();
 				fondo.setBounds(0, 0, 1100, 650);
@@ -278,6 +308,9 @@ public class DoctorModificar extends JDialog {
 				ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 				fondo.setIcon(imagen6);
 				contentPane.add(fondo);
+				
+
+
 				
 
 				
