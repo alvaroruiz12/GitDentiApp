@@ -1,6 +1,7 @@
 package Main;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import BBDD.Conexion;
 
@@ -149,6 +152,63 @@ public int CargarCantidad(String nombre) {
 
 }
 
+
+
+
+  public void AceptarSolicitud(Object idpedido) {
+        
+        try {
+            // conexión a la base de datos
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dentiapp?useSSL=false", "root", "1234");
+
+         //sentencia para eliminar a traves de la id
+            String consulta = "UPDATE pedidos set aceptado = true  WHERE idpedidos = ?";
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(consulta);
+            preparedStatement.setObject(1, idpedido);
+            preparedStatement.executeUpdate(); 
+
+            // Cerrar recursos
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejo de excepciones (puedes mostrar un mensaje de error, etc.)
+        }
+    }
+  public void CargarTablaPedidos(DefaultTableModel tableModel, JTable table_1) {
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+        
+			String consulta = "SELECT materiales.nombre_material,pedidos.cantidad,pedidos.aceptado "
+					+ "FROM materiales "
+					+ "JOIN pedidos  ON materiales.idmateriales = pedidos.idmateriales WHERE pedidos.idpedidos = pedidos.idpedidos";
+			rs = stm.executeQuery(consulta);
+			while (rs.next()) {
+			
+				String nombrematerial = rs.getString("nombre_material");
+				int cantidad= rs.getInt("cantidad");
+				boolean aceptado = rs.getBoolean("aceptado");
+			
+			
+				
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+				Object[] rowData = { nombrematerial, cantidad, aceptado};
+				tableModel.addRow(rowData);
+			}
+			// Crear un JTable con el modelo de tabla
+			table_1 = new JTable(tableModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 
 

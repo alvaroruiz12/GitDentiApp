@@ -98,7 +98,6 @@ public class SolicitarMaterial extends JDialog {
 		combomaterial.setBorder(null);
 		combomaterial.setBackground(new Color(192, 192, 192));
 		combomaterial.setToolTipText("");
-		combomaterial.setOpaque(false);
 		combomaterial.setBounds(157, 138, 160, 30);
 		contentPanel.add(combomaterial);
 	
@@ -164,7 +163,7 @@ public class SolicitarMaterial extends JDialog {
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 7, 58, 51);
-		btnVolver.setBackground(new Color(207, 241, 255));
+		btnVolver.setBackground(new Color(192, 192, 192));
 		btnVolver.setForeground(new Color(255, 255, 255));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
