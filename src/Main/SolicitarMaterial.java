@@ -114,6 +114,7 @@ public class SolicitarMaterial extends JDialog {
            int cantidad = pedido1.CargarCantidad(datos);
                 String resultado=String.valueOf(cantidad);
                 tfcantidad.setText(resultado);
+       
 			}
 		});
 	
@@ -137,7 +138,7 @@ public class SolicitarMaterial extends JDialog {
 		lblNewLabel.setForeground(new Color(192, 192, 192));
 		lblNewLabel.setBounds(49, 142, 100, 25);
 		contentPanel.add(lblNewLabel);
-/*
+
 	
 		JButton btnNewButton_1 = new JButton("ACEPTAR");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -146,28 +147,21 @@ public class SolicitarMaterial extends JDialog {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
             	//
-            		String datos= (String)combomaterial.getSelectedItem();
+				String datos= (String)combomaterial.getSelectedItem();
 	            
-            		
-            		int cantidad =Integer.parseInt(tfcantidad.getText());
-            	String consulta = "INSERT INTO PEDIDOS values()"
-            			
+		                int resultado1=Integer.parseInt(tfcantidad.getText());
+		                insertarid(datos,resultado1);
             			
 
-            		    			
-            		boolean status = false;
-           
-        			status = conexion.actualizar(conexion,sentencia);
-        			if (status=true) {
-        				
-        			}
+            	
+        			
         		
             	}
             });
 		
 		btnNewButton_1.setBounds(134, 320, 120, 25);
 		contentPanel.add(btnNewButton_1);
-*/
+
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 7, 58, 51);
 		btnVolver.setBackground(new Color(207, 241, 255));
@@ -225,6 +219,54 @@ public class SolicitarMaterial extends JDialog {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		contentPanel.add(fondo);
+
+	}
+	private void  insertarid(String nombrematerial,int cantidad) {
+
+		
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = (Connection) controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "select idmateriales from materiales where nombre_material = '"+nombrematerial+"'";
+			 rs = stm.executeQuery(consulta);
+			 int resultadomaterial=0;
+	   		 while (rs.next()) {
+	   			  resultadomaterial = Integer.parseInt(rs.getString("idmateriales"));
+	   			
+
+	   		
+	   		 }
+			
+	   		String consulta1 = "insert into pedidos(cantidad,aceptado,idmateriales) values("+cantidad+",false,"+resultadomaterial+");";
+			
+			
+		
+		
+		
+			boolean status = false;
+			System.out.println(consulta1);
+			status = controlador.insertar(controlador, consulta1);
+		
+				if (status==true) {
+					  int opcion = JOptionPane.showConfirmDialog(
+					            null,
+					            "¿Quieres realizar esta acción?",
+					            "Confirmación",
+					            JOptionPane.OK_CANCEL_OPTION
+					        );
+				}
+				
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
 
 	}
 }
