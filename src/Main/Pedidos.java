@@ -54,13 +54,13 @@ public void CargarTabla(DefaultTableModel tableModel, JTable table_1) {
 		cn = controlador.conectar();
 		stm = cn.createStatement();
 	
-		String consulta = "select nombre_material,cantidad,precio,CIFproveedor from materiales";
+		String consulta = "select nombre_material,cantidad, concat (precio, '€') as Precio,CIFproveedor from materiales";
 		rs = stm.executeQuery(consulta);
 		while (rs.next()) {
 		
 			String nombrematerial = rs.getString("nombre_material");
 			int cantidad= rs.getInt("cantidad");
-			int precio = rs.getInt("precio");
+			String precio = rs.getString("precio");
 			String proveedor = rs.getString("CIFproveedor");
 		
 			
@@ -184,12 +184,13 @@ public int CargarCantidad(String nombre) {
 			cn = controlador.conectar();
 			stm = cn.createStatement();
         
-			String consulta = "SELECT materiales.nombre_material,pedidos.cantidad,pedidos.aceptado "
-					+ "FROM materiales "
-					+ "JOIN pedidos  ON materiales.idmateriales = pedidos.idmateriales WHERE pedidos.idpedidos = pedidos.idpedidos";
+			String consulta = "SELECT pedidos.idpedidos, materiales.nombre_material,pedidos.cantidad,pedidos.aceptado "
+					+ "FROM materiales  "
+					+ "JOIN pedidos  "
+					+ "ON pedidos.idmateriales = materiales.idmateriales where pedidos.aceptado = false ";
 			rs = stm.executeQuery(consulta);
 			while (rs.next()) {
-			
+				int idpedidos= rs.getInt("idpedidos");
 				String nombrematerial = rs.getString("nombre_material");
 				int cantidad= rs.getInt("cantidad");
 				boolean aceptado = rs.getBoolean("aceptado");
@@ -199,7 +200,43 @@ public int CargarCantidad(String nombre) {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = { nombrematerial, cantidad, aceptado};
+				Object[] rowData = { idpedidos,nombrematerial, cantidad, aceptado};
+				tableModel.addRow(rowData);
+			}
+			// Crear un JTable con el modelo de tabla
+			table_1 = new JTable(tableModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+  
+  public void CargarTablaPedidosTodos(DefaultTableModel tableModel, JTable table_1) {
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+      
+			String consulta = "SELECT pedidos.idpedidos, materiales.nombre_material,pedidos.cantidad,pedidos.aceptado "
+					+ "FROM materiales  "
+					+ "JOIN pedidos  "
+					+ "ON pedidos.idmateriales = materiales.idmateriales order by idpedidos ASC";
+			rs = stm.executeQuery(consulta);
+			while (rs.next()) {
+				int idpedidos= rs.getInt("idpedidos");
+				String nombrematerial = rs.getString("nombre_material");
+				int cantidad= rs.getInt("cantidad");
+				boolean aceptado = rs.getBoolean("aceptado");
+			
+			
+				
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+				Object[] rowData = { idpedidos,nombrematerial, cantidad, aceptado};
 				tableModel.addRow(rowData);
 			}
 			// Crear un JTable con el modelo de tabla

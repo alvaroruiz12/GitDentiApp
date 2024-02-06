@@ -258,7 +258,7 @@ public class Login extends JFrame {
 				} else if (res.get(3) == "false") {
 					ArrayList<String> b = null;
 					Conexion con = null;
-					InicioDoctor ventana_doctor = new InicioDoctor(); 
+					InicioDoctor ventana_doctor = new InicioDoctor(res,conexion); 
 					ventana_doctor.setVisible(true);
 					dispose();
 					

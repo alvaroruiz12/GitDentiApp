@@ -28,11 +28,13 @@ import com.mysql.jdbc.Statement;
 
 import BBDD.Conexion;
 import javax.swing.JTable;
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AceptarPedidos extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	Pedidos pedidos = new Pedidos();
 
@@ -54,7 +56,6 @@ public static void main(String[] args) {
 			
 					AceptarPedidos modificar = new AceptarPedidos(b,con,null,true);
 					//metodo para que la pantalla sea en pantalla completa
-				
 					modificar.setVisible(true);
 					modificar.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				} catch (Exception e) {
@@ -75,18 +76,13 @@ super(parent,modal);
 		Conexion conexion = con;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 550);
+		getContentPane().setLayout(null);
 	
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		
-		
-		
-		
-		   // Realizamos el jscroll para ver los componentes bien
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(81, 275, 1000, 513);
+		scrollPane.setBounds(124, 150, 548, 350);
+		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		scrollPane.setMinimumSize(new Dimension(10, 10));
+		scrollPane.setMaximumSize(new Dimension(500, 250));
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -97,9 +93,9 @@ super(parent,modal);
 		header.setForeground(Color.black); 
 		header.setFont(new Font("Arial", Font.PLAIN, 20));
 		header.setBackground(new Color(207, 241, 255));
-		table_1.setIntercellSpacing(new Dimension(4, 4));
+		table_1.setIntercellSpacing(new Dimension(2, 2));
 		// ajusta el alto de las columnas de la tabla
-		table_1.setRowHeight(30);
+		table_1.setRowHeight(20);
 		// Cambia el color de fondo de las filas seleccionadas
 		table_1.setSelectionBackground(new Color(217, 217, 217)); 
 		table_1.setSelectionForeground(Color.BLACK);
@@ -107,7 +103,7 @@ super(parent,modal);
 		//creamos el modelo de la tabla y guardaremos los nombre en un array de object ya que model no coge otro tipo de variable
 		DefaultTableModel model;
 		table_1.setModel(model = new DefaultTableModel(new Object[][] {
-		}, new String[] { "NombreMaterial", "Cantidad", "Aceptado"}));
+		}, new String[] { "Idpedidos","NombreMaterial", "Cantidad", "Aceptado"}));
 		table_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1);
 		
@@ -116,8 +112,21 @@ super(parent,modal);
 		//en este caso las que ya esten aceptadas no saldran en pantalla
 		
 		pedidos.CargarTablaPedidos(model, table_1);
+		
+		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(10, 25, 89, 23);
+		getContentPane().add(btnNewButton);
 		  
 		
+		
+		
+		   // Realizamos el jscroll para ver los componentes bien
+	
 		
 		//creamos un escuchador de la tabla para poder asi eliminar una solicitud ya aceptada
 		table_1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -148,33 +157,8 @@ super(parent,modal);
 		 Insets margenes = new Insets(15, 15, 15, 15);
 		 
 		 
-		}
-	      
-            
-	       
-	        
-	    
-	
-		
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
-
-			
-	}
+		}			
+}
 
 
 

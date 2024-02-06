@@ -129,13 +129,37 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		menuBar.setMargin(margenes);
 		setJMenuBar(menuBar);
 
-		JMenu mnNewMenu_1 = new JMenu("Hacer Pedido");
+		JMenu mnNewMenu_1 = new JMenu("Pedidos");
+		
 		mnNewMenu_1.setMargin(margenes);
 
 		mnNewMenu_1.setBackground(new Color(207, 241, 255));
 		mnNewMenu_1.setForeground(Color.black);
 		mnNewMenu_1.setFont(new Font("Arial", Font.PLAIN, 25));
 		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Aceptar Pedidos");
+		mntmNewMenuItem_2.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_2.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal=true;
+				AceptarPedidos aceptar = new AceptarPedidos(a,con,padre,modal);
+				aceptar.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Ver pedidos");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				VerPedidos ver = new VerPedidos(a,con,padre,modal);
+				ver.setVisible(true);			}
+		});
+		mntmNewMenuItem_3.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_3.setFont(new Font("Arial", Font.PLAIN, 25));
+		mnNewMenu_1.add(mntmNewMenuItem_3);
 
 		JMenu mnNewMenu_2 = new JMenu("Consulta");
 		mnNewMenu_2.setMargin(margenes);
@@ -206,14 +230,18 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mnNewMenu_3.setForeground(Color.black);
 		mnNewMenu_3.setFont(new Font("Arial", Font.PLAIN, 25));
 		menuBar.add(mnNewMenu_3);
-
-		JMenu mnNewMenu_4 = new JMenu("Pedidos");
-		mnNewMenu_4.setMargin(margenes);
-
-		mnNewMenu_4.setBackground(new Color(207, 241, 255));
-		mnNewMenu_4.setForeground(Color.black);
-		mnNewMenu_4.setFont(new Font("Arial", Font.PLAIN, 25));
-		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Consultar Inventario");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal1 = true;
+				Inventario inventario = new Inventario(a, con, padre, modal1);
+				inventario.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 17));
+		mnNewMenu_3.add(mntmNewMenuItem_12);
 		contentPane.setBackground(new Color(235, 235, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

@@ -71,7 +71,8 @@ public class SolicitarMaterial extends JDialog {
 	 /**
 	 * Create the dialog.
 	 */
-	public SolicitarMaterial(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
+	public SolicitarMaterial(ArrayList<String> a, Conexion con, InicioDoctor parent, boolean modal) {
+		super(parent, modal);
 		setBounds(new Rectangle(62, 0, 854, 480));
 		getContentPane().setBounds(new Rectangle(0, 0, 900, 800));
 		Conexion solicitar = new Conexion();
@@ -205,7 +206,7 @@ public class SolicitarMaterial extends JDialog {
 		table_1_1.setSelectionBackground(new Color(217, 217, 217));
 		table_1_1.setSelectionForeground(Color.BLACK);
 		table_1_1.setModel(model = new DefaultTableModel(new Object[][] {},
-				new String[] { "NombreMaterial", "Cantidad", "Solicitud"}));
+				new String[] {  "Nombrematerial", "Cantidad", "Precio","Proveedor"}));
 		table_1_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1_1);
 		pedido.CargarTabla(model, table_1_1);
