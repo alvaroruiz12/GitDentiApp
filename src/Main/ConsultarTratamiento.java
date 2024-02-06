@@ -7,7 +7,7 @@ import javax.swing.JDialog;
 public class ConsultarTratamiento extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-
+	Tratamiento tratamiento= new Tratamiento();
 	/**
 	 * Launch the application.
 	 */
@@ -31,6 +31,8 @@ public class ConsultarTratamiento extends JDialog {
 	public ConsultarTratamiento() {
 		setBounds(100, 100, 600, 400);
 
+		
+		
 	}
 
 }
