@@ -34,14 +34,14 @@ private Conexion conexion;
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select nombrematerial,Cantidad,precio,proveedor_CIF from materiales;";
+			String consulta = "Select nombre_material,cantidad,precio,CIFproveedor from materiales;";
 			rs = stm.executeQuery(consulta);
 			while (rs.next()) {
 			
-				String nombrematerial = rs.getString("nombrematerial");
-				int cantidad= rs.getInt("Cantidad");
+				String nombrematerial = rs.getString("nombre_material");
+				int cantidad= rs.getInt("cantidad");
 				String precio = rs.getString("precio");
-				String proveedor_CIF = rs.getString("proveedor_CIF");
+				String proveedor_CIF = rs.getString("CIFproveedor");
 				
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya

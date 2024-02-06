@@ -79,10 +79,17 @@ public class SolicitarMaterial extends JDialog {
 		Pedidos pedido = new Pedidos();
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
+
+		setBounds(100, 100, 800, 600);
+		
+		contentPanel.setBounds(0, 0, 0, 0);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel);
+
 		Pedidos pedido1= new Pedidos();
 		JTable table_1_1 = new JTable();
+
 		contentPanel.setLayout(null);
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		DefaultTableModel model = null;
 		tfcantidad = new JTextField();
@@ -207,6 +214,7 @@ public class SolicitarMaterial extends JDialog {
 		table_1_1.setSelectionForeground(Color.BLACK);
 		table_1_1.setModel(model = new DefaultTableModel(new Object[][] {},
 				new String[] {  "Nombrematerial", "Cantidad", "Precio","Proveedor"}));
+
 		table_1_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1_1);
 		pedido.CargarTabla(model, table_1_1);
