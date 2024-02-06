@@ -19,7 +19,81 @@ public class Conexion {
 	private static final String CLAVE="1234";
 	
 	
-public boolean insertar(Conexion con, String sentencia) {
+	
+	
+	public ArrayList<String> selectObservacionesDiente(String DNI){
+		
+		ArrayList<String> res = new ArrayList<>();
+	    Connection cn = null;
+	    Statement stm = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	    	cn = this.conectar();
+	        stm = cn.createStatement();
+	        rs = stm.executeQuery("SELECT observaciones_diente FROM diente where DNIpaciente = '"+DNI+"'");
+	        while (rs.next()) {
+	        	String observaciones = rs.getString("observaciones_diente");
+	            res.add(observaciones);
+	        }
+	        
+	    }catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stm != null) stm.close();
+	            if (cn != null) cn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return res;
+	    
+	}
+	public ArrayList<String> selectPacienteDNI(String DNI) {
+		
+		ArrayList<String> res = new ArrayList<>();
+	    Connection cn = null;
+	    Statement stm = null;
+	    ResultSet rs = null;
+	    try {
+	        cn = this.conectar();
+	        stm = cn.createStatement();
+	        rs = stm.executeQuery("SELECT * FROM pacientes where DNIpaciente = '"+DNI+"'");
+
+	        while (rs.next()) {
+	            int idPacientes = rs.getInt("DNIpaciente");
+	            res.add(String.valueOf(idPacientes));
+	            String nombre = rs.getString("nombre_paciente");
+	            res.add(nombre);
+	            String apellidos = rs.getString("apellido_paciente");
+	            res.add(apellidos);
+	            String correo = rs.getString("correo");
+	            res.add(correo);
+	            String telefono = rs.getString("telefono");
+	            res.add(telefono);
+	            int edad = rs.getInt("edad");
+	            res.add(Integer.toString(edad));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (stm != null) stm.close();
+	            if (cn != null) cn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return res;
+
+	}
+	
+	
+	public boolean insertar(Conexion con, String sentencia) {
 		
 		boolean res= false;
 		

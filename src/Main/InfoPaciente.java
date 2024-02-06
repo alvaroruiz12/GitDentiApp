@@ -7,10 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BBDD.Conexion;
+
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
 public class InfoPaciente extends JDialog {
 
@@ -18,6 +24,8 @@ public class InfoPaciente extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private Paciente paciente;
+	private JTextField tf_DNI;
+	Conexion con;
 
 	/**
 	 * Launch the application.
@@ -50,8 +58,24 @@ public class InfoPaciente extends JDialog {
 		textField.setBounds(467, 329, 296, 127);
 		contentPanel.add(textField);
 		textField.setColumns(10);
+
+		tf_DNI = new JTextField();
+		tf_DNI.setBounds(40, 216, 169, 20);
+		contentPanel.add(tf_DNI);
+		tf_DNI.setColumns(10);
+		con = new Conexion();
+		con.conectar();
 		
 		JButton btnNewButton = new JButton("ODONTOGRAMA");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String DNIpaciente = tf_DNI.getText();
+				Odontograma odontograma = new Odontograma(DNIpaciente);
+				odontograma.setVisible(true);
+				
+			}
+		});
 		btnNewButton.setBounds(548, 62, 149, 40);
 		contentPanel.add(btnNewButton);
 		
@@ -105,10 +129,26 @@ public class InfoPaciente extends JDialog {
 		
 		//CAMBIO LA INFO DEL PACIENTE
 		
-		lbl1.setText(paciente.getNombre());
-		lbl2.setText(paciente.getApellidos());
-		int a = paciente.getEdad();
-		lbl3.setText(Integer.toString(a));
+		
+		
+		
+		
+		JButton btnNewButton_3 = new JButton("cargar datos");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String DNI = tf_DNI.getText();
+				ArrayList<String> paciente = new ArrayList<String>();
+				paciente = con.selectPacienteDNI(DNI);
+				
+				lbl1.setText(paciente.get(1));
+				lbl2.setText(paciente.get(2));
+				lbl3.setText(paciente.get(5));
+				
+			}
+		});
+		btnNewButton_3.setBounds(40, 251, 160, 23);
+		contentPanel.add(btnNewButton_3);
 		
 		
 		
