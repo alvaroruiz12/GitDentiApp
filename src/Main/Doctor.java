@@ -85,7 +85,7 @@ public class Doctor {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select DNIdoctor from doctor";
+			String consulta = "Select DNIdoctor from doctor order by DNIdoctor";
 			rs = stm.executeQuery(consulta);
 
 			if (DNIList == null) {
@@ -119,7 +119,7 @@ public class Doctor {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select nombre_doctor from doctor";
+			String consulta = "Select nombre_doctor from doctor order by DNIdoctor";
 			rs = stm.executeQuery(consulta);
 
 			if (NombreList == null) {

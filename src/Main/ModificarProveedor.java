@@ -30,7 +30,6 @@ public class ModificarProveedor extends JDialog {
 	JTable table_1 = new JTable();
 	Proveedor proveedor = new Proveedor();
 	DefaultTableModel model;
-	private JTextField txCIF;
 	private JTextField txTelefono;
 	private JTextField txCorreo;
 	private JTextField txNombre;
@@ -136,18 +135,13 @@ public class ModificarProveedor extends JDialog {
 		comboNombre.setBounds(36, 23, 133, 30);
 		getContentPane().add(comboNombre);
 
-		JLabel lblNewLabel_1 = new JLabel("CIF");
-		lblNewLabel_1.setBounds(36, 172, 46, 14);
-		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblNewLabel_1.setForeground(Color.white);
+		JLabel txCIF = new JLabel("CIF");
+		txCIF.setBounds(105, 173, 95, 30);
+		txCIF.setFont(new Font("Arial", Font.PLAIN, 20));
+		txCIF.setForeground(Color.white);
 
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblNewLabel_1);
-
-		txCIF = new JTextField();
-		txCIF.setBounds(114, 169, 86, 20);
+		txCIF.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(txCIF);
-		txCIF.setColumns(10);
 
 		txTelefono = new JTextField();
 		txTelefono.setBounds(114, 237, 86, 20);
@@ -165,16 +159,14 @@ public class ModificarProveedor extends JDialog {
 		txNombre.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		lblNewLabel_2.setBounds(36, 240, 46, 14);
-		lblNewLabel_2.setBounds(36, 172, 46, 14);
+		lblNewLabel_2.setBounds(21, 237, 46, 14);
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_2.setForeground(Color.white);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Correo");
-		lblNewLabel_3.setBounds(36, 308, 46, 14);
-		lblNewLabel_3.setBounds(36, 172, 46, 14);
+		lblNewLabel_3.setBounds(21, 305, 61, 20);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_3.setForeground(Color.white);
 
@@ -195,10 +187,10 @@ public class ModificarProveedor extends JDialog {
 				}
 
 				String sentencia = "UPDATE dentiapp.proveedor " 
-				+ "SET CIFproveedor='" + txCIF.getText().toString()
-						+ "', " + "nombre_proveedor='" + txNombre.getText().toString() + "', "
+				+ "SET " + "nombre_proveedor='" + txNombre.getText().toString() + "', "
 								+ "" + "telefono_proveedor="+ Integer.parseInt(txTelefono.getText().toString()) + ","
-										+ " " + "correo_proveedor='"+ txCorreo.getText().toString() + "'";
+										+ " " + "correo_proveedor='"+ txCorreo.getText().toString() + "' "
+												+ "WHERE CIFproveedor='"+txCIF.getText().toString()+"'";
 				boolean status = false;
 				status = conexion.insertar(conexion, sentencia);
 				if (status = true) {

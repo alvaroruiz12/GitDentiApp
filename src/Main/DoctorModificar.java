@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -36,9 +37,7 @@ public class DoctorModificar extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfDNI;
 	private JTextField tfNombre;
-	private JTextField tfIDusuario;
 	Especialidad especialidad = new Especialidad();
  Doctor doctor = new Doctor();
 	
@@ -95,20 +94,6 @@ public class DoctorModificar extends JDialog {
 		setContentPane(contentPane);
 				contentPane.setLayout(null);
 				
-				
-				//AÑADIR EN LA TABLA EL SELECCIONADO
-				
-				//DISEÑO
-				
-				//PRIMERA SELECCION
-				
-				tfDNI = new JTextField();
-				tfDNI.setText("Introduzca DNI");
-				tfDNI.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tfDNI.setBounds(124, 241, 189, 30);
-				contentPane.add(tfDNI);
-				tfDNI.setColumns(10);
-				
 				//SEGUNDA SELECCION
 				
 				tfNombre = new JTextField();
@@ -140,17 +125,13 @@ public class DoctorModificar extends JDialog {
 				btnVolver.setIcon(i8);
 				contentPane.add(btnVolver);
 				
-				tfIDusuario = new JTextField();
-				tfIDusuario.setText("Introduzca idusuario");
-				tfIDusuario.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tfIDusuario.setBounds(124, 360, 189, 30);
-				contentPane.add(tfIDusuario);
-				tfIDusuario.setColumns(10);
-				
 				
 		
-				JLabel textoDNI = new JLabel("New label");
-				textoDNI.setBounds(192, 216, 106, 14);
+				JLabel textoDNI = new JLabel("DNI");
+				textoDNI.setBounds(124, 243, 189, 30);
+				textoDNI.setFont(new Font("Arial", Font.PLAIN, 20));
+				textoDNI.setForeground(Color.white);
+				textoDNI.setHorizontalAlignment(SwingConstants.CENTER);
 				contentPane.add(textoDNI);
 				
 				
@@ -189,7 +170,7 @@ public class DoctorModificar extends JDialog {
 				}
 
 				
-				comboEspecialidad.setBounds(124, 420, 189, 30);
+				comboEspecialidad.setBounds(124, 361, 189, 30);
 				contentPane.add(comboEspecialidad);
 				
 				
@@ -228,21 +209,21 @@ public class DoctorModificar extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						ArrayList <String> datos= null;
 						String doc = "";
+						String nomDoc="";
 						//coger el dni
 						for (int i = 0; i < Nombre.size(); i++) {
 
-							String nomDoc = Nombre.get(i).toString();
+							 nomDoc = Nombre.get(i).toString();
+							 System.out.println(comboBoxDoctor.getSelectedItem().toString());
 							if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
 								doc = Dni.get(i);
+								tfNombre.setText(nomDoc);
+								datos=doctor.RellenarDatosModificar(doc);
+								textoDNI.setText(doc);
 							}	
 						}
 						
-						System.out.println(doc);
-						datos=doctor.RellenarDatosModificar(doc);
-						textoDNI.setText(datos.get(0));
-						tfNombre.setText(datos.get(1));
-						tfIDusuario.setText(datos.get(2));
-						//tfIDespecialidad.setText(datos.get(3));
+
 						
 					}
 				});
@@ -270,15 +251,15 @@ public class DoctorModificar extends JDialog {
 								espe = idEspecialidad.get(i);
 							}	
 						}
-                		String dni=textoDNI.getText();
-                		String nombre = tfNombre.getText();
-                		int idusuario= Integer.parseInt(tfIDusuario.getText());
+                		String dni=textoDNI.getText().toString();
+                		String nombre = tfNombre.getText().toString();
                 		String sentencia = "UPDATE dentiapp.doctor " +
-                                "SET DNIdoctor='" + dni + "', " +
+                                "SET  " +
                                 "nombre_doctor='" + nombre + "', " +
-                                "idusuarios=" + idusuario + ", " +
-                                "idespecialidad="+espe+ ";";            			
+                                "idespecialidad="+espe+ ""
+                                		+ " WHERE DNIdoctor='"+dni+"';";            			
                 		boolean status = false;
+                		System.out.println(sentencia);
             			status = conexion.insertar(conexion,sentencia);
             			if (status=true) {
             				
@@ -293,12 +274,8 @@ public class DoctorModificar extends JDialog {
 				
 				contentPane.add(lblNewLabel);
 				
-				JLabel lblNewLabel_1 = new JLabel("Id Usuarios");
-				lblNewLabel_1.setBounds(23, 366, 46, 14);
-				contentPane.add(lblNewLabel_1);
-				
 				JLabel lblNewLabel_2 = new JLabel("Especialidad");
-				lblNewLabel_2.setBounds(23, 424, 46, 14);
+				lblNewLabel_2.setBounds(23, 369, 76, 14);
 				contentPane.add(lblNewLabel_2);
 
                 JLabel fondo = new JLabel();
