@@ -64,7 +64,7 @@ public class ModificarProveedor extends JDialog {
 		Conexion conexion = con;
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(356, 72, 666, 435);
+		scrollPane.setBounds(356, 72, 718, 435);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -112,7 +112,7 @@ public class ModificarProveedor extends JDialog {
 		getContentPane().add(btnVolver);
 
 		JLabel NombreTexto = new JLabel("Nombre");
-		NombreTexto.setBounds(36, 109, 46, 14);
+		NombreTexto.setBounds(55, 106, 80, 30);
 		NombreTexto.setFont(new Font("Arial", Font.PLAIN, 20));
 		NombreTexto.setForeground(Color.white);
 
@@ -132,11 +132,11 @@ public class ModificarProveedor extends JDialog {
 			comboNombre.addItem(Nombre.get(i).toString());
 		}
 
-		comboNombre.setBounds(36, 23, 133, 30);
+		comboNombre.setBounds(67, 31, 181, 30);
 		getContentPane().add(comboNombre);
 
 		JLabel txCIF = new JLabel("CIF");
-		txCIF.setBounds(105, 173, 95, 30);
+		txCIF.setBounds(156, 173, 151, 30);
 		txCIF.setFont(new Font("Arial", Font.PLAIN, 20));
 		txCIF.setForeground(Color.white);
 
@@ -144,29 +144,29 @@ public class ModificarProveedor extends JDialog {
 		getContentPane().add(txCIF);
 
 		txTelefono = new JTextField();
-		txTelefono.setBounds(114, 237, 86, 20);
+		txTelefono.setBounds(156, 237, 151, 30);
 		getContentPane().add(txTelefono);
 		txTelefono.setColumns(10);
 
 		txCorreo = new JTextField();
-		txCorreo.setBounds(114, 305, 86, 20);
+		txCorreo.setBounds(156, 308, 151, 30);
 		getContentPane().add(txCorreo);
 		txCorreo.setColumns(10);
 
 		txNombre = new JTextField();
-		txNombre.setBounds(102, 106, 95, 20);
+		txNombre.setBounds(156, 109, 151, 30);
 		getContentPane().add(txNombre);
 		txNombre.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		lblNewLabel_2.setBounds(21, 237, 46, 14);
+		lblNewLabel_2.setBounds(36, 237, 105, 30);
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_2.setForeground(Color.white);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Correo");
-		lblNewLabel_3.setBounds(21, 305, 61, 20);
+		lblNewLabel_3.setBounds(55, 310, 61, 20);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_3.setForeground(Color.white);
 
@@ -200,7 +200,7 @@ public class ModificarProveedor extends JDialog {
 
 			}
 		});
-		btnModificar.setBounds(55, 395, 170, 37);
+		btnModificar.setBounds(137, 392, 170, 37);
 		btnModificar.setIcon(imagen4);
 
 		// Eliminar el borde del botón para que la imagen sea visible
@@ -241,7 +241,7 @@ public class ModificarProveedor extends JDialog {
 			}
 
 		});
-		btnRellenar.setBounds(194, 23, 57, 30);
+		btnRellenar.setBounds(271, 31, 57, 30);
 		btnRellenar.setIcon(imagen4);
 
 		// Eliminar el borde del botón para que la imagen sea visible

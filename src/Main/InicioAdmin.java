@@ -485,7 +485,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu.add(mntmNewMenuItem_15);
 		
-		JMenuItem mntmNewMenuItem_16 = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem_16 = new JMenuItem("Modificar especialidad");
 		mntmNewMenuItem_16.setMargin(margenes);
 		mntmNewMenuItem_16.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem_16.setForeground(Color.black);
@@ -493,8 +493,8 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal = true;
-				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
-				at.setVisible(modal);
+				ModificarEspecialidad me = new ModificarEspecialidad(a, con, padre, modal);
+				me.setVisible(modal);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_16);
