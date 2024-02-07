@@ -100,7 +100,7 @@ public class PacienteModificar extends JDialog {
 		tfDNI.setForeground(new Color(192, 192, 192));
 		tfDNI.setText("Introduzca DNI");
 		tfDNI.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfDNI.setBounds(124, 241, 189, 30);
+		tfDNI.setBounds(187, 241, 189, 30);
 		contentPane.add(tfDNI);
 		tfDNI.setColumns(10);
 
@@ -110,7 +110,7 @@ public class PacienteModificar extends JDialog {
 		tfNombre.setForeground(new Color(192, 192, 192));
 		tfNombre.setText("Introduzca Nombre");
 		tfNombre.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfNombre.setBounds(124, 304, 189, 30);
+		tfNombre.setBounds(187, 304, 189, 30);
 		contentPane.add(tfNombre);
 		tfNombre.setColumns(10);
 
@@ -122,27 +122,36 @@ public class PacienteModificar extends JDialog {
 		lblFotoUser.setIcon(imagen2);
 		contentPane.add(lblFotoUser);
 
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(23, 10, 76, 64);
-		btnVolver.setBackground(new Color(207, 241, 255));
-		btnVolver.setForeground(new Color(255, 255, 255));
+		JButton btnVolver = new JButton("VOLVER");
+
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				dispose();
 			}
 		});
-		ImageIcon i7 = new ImageIcon(getClass().getResource("volver.png"));
-		ImageIcon i8 = new ImageIcon(
-				i7.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
-		btnVolver.setIcon(i8);
-		contentPane.add(btnVolver);
+		btnVolver.setBounds(969, 11, 105, 50);
+		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen4 = new ImageIcon(imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+		btnVolver.setIcon(imagen4);
 
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnVolver.setBorderPainted(false);
+		btnVolver.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnVolver.setForeground(Color.WHITE); // Color del texto
+		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		contentPane.add(btnVolver);
+		
 		tfApellido = new JTextField();
 		tfApellido.setForeground(new Color(192, 192, 192));
 		tfApellido.setText("Introduzca Apellido");
 		tfApellido.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfApellido.setBounds(124, 360, 189, 30);
+		tfApellido.setBounds(187, 360, 189, 30);
 		contentPane.add(tfApellido);
 		tfApellido.setColumns(10);
 
@@ -150,7 +159,7 @@ public class PacienteModificar extends JDialog {
 		tfCorreo.setForeground(new Color(192, 192, 192));
 		tfCorreo.setText("Introduzca correo electronico");
 		tfCorreo.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfCorreo.setBounds(124, 418, 189, 30);
+		tfCorreo.setBounds(187, 418, 189, 30);
 		contentPane.add(tfCorreo);
 		tfCorreo.setColumns(10);
 
@@ -158,7 +167,7 @@ public class PacienteModificar extends JDialog {
 		tfTelefono.setForeground(new Color(192, 192, 192));
 		tfTelefono.setText("Introduzca el telefono");
 		tfTelefono.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfTelefono.setBounds(124, 465, 189, 30);
+		tfTelefono.setBounds(187, 465, 189, 30);
 		contentPane.add(tfTelefono);
 		tfTelefono.setColumns(10);
 
@@ -166,7 +175,7 @@ public class PacienteModificar extends JDialog {
 		tfEdad.setForeground(new Color(192, 192, 192));
 		tfEdad.setText("Introduzca edad");
 		tfEdad.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfEdad.setBounds(124, 518, 189, 30);
+		tfEdad.setBounds(187, 518, 189, 30);
 		contentPane.add(tfEdad);
 		tfEdad.setColumns(10);
 
@@ -309,7 +318,7 @@ public class PacienteModificar extends JDialog {
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(407, 169, 560, 326);
+		scrollPane.setBounds(407, 169, 629, 326);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -391,13 +400,14 @@ public class PacienteModificar extends JDialog {
 
 			}
 		});
-		btnBuscar.setBounds(867, 107, 100, 30);
+		btnBuscar.setBounds(936, 107, 100, 30);
+
 		getContentPane().add(btnBuscar);
 
 		// BOTON FUNCIONALIDAD
 
 		JButton btnAnadir = new JButton("Modificar");
-		btnAnadir.setBounds(407, 517, 560, 30);
+		btnAnadir.setBounds(407, 517, 629, 30);
 		contentPane.add(btnAnadir);
 		btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 22));
 		btnAnadir.setForeground(new Color(0, 0, 0));
@@ -422,6 +432,49 @@ public class PacienteModificar extends JDialog {
 			}
 		});
 
+		
+		JLabel lblNewLabel_2 = new JLabel("DNI");
+		lblNewLabel_2.setBounds(34, 241, 100, 30);
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_2.setForeground(Color.white);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Nombre");
+		lblNewLabel_3.setBounds(34, 304, 100, 30);
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_3.setForeground(Color.white);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Apellidos");
+		lblNewLabel_4.setBounds(34, 360, 100, 30);
+		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_4.setForeground(Color.white);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Correo");
+		lblNewLabel_5.setBounds(34, 418, 100, 30);
+		lblNewLabel_5.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_5.setForeground(Color.white);
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("Telefono");
+		lblNewLabel_6.setBounds(34, 465, 100, 30);
+		lblNewLabel_6.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_6.setForeground(Color.white);
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Edad");
+		lblNewLabel_7.setBounds(34, 518, 100, 30);
+		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_7.setForeground(Color.white);
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(lblNewLabel_7);
+
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1100, 650);
 
@@ -430,7 +483,10 @@ public class PacienteModificar extends JDialog {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		contentPane.add(fondo);
-
+		
+		
+		
+		
 	}
 
 	public void clearTxtField(JTextField text) {

@@ -35,12 +35,12 @@ public class EditarCitas extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txHora;
-	private JTextField txDoctor;
 	private JTextField txPacientes;
 	private JTextField txObservaciones;
 	private JTable table_1;
 	DefaultTableModel model;
 	Citas citas = new Citas();
+	Doctor doctor = new Doctor();
 
 	/**
 	 * Launch the application.
@@ -119,11 +119,6 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(txHora);
 		txHora.setColumns(10);
 
-		txDoctor = new JTextField();
-		txDoctor.setBounds(237, 226, 150, 30);
-		getContentPane().add(txDoctor);
-		txDoctor.setColumns(10);
-
 		txPacientes = new JTextField();
 		txPacientes.setBounds(237, 348, 150, 30);
 		getContentPane().add(txPacientes);
@@ -135,6 +130,27 @@ public class EditarCitas extends JDialog {
 		txObservaciones.setColumns(10);
 
 // combobox tratamientos
+		
+		// combobox doctor
+				JComboBox comboBoxDoctor = new JComboBox();
+				// cargar datos al combobox
+
+				// esto da null
+
+				int tamañoNombre = 0;
+				// metodo recoge el nombre y el dni
+
+				ArrayList<String> Dni=doctor.CargarDNIDoctorCitas();
+				ArrayList<String> Nombre=doctor.CargarNombreDoctorCitas();
+
+				System.out.println(Nombre);
+				// mete los nombres en el combobox
+				for (int i = 0; i < Nombre.size(); i++) {
+					comboBoxDoctor.addItem(Nombre.get(i).toString());
+				}
+
+				comboBoxDoctor.setBounds(237, 228, 150, 30);
+				getContentPane().add(comboBoxDoctor);
 
 		JComboBox cbTratamientos = new JComboBox();
 		cbTratamientos.setBounds(237, 287, 150, 30);
@@ -234,10 +250,17 @@ public class EditarCitas extends JDialog {
 							JOptionPane.ERROR_MESSAGE);
 
 				}
+				String doc="";
+				for (int i = 0; i < Nombre.size(); i++) {
 
+					String nomDoc = Nombre.get(i).toString();
+					if (nomDoc.equals(comboBoxDoctor.getSelectedItem().toString())) {
+						doc = Dni.get(i);
+
+					}
+				}
 				String hora = txHora.getText();
 				String pacientes = txPacientes.getText();
-				String doctor = txDoctor.getText();
 				String observaciones = txObservaciones.getText();
 				if (hora.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe una hora", "Error", JOptionPane.ERROR_MESSAGE);
@@ -249,15 +272,13 @@ public class EditarCitas extends JDialog {
 					JOptionPane.showMessageDialog(null, "Escribe un DNI de paciente", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
-				if (doctor.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Escribe un DNI de doctor", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				
 				if (observaciones.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
 				try {
-					citas.EditarCitas(table_1, con, hora, fecha, pacientes, doctor, observaciones);
+					citas.EditarCitas(table_1, con, hora, fecha, pacientes, doc, observaciones);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

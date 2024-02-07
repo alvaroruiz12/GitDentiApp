@@ -52,13 +52,12 @@ public class Tratamiento {
    		 Conexion controlador = new Conexion();
    		 cn = controlador.conectar();
    		 stm = cn.createStatement();
-   		 String consulta = "Select * from tratamientos";
+   		 String consulta = "Select nombre_tratamiento,coste_tratamiento from tratamientos";
    		 rs = stm.executeQuery(consulta);
 
    		 while (rs.next()) {
-   			 int idtratamientos = Integer.parseInt(rs.getString("idtratamientos"));
-   			 int Coste = Integer.parseInt(rs.getString("Coste"));
-   			 String Nombre= rs.getString("Nombre");
+   			 int Coste = Integer.parseInt(rs.getString("coste_tratamiento"));
+   			 String Nombre= rs.getString("nombre_tratamiento");
    		
    			
    			
@@ -67,7 +66,7 @@ public class Tratamiento {
    			 // Agregar los datos a la tabla
    			 // tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
    			 // que va a recibir todo tipo de datos.
-   			 Object[] rowData = { idtratamientos, Coste,Nombre};
+   			 Object[] rowData = { Nombre,Coste};
    			 tableModel.addRow(rowData);
    		 }
 
@@ -88,7 +87,7 @@ public class Tratamiento {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select nombre_tratamiento from tratamientos";
+			String consulta = "Select nombre_tratamiento from tratamientos order by idtratamiento";
 			rs = stm.executeQuery(consulta);
 		
 
@@ -125,7 +124,7 @@ public class Tratamiento {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select idtratamiento from tratamientos";
+			String consulta = "Select idtratamiento from tratamientos order by idtratamiento";
 			rs = stm.executeQuery(consulta);
 		
 
@@ -152,4 +151,39 @@ public class Tratamiento {
 		
 
 	}
+    public ArrayList<String> CargarDatos( int id) {
+      	ArrayList<String> datos=null; 
+    	try {
+      		 Connection cn = null;
+      		 Statement stm = null;
+      		 ResultSet rs = null;
+      		 Conexion controlador = new Conexion();
+      		 cn = controlador.conectar();
+      		 stm = cn.createStatement();
+      		 String consulta = "Select nombre_tratamiento,coste_tratamiento from tratamientos "
+      		 		+ " WHERE idtratamiento="+id+ " order by idtratamiento";
+      		 rs = stm.executeQuery(consulta);
+     		if (datos == null) {
+     			datos= new ArrayList<>();
+			}
+      		 while (rs.next()) {
+      			 int Coste = Integer.parseInt(rs.getString("coste_tratamiento"));
+      			 String Nombre= rs.getString("nombre_tratamiento");
+      			 datos.add(Nombre);
+      			 datos.add(String.valueOf(Coste));
+
+      			
+      			
+
+      		 }
+
+      	 } catch (SQLException e) {
+      		 e.printStackTrace();
+      	 }  			 
+      	 return datos;
+
+
+       }
+    
+    
 }

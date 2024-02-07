@@ -171,7 +171,7 @@ JButton btnEliminar = new JButton("ELIMINAR");
 		getContentPane().add(btnVolver);
 		
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 784, 461);
+		fondo.setBounds(0, 0, 800, 600);
 
 		ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));

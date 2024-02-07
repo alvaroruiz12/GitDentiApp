@@ -169,7 +169,6 @@ public class ModificarProveedor extends JDialog {
 		lblNewLabel_3.setBounds(55, 310, 61, 20);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_3.setForeground(Color.white);
-
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel_3);
 
@@ -185,10 +184,10 @@ public class ModificarProveedor extends JDialog {
 						doc = CIFList.get(i);
 					}
 				}
-
+				int telefono=Integer.parseInt(String.valueOf(txTelefono.getText()));
 				String sentencia = "UPDATE dentiapp.proveedor " 
 				+ "SET " + "nombre_proveedor='" + txNombre.getText().toString() + "', "
-								+ "" + "telefono_proveedor="+ Integer.parseInt(txTelefono.getText().toString()) + ","
+								+ "" + "telefono_proveedor="+ telefono + ","
 										+ " " + "correo_proveedor='"+ txCorreo.getText().toString() + "' "
 												+ "WHERE CIFproveedor='"+txCIF.getText().toString()+"'";
 				boolean status = false;
@@ -216,7 +215,7 @@ public class ModificarProveedor extends JDialog {
 		btnModificar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnModificar);
 
-		JButton btnRellenar = new JButton("+");
+		JButton btnRellenar = new JButton("RELLENAR");
 		btnRellenar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String doc = "";
@@ -241,7 +240,7 @@ public class ModificarProveedor extends JDialog {
 			}
 
 		});
-		btnRellenar.setBounds(271, 31, 57, 30);
+		btnRellenar.setBounds(258, 19, 137, 50);
 		btnRellenar.setIcon(imagen4);
 
 		// Eliminar el borde del botón para que la imagen sea visible

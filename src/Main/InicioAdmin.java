@@ -430,20 +430,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mnNewMenu_8.setFont(new Font("Arial", Font.PLAIN, 25));
 		menuBar.add(mnNewMenu_8);
 		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Editar tratamientos");
-		mntmNewMenuItem_11.setMargin(margenes);
-
-		mntmNewMenuItem_11.setBackground(new Color(207, 241, 255));
-		mntmNewMenuItem_11.setForeground(Color.black);
-		mntmNewMenuItem_11.setFont(new Font("Arial", Font.PLAIN, 25));
-		mntmNewMenuItem_11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boolean modal = true;
-				TratamientosModificar pp = new TratamientosModificar(a, con, padre, modal);
-				pp.setVisible(modal);
-			}
-		});
-		mnNewMenu_8.add(mntmNewMenuItem_11);
+		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Alta tratamiento");
 		mntmNewMenuItem_12.setMargin(margenes);
 
@@ -459,6 +446,36 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		
 		mnNewMenu_8.add(mntmNewMenuItem_12);
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Editar tratamientos");
+		mntmNewMenuItem_11.setMargin(margenes);
+
+		mntmNewMenuItem_11.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_11.setForeground(Color.black);
+		mntmNewMenuItem_11.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				TratamientosModificar pp = new TratamientosModificar(a, con, padre, modal);
+				pp.setVisible(modal);
+			}
+		});
+		mnNewMenu_8.add(mntmNewMenuItem_11);
+		
+		
+		JMenuItem mntmNewMenuItem_21 = new JMenuItem("Consultar tratamientos");
+		mntmNewMenuItem_21.setMargin(margenes);
+
+		mntmNewMenuItem_21.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_21.setForeground(Color.black);
+		mntmNewMenuItem_21.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				ConsultarTratamiento ct = new ConsultarTratamiento(a, con, padre, modal);
+				ct.setVisible(modal);
+			}
+		});
+		mnNewMenu_8.add(mntmNewMenuItem_21);
 
 		
 		JMenu mnNewMenu = new JMenu("Especialidad");

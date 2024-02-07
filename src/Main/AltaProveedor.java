@@ -20,6 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import BBDD.Conexion;
@@ -98,8 +99,8 @@ public class AltaProveedor extends JDialog {
 		
 		//BOTON FUNCIONALIDAD
 		
-		JButton btnAnadir = new JButton("+");
-		btnAnadir.setBounds(466, 525, 52, 42);
+		JButton btnAnadir = new JButton("DAR DE ALTA");
+		btnAnadir.setBounds(492, 435, 208, 47);
 		btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 28));
 		btnAnadir.setForeground(new Color(0, 0, 0));
 		btnAnadir.setBackground(new Color (207, 241, 255));
@@ -120,29 +121,58 @@ public class AltaProveedor extends JDialog {
 					}	
 			}
 		});
+		
+		ImageIcon imagen= new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(btnAnadir.getWidth(), btnAnadir.getHeight(), Image.SCALE_SMOOTH));
+        
+		// Establecer el texto sobre la imagen
+		btnAnadir.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnAnadir.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+        btnAnadir.setForeground(Color.WHITE); // Color del texto
+        btnAnadir.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+        btnAnadir.setIcon(imagen2);
+        
+        
+        // Eliminar el borde del botón para que la imagen sea visible
+		btnAnadir.setBorderPainted(false);
+        btnAnadir.setContentAreaFilled(false);
 		contentPanel.add(btnAnadir);
 		
 		JLabel lblFotoUser = new JLabel();
 		lblFotoUser.setBounds(94, 125, 170, 170);
-		ImageIcon imagen= new ImageIcon(getClass().getResource("user.png"));
-		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(lblFotoUser.getWidth(), lblFotoUser.getHeight(), Image.SCALE_SMOOTH));
-		lblFotoUser.setIcon(imagen2);
+		ImageIcon imagen3= new ImageIcon(getClass().getResource("user.png"));
+		ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(lblFotoUser.getWidth(), lblFotoUser.getHeight(), Image.SCALE_SMOOTH));
+		lblFotoUser.setIcon(imagen4);
 		contentPanel.add(lblFotoUser);
 		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 43, 76, 64);
-		btnVolver.setBackground(new Color(207, 241, 255));
-		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		//boton para volver a inicio
+				JButton btnVolver = new JButton("VOLVER");
 				
-				dispose();
-			}
-		});
-		ImageIcon i7 = new ImageIcon(getClass().getResource("volver.png"));
-		ImageIcon i8 = new ImageIcon(i7.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
-		btnVolver.setIcon(i8);
-		contentPanel.add(btnVolver);
+				btnVolver.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+				btnVolver.setBounds(619, 11, 105, 50);
+				ImageIcon imagen6= new ImageIcon(getClass().getResource("boton.png"));
+				ImageIcon imagen5= new ImageIcon(imagen.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+		        btnVolver.setIcon(imagen5);
+		        
+		        // Eliminar el borde del botón para que la imagen sea visible
+		        btnVolver.setBorderPainted(false);
+		        btnVolver.setContentAreaFilled(false);
+
+				// Establecer el texto sobre la imagen
+				btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+				btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+		        // Personalizar el estilo del texto
+				btnVolver.setForeground(Color.WHITE); // Color del texto
+				btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+				contentPanel.add(btnVolver);
+				
 		
 		textoTelefono = new JTextField();
 		textoTelefono.setForeground(new Color(192, 192, 192));
@@ -164,33 +194,48 @@ public class AltaProveedor extends JDialog {
 		txDireccion.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("CIF");
-		lblNewLabel.setBounds(336, 131, 46, 14);
+		lblNewLabel.setBounds(336, 131, 76, 24);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setForeground(Color.white);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		lblNewLabel_1.setBounds(336, 199, 46, 14);
+		lblNewLabel_1.setBounds(336, 199, 93, 24);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setForeground(Color.white);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Telefono");
-		lblNewLabel_2.setBounds(336, 259, 46, 14);
+		lblNewLabel_2.setBounds(336, 259, 93, 24);
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_2.setForeground(Color.white);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Correo");
-		lblNewLabel_3.setBounds(336, 322, 46, 14);
+		lblNewLabel_3.setBounds(336, 319, 76, 27);
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_3.setForeground(Color.white);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Direccion");
-		lblNewLabel_4.setBounds(336, 379, 46, 14);
+		lblNewLabel_4.setBounds(336, 379, 93, 22);
+		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_4.setForeground(Color.white);
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel_4);
 		
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 750, 650);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
-		ImageIcon imagen6 = new ImageIcon(
-				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
-		fondo.setIcon(imagen6);
+		ImageIcon imagen7 = new ImageIcon(getClass().getResource("fondo.jpg"));
+		ImageIcon imagen8 = new ImageIcon(
+				imagen7.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen8);
 		contentPanel.add(fondo);
 		
 

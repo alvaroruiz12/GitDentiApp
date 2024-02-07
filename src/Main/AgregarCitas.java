@@ -153,7 +153,7 @@ public class AgregarCitas extends JDialog {
 		txObservaciones.setBounds(246, 384, 236, 154);
 		getContentPane().add(txObservaciones);
 		txObservaciones.setColumns(10);
-// combobox tratamientos
+		// combobox tratamientos
 
 		JComboBox cbTratamientos = new JComboBox();
 		cbTratamientos.setBounds(246, 275, 150, 30);
@@ -185,7 +185,7 @@ public class AgregarCitas extends JDialog {
 		getContentPane().add(dateChooser);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(429, 204, 439, 161);
+		scrollPane.setBounds(561, 82, 439, 437);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 //tabla pacientes

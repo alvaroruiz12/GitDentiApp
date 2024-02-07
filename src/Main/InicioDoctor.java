@@ -30,6 +30,7 @@ import BBDD.Conexion;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -41,7 +42,7 @@ public class InicioDoctor extends JFrame {
 	private JTable table_1;
 	DefaultTableModel model;
 	Citas citas = new Citas();
-
+	Paciente paciente= new Paciente();
 	/**
 	 * Launch the application.
 	 */
@@ -173,7 +174,7 @@ public class InicioDoctor extends JFrame {
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 151, 1223, 529);
+		scrollPane.setBounds(42, 150, 1223, 529);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 
@@ -212,6 +213,69 @@ public class InicioDoctor extends JFrame {
 				btnCerrarSesion.getHeight(), Image.SCALE_SMOOTH));
 		btnCerrarSesion.setIcon(sesion);
 		
+		
+		JTextField textoNombre = new JTextField();
+		textoNombre.setBounds(52, 84, 150, 30);
+		getContentPane().add(textoNombre);
+		textoNombre.setColumns(10);
+
+		
+		
+		JTextField textoApellidos = new JTextField();
+		textoApellidos.setBounds(212, 84, 250, 30);
+		getContentPane().add(textoApellidos);
+		textoApellidos.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		lblNewLabel.setBounds(52, 31, 150, 30);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setForeground(Color.white);
+
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Apellidos");
+		lblNewLabel_1.setBounds(212, 31, 158, 30);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setForeground(Color.white);
+
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel_1);
+
+		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setBounds(633, 71, 172, 50);
+		lblDNI.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblDNI.setForeground(Color.white);
+		lblDNI.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblDNI);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
+				citas.CargarTablaBusqueda(model, table_1, DNI);
+				lblDNI.setText(DNI);
+			}
+		});
+		btnBuscar.setBounds(474, 75, 120, 44);
+		ImageIcon imagen5 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen6 = new ImageIcon(
+				imagen5.getImage().getScaledInstance(btnBuscar.getWidth(), btnBuscar.getHeight(), Image.SCALE_SMOOTH));
+		btnBuscar.setIcon(imagen6);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnBuscar.setBorderPainted(false);
+		btnBuscar.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnBuscar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBuscar.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnBuscar.setForeground(Color.WHITE); // Color del texto
+		btnBuscar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		getContentPane().add(btnBuscar);
+		
 		// boton cerrar sesion
 				JButton btnCerra = new JButton("");
 				btnCerrarSesion.addActionListener(new ActionListener() {
@@ -230,10 +294,10 @@ public class InicioDoctor extends JFrame {
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1920, 1080);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
-		ImageIcon imagen6 = new ImageIcon(
-				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
-		fondo.setIcon(imagen6);
+		ImageIcon imagen8 = new ImageIcon(getClass().getResource("fondo.jpg"));
+		ImageIcon imagen9 = new ImageIcon(
+				imagen8.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen9);
 		contentPane.add(fondo);
 
 	}

@@ -90,6 +90,7 @@ public class AltaPacientes extends JDialog {
 		tf2.setBounds(456, 195, 189, 30);
 		contentPanel.add(tf2);
 		tf2.setColumns(10);
+		
 		JButton btnVolver = new JButton("VOLVER");
 
 		btnVolver.addActionListener(new ActionListener() {
@@ -119,7 +120,7 @@ public class AltaPacientes extends JDialog {
 		//BOTON FUNCIONALIDAD
 		
 		JButton btnAnadir = new JButton("Insertar");
-		btnAnadir.setBounds(626, 537, 55, 50);
+		btnAnadir.setBounds(456, 514, 189, 50);
 		btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 28));
 		btnAnadir.setForeground(new Color(0, 0, 0));
 		btnAnadir.setBackground(new Color (207, 241, 255));
@@ -168,7 +169,6 @@ public class AltaPacientes extends JDialog {
 		
 		tf3 = new JTextField();
 		tf3.setForeground(new Color(192, 192, 192));
-		tf3.setText("Introduzca DNI");
 		tf3.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf3.setBounds(456, 265, 189, 30);
 		contentPanel.add(tf3);
@@ -176,7 +176,6 @@ public class AltaPacientes extends JDialog {
 		
 		tf4 = new JTextField();
 		tf4.setForeground(new Color(192, 192, 192));
-		tf4.setText("Introduzca correo electronico");
 		tf4.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf4.setBounds(456, 333, 189, 30);
 		contentPanel.add(tf4);
@@ -184,7 +183,6 @@ public class AltaPacientes extends JDialog {
 		
 		tf5 = new JTextField();
 		tf5.setForeground(new Color(192, 192, 192));
-		tf5.setText("Introduzca el telefono");
 		tf5.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf5.setBounds(456, 403, 189, 30);
 		contentPanel.add(tf5);
@@ -192,7 +190,6 @@ public class AltaPacientes extends JDialog {
 		
 		tf6 = new JTextField();
 		tf6.setForeground(new Color(192, 192, 192));
-		tf6.setText("Introduzca edad");
 		tf6.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf6.setBounds(456, 473, 189, 30);
 		contentPanel.add(tf6);

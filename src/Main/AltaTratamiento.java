@@ -52,7 +52,7 @@ public class AltaTratamiento extends JDialog {
 		Conexion conexion = con;
 
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(10, 72, 99, 24);
+		lblNewLabel.setBounds(39, 121, 99, 30);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel.setForeground(Color.white);
 
@@ -60,7 +60,7 @@ public class AltaTratamiento extends JDialog {
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Precio");
-		lblNewLabel_1.setBounds(10, 120, 99, 27);
+		lblNewLabel_1.setBounds(33, 175, 105, 31);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_1.setForeground(Color.white);
 
@@ -68,7 +68,7 @@ public class AltaTratamiento extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Material");
-		lblNewLabel_2.setBounds(10, 162, 99, 27);
+		lblNewLabel_2.setBounds(33, 231, 105, 30);
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_2.setForeground(Color.white);
 
@@ -76,12 +76,12 @@ public class AltaTratamiento extends JDialog {
 		getContentPane().add(lblNewLabel_2);
 		
 		NombreTexto = new JTextField();
-		NombreTexto.setBounds(119, 69, 100, 30);
+		NombreTexto.setBounds(159, 121, 150, 30);
 		getContentPane().add(NombreTexto);
 		NombreTexto.setColumns(10);
 		
 		CosteTexto = new JTextField();
-		CosteTexto.setBounds(119, 117, 100, 30);
+		CosteTexto.setBounds(159, 176, 150, 30);
 		getContentPane().add(CosteTexto);
 		CosteTexto.setColumns(10);
 		
@@ -101,7 +101,7 @@ public class AltaTratamiento extends JDialog {
 		}
 
 		
-		comboMateriales.setBounds(119, 159, 150, 30);
+		comboMateriales.setBounds(159, 231, 150, 30);
 		getContentPane().add(comboMateriales);
 		
 		
@@ -161,7 +161,7 @@ public class AltaTratamiento extends JDialog {
 						
 					}
 				});
-				btnInsertar.setBounds(94, 203, 143, 50);
+				btnInsertar.setBounds(159, 272, 150, 50);
 				btnInsertar.setIcon(imagen4);
 
 				// Eliminar el borde del botón para que la imagen sea visible

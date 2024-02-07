@@ -80,16 +80,15 @@ public class AltaEspecialidad extends JDialog {
 		getContentPane().add(btnVolver);
 
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(36, 131, 200, 50);
+		lblNewLabel.setBounds(53, 101, 116, 41);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel.setForeground(Color.white);
 
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(123, 101, 46, 14);
 		getContentPane().add(lblNewLabel);
 
 		textoNombre = new JTextField();
-		textoNombre.setBounds(206, 98, 86, 20);
+		textoNombre.setBounds(200, 109, 148, 30);
 		getContentPane().add(textoNombre);
 		textoNombre.setColumns(10);
 

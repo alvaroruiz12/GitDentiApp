@@ -1,6 +1,8 @@
 package Main;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import BBDD.Conexion;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -47,11 +50,14 @@ public class BajaEspecialidad extends JDialog {
 		getContentPane().setLayout(null);
 		Conexion conexion=con;
 		JComboBox comboNombre = new JComboBox();
-		comboNombre.setBounds(82, 94, 173, 32);
+		comboNombre.setBounds(82, 135, 173, 32);
 		getContentPane().add(comboNombre);
 		
 		JLabel Nombre = new JLabel("Nombre");
-		Nombre.setBounds(99, 69, 46, 14);
+		Nombre.setBounds(82, 101, 173, 23);
+		Nombre.setFont(new Font("Arial", Font.PLAIN, 20));
+		Nombre.setHorizontalAlignment(SwingConstants.CENTER);
+		Nombre.setForeground(Color.white);
 		getContentPane().add(Nombre);
 		
 		
@@ -61,7 +67,32 @@ public class BajaEspecialidad extends JDialog {
 		for (int i = 0; i < nombreEspecialidad.size(); i++) {
 			comboNombre.addItem(nombreEspecialidad.get(i).toString());
 		}
-		
+		JButton btnVolver = new JButton("VOLVER");
+
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnVolver.setBounds(319, 11, 105, 50);
+		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen4 = new ImageIcon(
+				imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+		btnVolver.setIcon(imagen4);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnVolver.setBorderPainted(false);
+		btnVolver.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnVolver.setForeground(Color.WHITE); // Color del texto
+		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		getContentPane().add(btnVolver);
+
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
@@ -108,7 +139,22 @@ public class BajaEspecialidad extends JDialog {
 				}
 			}
 		});
-		btnEliminar.setBounds(335, 227, 89, 23);
+		btnEliminar.setBounds(319, 218, 105, 32);
+		ImageIcon imagen56 = new ImageIcon(
+				imagen3.getImage().getScaledInstance(btnEliminar.getWidth(), btnEliminar.getHeight(), Image.SCALE_SMOOTH));
+		btnEliminar.setIcon(imagen56);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnEliminar.setBorderPainted(false);
+		btnEliminar.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnEliminar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnEliminar.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnEliminar.setForeground(Color.WHITE); // Color del texto
+		btnEliminar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnEliminar);
 		
 		//fondo

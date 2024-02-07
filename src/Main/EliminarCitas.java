@@ -90,7 +90,7 @@ public class EliminarCitas extends JDialog {
 					table_1.setSelectionBackground(new Color(217, 217, 217)); 
 					table_1.setSelectionForeground(Color.BLACK);
 					table_1.setModel(model = new DefaultTableModel(new Object[][] {
-					}, new String[] { "idCitas", "Hora", "Fecha", "IdPagos", "DNI paciente", "DNI doctor","Observaciones" }));
+					}, new String[] {  "Hora", "Fecha", "DNI paciente", "DNI doctor","Observaciones" }));
 					table_1.getColumnModel().getColumn(1).setMinWidth(23);
 					scrollPane.setViewportView(table_1);
 					

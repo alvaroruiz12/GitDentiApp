@@ -19,9 +19,11 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import BBDD.Conexion;
+import javax.swing.JComboBox;
 
 public class AltaDoctor extends JDialog {
 
@@ -32,9 +34,7 @@ public class AltaDoctor extends JDialog {
 	private JTextField tf1;
 	private JTextField tf2;
 	private JTextField tf3;
-	private JTextField tf4;
-	private JTextField tf5;
-	private JTextField tf6;
+	Especialidad especialidad= new Especialidad();
 	/**
 	 * Launch the application.
 	 */
@@ -56,6 +56,19 @@ public class AltaDoctor extends JDialog {
 	public AltaDoctor(ArrayList<String> a, Conexion con,InicioAdmin parent,boolean modal) {
 		
 		super(parent,modal);
+		
+		
+		ArrayList <String> nombreEspecialidad=especialidad.CargarNombreEspecialidad();
+		ArrayList <String> idEspecialidad=especialidad.CargarNumeroEspecialidad();
+		JComboBox comboNombre = new JComboBox();
+		comboNombre.setBounds(494, 332, 189, 30);
+		contentPanel.add(comboNombre);
+		
+		// mete los nombres en el combobox
+		for (int i = 0; i < nombreEspecialidad.size(); i++) {
+			comboNombre.addItem(nombreEspecialidad.get(i).toString());
+		}
+		
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
 		setBounds(100, 100, 750, 650);
@@ -66,9 +79,8 @@ public class AltaDoctor extends JDialog {
 		
 		tf1 = new JTextField();
 		tf1.setForeground(new Color(192, 192, 192));
-		tf1.setText("Introduzca nombre");
 		tf1.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf1.setBounds(398, 125, 189, 30);
+		tf1.setBounds(494, 125, 189, 30);
 		contentPanel.add(tf1);
 		tf1.setColumns(10);
 		
@@ -81,31 +93,90 @@ public class AltaDoctor extends JDialog {
 		//text field apellidos
 		tf2 = new JTextField();
 		tf2.setForeground(new Color(192, 192, 192));
-		tf2.setText("Introduzca Apellidos");
 		tf2.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf2.setBounds(398, 198, 189, 30);
+		tf2.setBounds(494, 194, 189, 30);
 		contentPanel.add(tf2);
 		tf2.setColumns(10);
         
+		JLabel lblNewLabel = new JLabel("DNI");
+		lblNewLabel.setBounds(376, 125, 87, 30);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setForeground(Color.white);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(lblNewLabel);
 		
+		JLabel lblNewLabel_1 = new JLabel("Nombre");
+		lblNewLabel_1.setBounds(376, 194, 87, 30);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setForeground(Color.white);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Id usuarios");
+		lblNewLabel_2.setBounds(356, 265, 96, 30);
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_2.setForeground(Color.white);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Especialidad");
+		lblNewLabel_3.setBounds(354, 333, 120, 22);
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_3.setForeground(Color.white);
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(lblNewLabel_3);
+		JButton btnVolver = new JButton("VOLVER");
 
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnVolver.setBounds(584, 11, 140, 47);
+		ImageIcon imagen34 = new ImageIcon(getClass().getResource("boton.png"));
+
+		ImageIcon imagen6 = new ImageIcon(
+				imagen34.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+		btnVolver.setIcon(imagen6);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnVolver.setBorderPainted(false);
+		btnVolver.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnVolver.setForeground(Color.WHITE); // Color del texto
+		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		contentPanel.add(btnVolver);
 		
 		
 		//BOTON FUNCIONALIDAD
 		
-		JButton btnAnadir = new JButton("+");
-		btnAnadir.setBounds(297, 334, 52, 42);
+		JButton btnAnadir = new JButton("DAR DE ALTA DOCTOR");
+		btnAnadir.setBounds(450, 400, 254, 38);
 		btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 28));
 		btnAnadir.setForeground(new Color(0, 0, 0));
 		btnAnadir.setBackground(new Color (207, 241, 255));
 		btnAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String nEspecialidad="";
+				String id="";
+				int nid=0;
+				for (int i = 0; i < nombreEspecialidad.size(); i++) {
+					 nEspecialidad = nombreEspecialidad.get(i).toString();
+					if (nEspecialidad.equals(comboNombre.getSelectedItem().toString())) {
+						id = idEspecialidad.get(i);
+						nid=Integer.parseInt(id);
+					}	
+				}
 				
 
 		
 					String sentencia2="Insert into dentiapp.doctor (DNI,Nombre,usuarios_idusuarios,especialidad_idespecialidad)values('"
-							+tf2.getText()+"','"+tf1.getText()+"',"+tf3.getText()+"," + tf4.getText() +");";
+							+tf2.getText()+"','"+tf1.getText()+"',"+tf3.getText()+"," + nid +");";
 				
 					
 					boolean status2 = false;
@@ -115,6 +186,22 @@ public class AltaDoctor extends JDialog {
 					}
 			}
 		});
+		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen4 = new ImageIcon(
+				imagen3.getImage().getScaledInstance(btnAnadir.getWidth(), btnAnadir.getHeight(), Image.SCALE_SMOOTH));
+		btnAnadir.setIcon(imagen4);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnAnadir.setBorderPainted(false);
+		btnAnadir.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnAnadir.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnAnadir.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnAnadir.setForeground(Color.WHITE); // Color del texto
+		btnAnadir.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		contentPanel.add(btnAnadir);
 		
 		JLabel lblFotoUser = new JLabel();
@@ -124,247 +211,32 @@ public class AltaDoctor extends JDialog {
 		lblFotoUser.setIcon(imagen2);
 		contentPanel.add(lblFotoUser);
 		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 43, 76, 64);
-		btnVolver.setBackground(new Color(207, 241, 255));
-		btnVolver.setForeground(new Color(255, 255, 255));
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				dispose();
-			}
-		});
-		ImageIcon i7 = new ImageIcon(getClass().getResource("volver.png"));
-		ImageIcon i8 = new ImageIcon(i7.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
-		btnVolver.setIcon(i8);
-		contentPanel.add(btnVolver);
+		
 		
 		tf3 = new JTextField();
 		tf3.setForeground(new Color(192, 192, 192));
-		tf3.setText("Introduzca DNI");
 		tf3.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf3.setBounds(398, 265, 189, 30);
+		tf3.setBounds(494, 265, 189, 30);
 		contentPanel.add(tf3);
 		tf3.setColumns(10);
-		
-		tf4 = new JTextField();
-		tf4.setForeground(new Color(192, 192, 192));
-		tf4.setText("Introduzca correo electronico");
-		tf4.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf4.setBounds(398, 334, 189, 30);
-		contentPanel.add(tf4);
-		tf4.setColumns(10);
-		
-		tf5 = new JTextField();
-		tf5.setForeground(new Color(192, 192, 192));
-		tf5.setText("Introduzca el telefono");
-		tf5.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf5.setBounds(398, 406, 189, 30);
-		contentPanel.add(tf5);
-		tf5.setColumns(10);
-		
-		tf6 = new JTextField();
-		tf6.setForeground(new Color(192, 192, 192));
-		tf6.setText("Introduzca edad");
-		tf6.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf6.setBounds(398, 468, 189, 30);
-		contentPanel.add(tf6);
-		tf6.setColumns(10);
-		
-		
 
 		
 		
 		
-		
-		//-----------------------Para que desaparezca y aparezca cuando este vacio----------------
-		
-		
-		tf1.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-					tf1.setText("");
-					tf1.setForeground(new Color(0,0,0));
-					
-				
-			}
-			
-		});
-		
-		tf1.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf1.getText().isEmpty()) {
-					
-					
-					tf1.setText(stf1);
-					tf1.setForeground(new Color(192,192,192));
-					
-				}
-			}
-		});
-		tf2.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-				tf2.setText("");
-				tf2.setForeground(new Color(0,0,0));
-				
-			}
-			
-		});
-		
-		tf2.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf2.getText().isEmpty()) {
-					
-					
-					tf2.setText(stf2);
-					tf2.setForeground(new Color(192,192,192));
-				}
-			}
-		});
-		
-		tf3.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-				tf3.setText("");
-			
-				tf3.setForeground(new Color(0,0,0));
-				
-			}
-			
-		});
-		
-		tf3.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf3.getText().isEmpty()) {
-					
-					
-					tf3.setText(stf3);
-					tf3.setForeground(new Color(192,192,192));
-				}
-			}
-		});
-		tf4.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-				tf4.setText("");
-				tf4.setForeground(new Color(0,0,0));
-				
-			}
-			
-		});
-		
-		tf4.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf4.getText().isEmpty()) {
-					
-					
-					tf4.setText(stf4);
-					tf4.setForeground(new Color(192,192,192));
-				}
-			}
-		});
-		tf5.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-				tf5.setText("");
-				tf5.setForeground(new Color(0,0,0));
-				
-			}
-			
-		});
-		
-		tf5.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf5.getText().isEmpty()) {
-					
-					
-					tf5.setText(stf5);
-					tf5.setForeground(new Color(192,192,192));
-				}
-			}
-		});
-		tf6.addMouseListener(new MouseAdapter() {
-			
-			public void mouseClicked(MouseEvent e) {
-				
-				tf6.setText("");
-				tf6.setForeground(new Color(0,0,0));
-			}
-			
-		});
-		
-		tf6.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				
-				
-				if(tf6.getText().isEmpty()) {
-					
-					
-					tf6.setText(stf6);
-					tf6.setForeground(new Color(192,192,192));
-				}
-			}
-		});
-		
-		
-		
-		
-		
-		
-		
-		
-		//----------------Seleccion del combobox---------------------------------
-		
-		
-							
-							tf5.setVisible(false);
-							tf6.setVisible(false);
-							clearTxtField(tf1);
-							clearTxtField(tf2);
-							clearTxtField(tf3);
-							
-							stf1="Introduzca nombre";
-							stf2= "Introduzca dni";
-							stf3 = "Introduzca idusuario";
-							stf4 = "Introduzca especialidad";
-							
-							//metodo borrar lo que tegan los edit text y poner el texto predeterminado correspondiente
-							
-							tf1.setText(stf1);
-							tf2.setText(stf2);
-							tf3.setText(stf3);
-							tf4.setText(stf4);
-
 		//JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 750, 650);
 
 		ImageIcon imagen5= new ImageIcon(getClass().getResource("fondo.jpg"));
-		ImageIcon imagen6= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
-		fondo.setIcon(imagen6);
+		ImageIcon imagen7= new ImageIcon(imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen7);
 		contentPanel.add(fondo);
+		
+
+		
+
+		
+
 		
 }public void clearTxtField(JTextField text) {
 text.setText("");

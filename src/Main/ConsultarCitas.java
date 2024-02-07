@@ -137,27 +137,53 @@ public class ConsultarCitas extends JDialog {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel_1);
 
+		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setBounds(637, 124, 172, 50);
+		lblDNI.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblDNI.setForeground(Color.white);
+		lblDNI.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblDNI);
+		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
 				citas.CargarTablaBusqueda(model, table_1, DNI);
-				
+				lblDNI.setText(DNI);
 			}
 		});
-		btnBuscar.setBounds(472, 137, 100, 30);
+		btnBuscar.setBounds(472, 128, 120, 44);
+		ImageIcon imagen5 = new ImageIcon(getClass().getResource("boton.png"));
+		ImageIcon imagen6 = new ImageIcon(
+				imagen5.getImage().getScaledInstance(btnBuscar.getWidth(), btnBuscar.getHeight(), Image.SCALE_SMOOTH));
+		btnBuscar.setIcon(imagen4);
+
+		// Eliminar el borde del botón para que la imagen sea visible
+		btnBuscar.setBorderPainted(false);
+		btnBuscar.setContentAreaFilled(false);
+
+		// Establecer el texto sobre la imagen
+		btnBuscar.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnBuscar.setVerticalTextPosition(SwingConstants.CENTER);
+
+		// Personalizar el estilo del texto
+		btnBuscar.setForeground(Color.WHITE); // Color del texto
+		btnBuscar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnBuscar);
+		
+
 
 		
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 700);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
-		ImageIcon imagen6 = new ImageIcon(
-				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
-		fondo.setIcon(imagen6);
+		ImageIcon imagen7 = new ImageIcon(getClass().getResource("fondo.jpg"));
+		ImageIcon imagen8 = new ImageIcon(
+				imagen7.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen8);
 		getContentPane().add(fondo);
+		
 
 	}
 }

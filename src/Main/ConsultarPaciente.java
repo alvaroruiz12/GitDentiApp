@@ -57,7 +57,7 @@ public class ConsultarPaciente extends JDialog {
 		getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(28, 197, 725, 242);
+		scrollPane.setBounds(28, 72, 725, 367);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
 		getContentPane().add(scrollPane);
 //tabla pacientes
