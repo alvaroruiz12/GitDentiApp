@@ -159,6 +159,69 @@ public class Citas {
 		}
 
 	}
+	public int conseguirIDcitas(String DNI, String fecha) {
+		int id=0;
+		try {
+
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select idcitas from citas WHERE DNIpaciente='" + DNI + "' AND "
+					+ "fecha='"+fecha+"'";
+			rs = stm.executeQuery(consulta);
+
+			while (rs.next()) {
+				id = rs.getInt("idcitas");
+				System.out.println(id);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+		
+	
+	}
+	
+	public ArrayList <String> conseguirPagos(int idcitas) {
+		ArrayList <String> datos=null;
+		
+		try {
+
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select precio, abonado from pagos WHERE idcitas=" + idcitas + "" ;
+			rs = stm.executeQuery(consulta);
+			if (datos == null) {
+				datos = new ArrayList<>();
+			}
+			while (rs.next()) {
+				int precio = rs.getInt("precio");
+				int abonado = rs.getInt("abonado");
+				System.out.println(precio);
+				String precioString=String.valueOf(precio);
+				String abonadoString=String.valueOf(abonado);
+				datos.add(precioString);
+				datos.add(abonadoString);
+				
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+		
+	
+	}
+	
+	
 
 	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
 		// voy a coger la fila selecccionada.

@@ -199,7 +199,6 @@ public class AgregarCitas extends JDialog {
 		header.setFont(new Font("Arial", Font.PLAIN, 20));
 
 		header.setBackground(new Color(207, 241, 255));
-		table_1.setIntercellSpacing(new Dimension(4, 4));
 		// ajusta el alto de las columnas de la tabla
 		table_1.setRowHeight(30);
 		// Cambia el color de fondo de las filas seleccionadas

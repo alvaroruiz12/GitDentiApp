@@ -7,7 +7,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +24,7 @@ import javax.swing.table.JTableHeader;
 
 import BBDD.Conexion;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 public class ConsultarCitas extends JDialog {
 	Citas citas = new Citas();
@@ -29,6 +32,9 @@ public class ConsultarCitas extends JDialog {
 	private JTextField textoNombre;
 	private JTextField textoApellidos;
 	Paciente paciente= new Paciente();
+	Date hoy = new Date();
+	int id=0;
+
 	/**
 	 * Launch the application.
 	 */
@@ -109,22 +115,44 @@ public class ConsultarCitas extends JDialog {
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnVolver);
 
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(110, 171, 46, 14);
-		getContentPane().add(lblNewLabel_2);
+		JLabel textoCoste = new JLabel("");
+		textoCoste.setBounds(52, 148, 150, 37);
+		textoCoste.setFont(new Font("Arial", Font.PLAIN, 20));
+		textoCoste.setForeground(Color.white);
+
+		textoCoste.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(textoCoste);
 		
-		JLabel txCoste = new JLabel("New label");
-		txCoste.setBounds(96, 207, 46, 14);
+		JLabel txCoste = new JLabel("");
+		txCoste.setBounds(52, 196, 150, 30);
+		txCoste.setFont(new Font("Arial", Font.PLAIN, 20));
+		txCoste.setForeground(Color.white);
+
+		txCoste.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(txCoste);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(270, 171, 46, 14);
-		getContentPane().add(lblNewLabel_4);
+		JLabel textoAbonado = new JLabel("");
+		textoAbonado.setBounds(212, 151, 150, 30);
+		textoAbonado.setFont(new Font("Arial", Font.PLAIN, 20));
+		textoAbonado.setForeground(Color.white);
+
+		textoAbonado.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(textoAbonado);
 		
-		JLabel txAbonado = new JLabel("New label");
-		txAbonado.setBounds(270, 207, 46, 14);
+		JLabel txAbonado = new JLabel("");
+		txAbonado.setBounds(212, 196, 150, 30);
+		txAbonado.setFont(new Font("Arial", Font.PLAIN, 20));
+		txAbonado.setForeground(Color.white);
+
+		txAbonado.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(txAbonado);
 		
+		SimpleDateFormat formatoBBDD = new SimpleDateFormat("dd-MM-yyyy");
+
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(484, 83, 120, 30);
+		
+		getContentPane().add(dateChooser);
 		
 		
 		
@@ -157,7 +185,7 @@ public class ConsultarCitas extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 
 		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(634, 70, 172, 50);
+		lblDNI.setBounds(722, 72, 172, 50);
 		lblDNI.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblDNI.setForeground(Color.white);
 		lblDNI.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,13 +196,26 @@ public class ConsultarCitas extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String DNI = paciente.BuscarPaciente(textoNombre.getText().toString(),
 						textoApellidos.getText().toString());
-				citas.CargarTablaBusqueda(model, table_1, DNI);
+				if (dateChooser.getDate() == null) {
+					model.setRowCount(0);
+					lblDNI.setText(DNI);
+					citas.CargarTablaBusqueda(model, table_1, DNI);
+
 				lblDNI.setText(DNI);
-				
+				}else {
+					String fecha = formatoBBDD.format(dateChooser.getDate());
+					id=citas.conseguirIDcitas(DNI, fecha);
+					ArrayList<String> precios=citas.conseguirPagos(id);
+					textoCoste.setText("Coste");
+					textoAbonado.setText("Abonado");
+					txCoste.setText(precios.get(0));
+					txAbonado.setText(precios.get(1));
+
+				}
 				
 			}
 		});
-		btnBuscar.setBounds(489, 74, 120, 44);
+		btnBuscar.setBounds(604, 76, 120, 44);
 		ImageIcon imagen5 = new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen6 = new ImageIcon(
 				imagen5.getImage().getScaledInstance(btnBuscar.getWidth(), btnBuscar.getHeight(), Image.SCALE_SMOOTH));
@@ -210,6 +251,8 @@ public class ConsultarCitas extends JDialog {
 				imagen7.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen8);
 		getContentPane().add(fondo);
+		
+
 		
 
 
