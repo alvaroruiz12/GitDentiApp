@@ -219,28 +219,69 @@ public class Citas {
 			cn = controlador.conectar();
 			stm = cn.createStatement();
 			String consulta = "Select idcitas,hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
-					+ " from citas WHERE DNIpaciente='"+DNI+"' AND fecha='"+fecha+"'";
+					+ " from citas WHERE DNIpaciente='" + DNI + "' AND fecha='" + fecha + "'";
 			rs = stm.executeQuery(consulta);
 			if (datos == null) {
-				datos= new ArrayList<>();
+				datos = new ArrayList<>();
 			}
 			while (rs.next()) {
-				String idcitas=rs.getString("idcitas");
+				String idcitas = rs.getString("idcitas");
 				String Hora = rs.getString("hora");
 				String Fecha = rs.getString("fecha");
 				String DNIpacientes = rs.getString("DNIpaciente");
 				String DNIdoctor = rs.getString("DNIdoctor");
 				String Observaciones = rs.getString("observaciones_cita");
 
-
-				//relleno de los datos del arraylist
+				// relleno de los datos del arraylist
 				datos.add(idcitas);
 				datos.add(Hora);
 				datos.add(Fecha);
 				datos.add(DNIpacientes);
 				datos.add(DNIdoctor);
 				datos.add(Observaciones);
-				
+
+			}
+
+			// Crear un JTable con el modelo de tabla
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
+
+	
+	public ArrayList<String> CargarPagos(String DNI, String fecha) {
+		ArrayList<String> datos = null;
+		try {
+
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select idcitas,hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
+					+ " from citas WHERE DNIpaciente='" + DNI + "' AND fecha='" + fecha + "'";
+			rs = stm.executeQuery(consulta);
+			if (datos == null) {
+				datos = new ArrayList<>();
+			}
+			while (rs.next()) {
+				String idcitas = rs.getString("idcitas");
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
+
+				// relleno de los datos del arraylist
+				datos.add(idcitas);
+				datos.add(Hora);
+				datos.add(Fecha);
+				datos.add(DNIpacientes);
+				datos.add(DNIdoctor);
+				datos.add(Observaciones);
+
 			}
 
 			// Crear un JTable con el modelo de tabla

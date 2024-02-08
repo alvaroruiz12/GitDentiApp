@@ -191,7 +191,6 @@ public class TratamientosModificar extends JDialog {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
 				String nombre = tfNombre.getText();
 				int Coste = Integer.parseInt(tfCoste.getText());
 				String sentencia = "UPDATE dentiapp.tratamientos " + "SET " + "coste_tratamiento=" + Coste + ", "
@@ -231,23 +230,23 @@ public class TratamientosModificar extends JDialog {
 		btnRellenar.setForeground(new Color(0, 0, 0));
 		btnRellenar.setBackground(new Color(207, 241, 255));
 		contentPane.add(btnRellenar);
-		
+
 		JLabel lblNewLabel = new JLabel("Nombre");
 		lblNewLabel.setBounds(32, 244, 120, 30);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel.setForeground(Color.white);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Coste");
 		lblNewLabel_1.setBounds(32, 303, 120, 30);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_1.setForeground(Color.white);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JLabel fondo = new JLabel();
-		
+
 		fondo.setBounds(0, 0, 1100, 650);
 
 		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
@@ -255,8 +254,6 @@ public class TratamientosModificar extends JDialog {
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);
 		contentPane.add(fondo);
-		
-
 
 	}
 

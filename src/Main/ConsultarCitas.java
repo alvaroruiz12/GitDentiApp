@@ -109,20 +109,39 @@ public class ConsultarCitas extends JDialog {
 		btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnVolver);
 
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBounds(110, 171, 46, 14);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel txCoste = new JLabel("New label");
+		txCoste.setBounds(96, 207, 46, 14);
+		getContentPane().add(txCoste);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setBounds(270, 171, 46, 14);
+		getContentPane().add(lblNewLabel_4);
+		
+		JLabel txAbonado = new JLabel("New label");
+		txAbonado.setBounds(270, 207, 46, 14);
+		getContentPane().add(txAbonado);
+		
+		
+		
+		
 		textoNombre = new JTextField();
-		textoNombre.setBounds(52, 137, 150, 30);
+		textoNombre.setBounds(52, 83, 150, 30);
 		getContentPane().add(textoNombre);
 		textoNombre.setColumns(10);
 
 		
 		
 		textoApellidos = new JTextField();
-		textoApellidos.setBounds(212, 137, 250, 30);
+		textoApellidos.setBounds(212, 83, 250, 30);
 		getContentPane().add(textoApellidos);
 		textoApellidos.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(52, 96, 150, 30);
+		lblNewLabel.setBounds(52, 34, 150, 30);
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel.setForeground(Color.white);
 
@@ -130,7 +149,7 @@ public class ConsultarCitas extends JDialog {
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Apellidos");
-		lblNewLabel_1.setBounds(212, 96, 158, 30);
+		lblNewLabel_1.setBounds(212, 34, 158, 30);
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_1.setForeground(Color.white);
 
@@ -138,7 +157,7 @@ public class ConsultarCitas extends JDialog {
 		getContentPane().add(lblNewLabel_1);
 
 		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setBounds(637, 124, 172, 50);
+		lblDNI.setBounds(634, 70, 172, 50);
 		lblDNI.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblDNI.setForeground(Color.white);
 		lblDNI.setHorizontalAlignment(SwingConstants.CENTER);
@@ -147,12 +166,15 @@ public class ConsultarCitas extends JDialog {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
+				String DNI = paciente.BuscarPaciente(textoNombre.getText().toString(),
+						textoApellidos.getText().toString());
 				citas.CargarTablaBusqueda(model, table_1, DNI);
 				lblDNI.setText(DNI);
+				
+				
 			}
 		});
-		btnBuscar.setBounds(472, 128, 120, 44);
+		btnBuscar.setBounds(489, 74, 120, 44);
 		ImageIcon imagen5 = new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen6 = new ImageIcon(
 				imagen5.getImage().getScaledInstance(btnBuscar.getWidth(), btnBuscar.getHeight(), Image.SCALE_SMOOTH));
@@ -174,6 +196,11 @@ public class ConsultarCitas extends JDialog {
 
 
 		
+		
+		
+		
+		
+		
 		// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1000, 700);
@@ -184,6 +211,7 @@ public class ConsultarCitas extends JDialog {
 		fondo.setIcon(imagen8);
 		getContentPane().add(fondo);
 		
+
 
 	}
 }
