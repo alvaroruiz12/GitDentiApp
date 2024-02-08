@@ -36,7 +36,6 @@ public class PacienteModificar extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfDNI;
 	private JTextField tfNombre;
 	private JTextField tfApellido;
 	private JTextField tfCorreo;
@@ -96,19 +95,12 @@ public class PacienteModificar extends JDialog {
 
 		// PRIMERA SELECCION
 
-		tfDNI = new JTextField();
-		tfDNI.setForeground(new Color(192, 192, 192));
-		tfDNI.setText("Introduzca DNI");
-		tfDNI.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tfDNI.setBounds(187, 241, 189, 30);
-		contentPane.add(tfDNI);
-		tfDNI.setColumns(10);
+
 
 		// SEGUNDA SELECCION
 		// text field apellidos
 		tfNombre = new JTextField();
 		tfNombre.setForeground(new Color(192, 192, 192));
-		tfNombre.setText("Introduzca Nombre");
 		tfNombre.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfNombre.setBounds(187, 304, 189, 30);
 		contentPane.add(tfNombre);
@@ -149,7 +141,6 @@ public class PacienteModificar extends JDialog {
 		
 		tfApellido = new JTextField();
 		tfApellido.setForeground(new Color(192, 192, 192));
-		tfApellido.setText("Introduzca Apellido");
 		tfApellido.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfApellido.setBounds(187, 360, 189, 30);
 		contentPane.add(tfApellido);
@@ -157,7 +148,6 @@ public class PacienteModificar extends JDialog {
 
 		tfCorreo = new JTextField();
 		tfCorreo.setForeground(new Color(192, 192, 192));
-		tfCorreo.setText("Introduzca correo electronico");
 		tfCorreo.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfCorreo.setBounds(187, 418, 189, 30);
 		contentPane.add(tfCorreo);
@@ -165,7 +155,6 @@ public class PacienteModificar extends JDialog {
 
 		tfTelefono = new JTextField();
 		tfTelefono.setForeground(new Color(192, 192, 192));
-		tfTelefono.setText("Introduzca el telefono");
 		tfTelefono.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfTelefono.setBounds(187, 465, 189, 30);
 		contentPane.add(tfTelefono);
@@ -173,149 +162,12 @@ public class PacienteModificar extends JDialog {
 
 		tfEdad = new JTextField();
 		tfEdad.setForeground(new Color(192, 192, 192));
-		tfEdad.setText("Introduzca edad");
 		tfEdad.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfEdad.setBounds(187, 518, 189, 30);
 		contentPane.add(tfEdad);
 		tfEdad.setColumns(10);
 
-		// -----------------------Para que desaparezca y aparezca cuando este
-		// vacio----------------
-
-		tfDNI.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfDNI.setText("");
-				tfDNI.setForeground(new Color(0, 0, 0));
-
-			}
-
-		});
-
-		tfDNI.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfDNI.getText().isEmpty()) {
-
-					tfDNI.setText(stf1);
-					tfDNI.setForeground(new Color(192, 192, 192));
-
-				}
-			}
-		});
-		tfNombre.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfNombre.setText("");
-				tfNombre.setForeground(new Color(0, 0, 0));
-
-			}
-
-		});
-
-		tfNombre.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfNombre.getText().isEmpty()) {
-
-					tfNombre.setText(stf2);
-					tfNombre.setForeground(new Color(192, 192, 192));
-				}
-			}
-		});
-
-		tfApellido.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfApellido.setText("");
-
-				tfApellido.setForeground(new Color(0, 0, 0));
-
-			}
-
-		});
-
-		tfApellido.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfApellido.getText().isEmpty()) {
-
-					tfApellido.setText(stf3);
-					tfApellido.setForeground(new Color(192, 192, 192));
-				}
-			}
-		});
-		tfCorreo.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfCorreo.setText("");
-				tfCorreo.setForeground(new Color(0, 0, 0));
-
-			}
-
-		});
-
-		tfCorreo.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfCorreo.getText().isEmpty()) {
-
-					tfCorreo.setText(stf4);
-					tfCorreo.setForeground(new Color(192, 192, 192));
-				}
-			}
-		});
-		tfTelefono.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfTelefono.setText("");
-				tfTelefono.setForeground(new Color(0, 0, 0));
-
-			}
-
-		});
-
-		tfTelefono.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfTelefono.getText().isEmpty()) {
-
-					tfTelefono.setText(stf5);
-					tfTelefono.setForeground(new Color(192, 192, 192));
-				}
-			}
-		});
-		tfEdad.addMouseListener(new MouseAdapter() {
-
-			public void mouseClicked(MouseEvent e) {
-
-				tfEdad.setText("");
-				tfEdad.setForeground(new Color(0, 0, 0));
-			}
-
-		});
-
-		tfEdad.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-
-				if (tfEdad.getText().isEmpty()) {
-
-					tfEdad.setText(stf6);
-					tfEdad.setForeground(new Color(192, 192, 192));
-				}
-			}
-		});
+	
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(407, 169, 629, 326);
@@ -345,6 +197,15 @@ public class PacienteModificar extends JDialog {
 		scrollPane.setViewportView(table_1);
 		paciente.CargarTabla(model, table_1);
 
+		
+		JLabel labelDNI = new JLabel("DNI");
+		labelDNI.setBounds(34, 241, 100, 30);
+		labelDNI.setFont(new Font("Arial", Font.PLAIN, 20));
+		labelDNI.setForeground(Color.white);
+		labelDNI.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(labelDNI);
+		
+		
 		// funcion buscar
 		JTextField textoNombre = new JTextField();
 		textoNombre.setBounds(407, 107, 150, 30);
@@ -383,7 +244,6 @@ public class PacienteModificar extends JDialog {
 
 				
 				//cambio de color a negro
-				tfDNI.setForeground(Color.BLACK);
 				tfNombre.setForeground(Color.BLACK);
 				tfApellido.setForeground(Color.BLACK);
 				tfCorreo.setForeground(Color.BLACK);
@@ -391,7 +251,7 @@ public class PacienteModificar extends JDialog {
 				tfEdad.setForeground(Color.BLACK);
 				
 				//relleno de datos con la busqueda
-				tfDNI.setText(datos.get(0));
+				labelDNI.setText(datos.get(0));
 				tfNombre.setText(textoNombre.getText().toString());
 				tfApellido.setText(textoApellidos.getText().toString());
 				tfCorreo.setText(datos.get(1));
@@ -414,13 +274,13 @@ public class PacienteModificar extends JDialog {
 		btnAnadir.setBackground(new Color(207, 241, 255));
 		btnAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String dni = tfDNI.getText();
+				String dni = labelDNI.getText();
 				String apellido = tfApellido.getText();
 				String nombre = tfNombre.getText();
 				String correo = tfCorreo.getText();
 				int telefono = Integer.parseInt(tfTelefono.getText());
 				int edad = Integer.parseInt(tfEdad.getText());
-				String sentencia = "UPDATE dentiapp.pacientes " + "SET nombre_paciente='" + nombre + "', " + "apellido_pacie='"
+				String sentencia = "UPDATE dentiapp.pacientes " + "SET nombre_paciente='" + nombre + "', " + "apellido_paciente='"
 						+ apellido + "', " + "correo='" + correo + "', " + "telefono=" + telefono + ", " + "edad="
 						+ edad + " " + "WHERE DNIpaciente='" + dni + "';";
 				boolean status = false;
@@ -428,17 +288,13 @@ public class PacienteModificar extends JDialog {
 				if (status = true) {
 
 				}
+				table_1.removeAll();
 				paciente.CargarTabla(model, table_1);
 			}
 		});
 
 		
-		JLabel lblNewLabel_2 = new JLabel("DNI");
-		lblNewLabel_2.setBounds(34, 241, 100, 30);
-		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblNewLabel_2.setForeground(Color.white);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel_2);
+
 		
 		JLabel lblNewLabel_3 = new JLabel("Nombre");
 		lblNewLabel_3.setBounds(34, 304, 100, 30);

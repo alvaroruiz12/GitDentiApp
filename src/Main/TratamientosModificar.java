@@ -193,7 +193,6 @@ public class TratamientosModificar extends JDialog {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println(NumeroTratamiento);
 
 				String nombre = tfNombre.getText();
 				int Coste = Integer.parseInt(tfCoste.getText());
