@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,21 +26,26 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import java.util.Date;
+
 import com.toedter.calendar.JDateChooser;
 
 import BBDD.Conexion;
 
 public class EditarCitas extends JDialog {
-
+	String idcitas = "";
 	private static final long serialVersionUID = 1L;
-	private JTextField txHora;
-	private JTextField txPacientes;
 	private JTextField txObservaciones;
 	private JTable table_1;
+
 	DefaultTableModel model;
 	Citas citas = new Citas();
 	Doctor doctor = new Doctor();
-
+	private JTextField textoNombre;
+	private JTextField textoApellidos;
+	Date hoy = new Date();
+	Paciente paciente= new Paciente();
+	Tratamiento tratamiento= new Tratamiento();
 	/**
 	 * Launch the application.
 	 */
@@ -66,7 +70,19 @@ public class EditarCitas extends JDialog {
 	 */
 	public EditarCitas(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
 		setBounds(100, 100, 1100, 650);
+		Conexion conexion=con;
+		
+		JComboBox comboHora = new JComboBox();
+		comboHora.setBounds(237, 104, 150, 30);
+		getContentPane().add(comboHora);
 
+		for (int hour = 9; hour <= 20; hour++) {
+			for (int minute = 0; minute < 60; minute += 30) {
+				String formattedHour = String.format("%02d:%02d", hour, minute);
+				comboHora.addItem(formattedHour);
+			}
+		}
+		
 		JLabel lblHora = new JLabel("Hora");
 		lblHora.setBounds(27, 91, 200, 50);
 		lblHora.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -107,22 +123,12 @@ public class EditarCitas extends JDialog {
 		lblObservaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblObservaciones);
 
-		JLabel lblPacientes = new JLabel("Pacientes");
-		lblPacientes.setBounds(47, 335, 200, 50);
-		lblPacientes.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPacientes.setForeground(Color.white);
-		lblPacientes.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblPacientes);
-		// jtextField
-		txHora = new JTextField();
-		txHora.setBounds(237, 104, 150, 30);
-		getContentPane().add(txHora);
-		txHora.setColumns(10);
-
-		txPacientes = new JTextField();
-		txPacientes.setBounds(237, 348, 150, 30);
-		getContentPane().add(txPacientes);
-		txPacientes.setColumns(10);
+		JLabel txPaciente = new JLabel("Paciente");
+		txPaciente.setBounds(217, 335, 200, 50);
+		txPaciente.setFont(new Font("Arial", Font.PLAIN, 20));
+		txPaciente.setForeground(Color.white);
+		txPaciente.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(txPaciente);
 
 		txObservaciones = new JTextField();
 		txObservaciones.setBounds(237, 396, 200, 80);
@@ -130,35 +136,38 @@ public class EditarCitas extends JDialog {
 		txObservaciones.setColumns(10);
 
 // combobox tratamientos
-		
+
 		// combobox doctor
-				JComboBox comboBoxDoctor = new JComboBox();
-				// cargar datos al combobox
+		JComboBox comboBoxDoctor = new JComboBox();
+		// cargar datos al combobox
 
-				// esto da null
+		// esto da null
 
-				int tamañoNombre = 0;
-				// metodo recoge el nombre y el dni
+		int tamañoNombre = 0;
+		// metodo recoge el nombre y el dni
 
-				ArrayList<String> Dni=doctor.CargarDNIDoctorCitas();
-				ArrayList<String> Nombre=doctor.CargarNombreDoctorCitas();
+		ArrayList<String> Dni = doctor.CargarDNIDoctorCitas();
+		ArrayList<String> Nombre = doctor.CargarNombreDoctorCitas();
 
-				System.out.println(Nombre);
-				// mete los nombres en el combobox
-				for (int i = 0; i < Nombre.size(); i++) {
-					comboBoxDoctor.addItem(Nombre.get(i).toString());
-				}
+		System.out.println(Nombre);
+		// mete los nombres en el combobox
+		for (int i = 0; i < Nombre.size(); i++) {
+			comboBoxDoctor.addItem(Nombre.get(i).toString());
+		}
 
-				comboBoxDoctor.setBounds(237, 228, 150, 30);
-				getContentPane().add(comboBoxDoctor);
+		comboBoxDoctor.setBounds(237, 228, 150, 30);
+		getContentPane().add(comboBoxDoctor);
 
 		JComboBox cbTratamientos = new JComboBox();
 		cbTratamientos.setBounds(237, 287, 150, 30);
+		
 		getContentPane().add(cbTratamientos);
-		cbTratamientos.addItem("Limpieza dental");
-		cbTratamientos.addItem("Ortodoncia");
-		cbTratamientos.addItem("Empaste");
-		cbTratamientos.addItem("Extracción");
+		ArrayList<String> NombreTratamiento=tratamiento.CargarNombreTratamiento();
+		ArrayList<String> NumTratamiento=tratamiento.CargarNumeroTratamiento();
+		
+		for (int i = 0; i < NombreTratamiento.size(); i++) {
+			cbTratamientos.addItem(NombreTratamiento.get(i).toString());
+		}
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(469, 104, 583, 363);
@@ -194,7 +203,7 @@ public class EditarCitas extends JDialog {
 				dispose();
 			}
 		});
-		btnVolver.setBounds(966, 7, 105, 50);
+		btnVolver.setBounds(10, 18, 105, 50);
 		ImageIcon imagen3 = new ImageIcon(getClass().getResource("boton.png"));
 		ImageIcon imagen4 = new ImageIcon(
 				imagen3.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
@@ -220,6 +229,7 @@ public class EditarCitas extends JDialog {
 		// calendar
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(237, 163, 150, 30);
+		dateChooser.setMinSelectableDate(hoy);
 
 		getContentPane().add(dateChooser);
 
@@ -231,26 +241,22 @@ public class EditarCitas extends JDialog {
 
 				int pagosId = 0;
 				// declaracion de variables
-				int tratamientosId = 0;
+				String numTratamiento="";
+				int NumeroTratamiento=0;
+				for (int i = 0; i < NombreTratamiento.size(); i++) {
+					String nomTra = NombreTratamiento.get(i).toString();
 
-				// seleccion del combobox de tratamientos
-				if (cbTratamientos.getSelectedItem().equals("Limpieza dental")) {
-					tratamientosId = 5;
-				} else if (cbTratamientos.getSelectedItem().equals("Ortodoncia")) {
-					tratamientosId = 6;
+					if (nomTra.equals(cbTratamientos.getSelectedItem().toString())) {
+						
+						 numTratamiento = NumTratamiento.get(i);
 
-				} else if (cbTratamientos.getSelectedItem().equals("Empaste")) {
-					tratamientosId = 7;
-
-				} else if (cbTratamientos.getSelectedItem().equals("Extracción")) {
-					tratamientosId = 8;
+						NumeroTratamiento=Integer.parseInt(numTratamiento);
+						
+					}
 				}
-				if (tratamientosId == 0) {
-					JOptionPane.showMessageDialog(null, "Selecciona un tratamiento", "Error",
-							JOptionPane.ERROR_MESSAGE);
 
-				}
-				String doc="";
+				
+				String doc = "";
 				for (int i = 0; i < Nombre.size(); i++) {
 
 					String nomDoc = Nombre.get(i).toString();
@@ -259,9 +265,9 @@ public class EditarCitas extends JDialog {
 
 					}
 				}
-				String hora = txHora.getText();
-				String pacientes = txPacientes.getText();
-				String observaciones = txObservaciones.getText();
+				String hora = comboHora.getSelectedItem().toString();
+				String pacientes = txPaciente.getText().toString();
+				String observaciones = txObservaciones.getText().toString();
 				if (hora.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe una hora", "Error", JOptionPane.ERROR_MESSAGE);
 				}
@@ -272,17 +278,22 @@ public class EditarCitas extends JDialog {
 					JOptionPane.showMessageDialog(null, "Escribe un DNI de paciente", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 				if (observaciones.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
 				}
+				String sentencia="UPDATE dentiapp.citas set hora='"+hora+"',"
+						+ " fecha='"+fecha+"', observaciones_cita='"+observaciones+"', "
+								+ "DNIpaciente='"+pacientes+"', idtratamiento="+NumeroTratamiento+","
+										+ " DNIdoctor='"+doc+"' WHERE idcitas="+idcitas+";";
+				System.out.println(sentencia);
+				boolean status = false;
+				status = conexion.actualizar(conexion, sentencia);
+				if (status = true) {
 
-				try {
-					citas.EditarCitas(table_1, con, hora, fecha, pacientes, doc, observaciones);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
+				model.setRowCount(0);
+				citas.CargarTabla(model, table_1);
 
 			}
 		});
@@ -304,6 +315,62 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(btnEditar);
 		getContentPane().add(btnEditar);
 
+		JLabel lblNewLabel = new JLabel("Apellidos");
+		lblNewLabel.setBounds(595, 27, 150, 30);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel.setForeground(Color.white);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel);
+
+		textoNombre = new JTextField();
+		textoNombre.setBounds(474, 63, 100, 30);
+		getContentPane().add(textoNombre);
+		textoNombre.setColumns(10);
+
+		textoApellidos = new JTextField();
+		textoApellidos.setBounds(595, 63, 150, 30);
+		getContentPane().add(textoApellidos);
+		textoApellidos.setColumns(10);
+
+		JLabel lblNewLabel_1 = new JLabel("Nombre");
+		lblNewLabel_1.setBounds(476, 29, 105, 30);
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNewLabel_1.setForeground(Color.white);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNewLabel_1);
+
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(766, 63, 150, 30);
+
+		getContentPane().add(dateChooser_1);
+
+		JButton btnRellenar = new JButton("Rellenar");
+		btnRellenar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fecha1 = formatoBBDD.format(dateChooser_1.getDate());
+				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
+
+				ArrayList<String> datos = citas.CargarDatos(DNI, fecha1);
+				   String date = datos.get(2);
+				   java.util.Date date2 = null;
+				try {
+					date2 = new SimpleDateFormat("dd-MM-yyy").parse(date);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				   dateChooser.setDate(date2);
+
+				System.out.println(datos);
+				txPaciente.setText(datos.get(3));
+				txObservaciones.setText(datos.get(5));
+				idcitas = datos.get(0);
+
+			}
+		});
+		btnRellenar.setBounds(939, 67, 89, 23);
+		getContentPane().add(btnRellenar);
+
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1100, 650);
 
@@ -314,5 +381,4 @@ public class EditarCitas extends JDialog {
 		getContentPane().add(fondo);
 
 	}
-
 }

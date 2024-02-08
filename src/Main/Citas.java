@@ -65,8 +65,7 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select hora,fecha,DNIpaciente,"
-					+ "DNIdoctor,observaciones_cita"
+			String consulta = "Select hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
 					+ " from citas ORDER BY fecha";
 			rs = stm.executeQuery(consulta);
 
@@ -80,7 +79,7 @@ public class Citas {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
+				Object[] rowData = { Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
 				tableModel.addRow(rowData);
 			}
 
@@ -91,7 +90,7 @@ public class Citas {
 		}
 
 	}
-	
+
 	public void CargarTablaDoctor(DefaultTableModel tableModel, JTable table_1) {
 		try {
 			Connection cn = null;
@@ -100,8 +99,7 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select hora,fecha,DNIpaciente,"
-					+ "DNIdoctor,observaciones_cita"
+			String consulta = "Select hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
 					+ " from citas ORDER BY fecha";
 			rs = stm.executeQuery(consulta);
 
@@ -115,7 +113,7 @@ public class Citas {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
+				Object[] rowData = { Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
 				tableModel.addRow(rowData);
 			}
 
@@ -126,7 +124,8 @@ public class Citas {
 		}
 
 	}
-	public void CargarTablaBusqueda(DefaultTableModel tableModel, JTable table_1,String DNI) {
+
+	public void CargarTablaBusqueda(DefaultTableModel tableModel, JTable table_1, String DNI) {
 		try {
 
 			Connection cn = null;
@@ -135,9 +134,8 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select hora,fecha,DNIpaciente,"
-					+ "DNIdoctor,observaciones_cita"
-					+ " from citas WHERE DNIpaciente='"+DNI+"' ORDER BY fecha";
+			String consulta = "Select hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
+					+ " from citas WHERE DNIpaciente='" + DNI + "' ORDER BY fecha";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
@@ -150,7 +148,7 @@ public class Citas {
 				// Agregar los datos a la tabla
 				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
 				// que va a recibir todo tipo de datos.
-				Object[] rowData = {Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
+				Object[] rowData = { Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
 				tableModel.addRow(rowData);
 			}
 
@@ -161,7 +159,6 @@ public class Citas {
 		}
 
 	}
-	
 
 	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
 		// voy a coger la fila selecccionada.
@@ -186,7 +183,8 @@ public class Citas {
 	}
 
 	// metodo editar citas NO TERMINADO
-	public void EditarCitas(JTable jTable, Conexion conexion, String hora,String fecha, String DNIpaciente, String DNIdoctor,String observaciones) throws SQLException {
+	public void EditarCitas(JTable jTable, Conexion conexion, String hora, String fecha, String DNIpaciente,
+			String DNIdoctor, String observaciones) throws SQLException {
 		// voy a coger la fila selecccionada.
 		int filaSeleccionada = jTable.getSelectedRow();
 		if (filaSeleccionada == -1) {
@@ -199,15 +197,9 @@ public class Citas {
 			int idCitas = Integer.parseInt(valorId.toString());
 
 			// consulta SQL para borrar
-			String consulta = "UPDATE nombre_de_tabla"
-					+ "SET "
-					+ "    hora = '"+hora+"',"
-					+ "    fecha = '"+fecha+"',"
-					+ "    DNIpaciente = '"+DNIpaciente+"',"
-					+ "    DNIdoctor = '"+DNIdoctor+"',"
-					+ "    observaciones_cita = '"+observaciones+"'"
-					+ "WHERE\n"
-					+ "    idcitas = "+idCitas+";";
+			String consulta = "UPDATE nombre_de_tabla" + "SET " + "    hora = '" + hora + "'," + "    fecha = '" + fecha
+					+ "'," + "    DNIpaciente = '" + DNIpaciente + "'," + "    DNIdoctor = '" + DNIdoctor + "',"
+					+ "    observaciones_cita = '" + observaciones + "'" + "WHERE\n" + "    idcitas = " + idCitas + ";";
 			conexion.ejecutarInsertDeleteUpdate(consulta);
 			// borramos de la tabla ahora.
 			DefaultTableModel model = (DefaultTableModel) jTable.getModel();
@@ -215,9 +207,47 @@ public class Citas {
 
 		}
 	}
-	
-	
+
+	public ArrayList<String> CargarDatos(String DNI, String fecha) {
+		ArrayList<String> datos = null;
+		try {
+
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select idcitas,hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
+					+ " from citas WHERE DNIpaciente='"+DNI+"' AND fecha='"+fecha+"'";
+			rs = stm.executeQuery(consulta);
+			if (datos == null) {
+				datos= new ArrayList<>();
+			}
+			while (rs.next()) {
+				String idcitas=rs.getString("idcitas");
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
 
 
+				//relleno de los datos del arraylist
+				datos.add(idcitas);
+				datos.add(Hora);
+				datos.add(Fecha);
+				datos.add(DNIpacientes);
+				datos.add(DNIdoctor);
+				datos.add(Observaciones);
+				
+			}
+
+			// Crear un JTable con el modelo de tabla
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return datos;
+	}
 
 }

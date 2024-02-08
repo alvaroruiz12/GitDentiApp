@@ -476,6 +476,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 			}
 		});
 		mnNewMenu_8.add(mntmNewMenuItem_21);
+		
 
 		
 		JMenu mnNewMenu = new JMenu("Especialidad");

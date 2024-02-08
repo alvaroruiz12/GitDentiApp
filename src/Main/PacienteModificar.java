@@ -199,7 +199,7 @@ public class PacienteModificar extends JDialog {
 
 		
 		JLabel labelDNI = new JLabel("DNI");
-		labelDNI.setBounds(34, 241, 100, 30);
+		labelDNI.setBounds(187, 246, 189, 30);
 		labelDNI.setFont(new Font("Arial", Font.PLAIN, 20));
 		labelDNI.setForeground(Color.white);
 		labelDNI.setHorizontalAlignment(SwingConstants.CENTER);
@@ -288,8 +288,9 @@ public class PacienteModificar extends JDialog {
 				if (status = true) {
 
 				}
-
+				model.setRowCount(0);
 				paciente.CargarTabla(model, table_1);
+				
 			}
 		});
 
