@@ -288,7 +288,7 @@ public class PacienteModificar extends JDialog {
 				if (status = true) {
 
 				}
-				table_1.removeAll();
+
 				paciente.CargarTabla(model, table_1);
 			}
 		});
