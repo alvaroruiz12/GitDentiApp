@@ -163,10 +163,12 @@ public int CargarCantidad(String nombre) {
 
          //sentencia para eliminar a traves de la id
             String consulta = "UPDATE pedidos set aceptado = true  WHERE idpedidos = ?";
+           
+   
             PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(consulta);
             preparedStatement.setObject(1, idpedido);
             preparedStatement.executeUpdate(); 
-
+         
             // Cerrar recursos
             preparedStatement.close();
             connection.close();
@@ -175,6 +177,69 @@ public int CargarCantidad(String nombre) {
             // Manejo de excepciones (puedes mostrar un mensaje de error, etc.)
         }
     }
+  
+  public void Actualizarmateriales(int idpedido) {
+      
+      try {
+    	  Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			int idmateriales =0;
+			int cantidadpedidos=0;
+			int cantidadmaterial =0;
+      
+		       String consulta = "select idmateriales "
+		         		+ "from pedidos where idpedidos= "+idpedido+"";
+		         	
+			rs = stm.executeQuery(consulta);
+			while (rs.next()) {
+				idmateriales= rs.getInt("idmateriales");
+				
+				
+			}
+			
+			String consulta2="select cantidad from pedidos where idpedidos = "+idpedido+"";
+			rs = stm.executeQuery(consulta2);
+			while (rs.next()) {
+				cantidadpedidos= rs.getInt("cantidad");
+				
+			}
+			
+			String consulta3 ="select cantidad from materiales where idmateriales = "+idmateriales+"";
+			rs = stm.executeQuery(consulta3);
+			while (rs.next()) {
+				cantidadmaterial= rs.getInt("cantidad");
+				
+			}
+			int sumatotal = cantidadpedidos+cantidadmaterial; 
+    	  
+    	  
+   
+				
+         
+			String consulta6 = "UPDATE materiales"
+                    + " SET materiales.cantidad = " + sumatotal
+                    + " where materiales.idmateriales = " + idmateriales + "";
+
+          
+          stm.executeUpdate(consulta6);
+          
+          String eliminar = "delete from pedidos where idpedidos ="+idpedido+"";
+          stm.execute(eliminar);
+          System.out.println("se ha eliminado correctamente");
+          
+      } catch (SQLException e) {
+          e.printStackTrace();
+          // Manejo de excepciones (puedes mostrar un mensaje de error, etc.)
+      }
+  }
+  
+  
+  
+  
   public void CargarTablaPedidos(DefaultTableModel tableModel, JTable table_1) {
 		try {
 			Connection cn = null;

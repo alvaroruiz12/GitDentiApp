@@ -240,8 +240,12 @@ public class InicioAdmin extends JFrame implements ActionListener {
 			}
 		});
 		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
-		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 17));
+		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
 		mnNewMenu_3.add(mntmNewMenuItem_12);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Baja Material");
+		mntmNewMenuItem_13.setFont(new Font("Arial", Font.PLAIN, 25));
+		mnNewMenu_3.add(mntmNewMenuItem_13);
 		contentPane.setBackground(new Color(235, 235, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

@@ -56,4 +56,28 @@ private Conexion conexion;
 		}
 		
 	}
+	
+	 public void BajaMaterial(String nombre) {
+	      
+	      try {
+	    	  Connection cn = null;
+				Statement stm = null;
+			
+				Conexion controlador = new Conexion();
+				cn = controlador.conectar();
+				stm = cn.createStatement();
+			
+	      
+	          
+	          String eliminar = "delete from materiales where nombre_material = '"+nombre+"'";
+	          stm.execute(eliminar);
+	          System.out.println("se ha eliminado correctamente");
+	          
+	      } catch (SQLException e) {
+	          e.printStackTrace();
+	          // Manejo de excepciones (puedes mostrar un mensaje de error, etc.)
+	      }
+	  }
+	  
+	
 }

@@ -6,14 +6,17 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,6 +34,7 @@ import javax.swing.JTable;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.MatteBorder;
 
 public class AceptarPedidos extends JDialog {
 
@@ -79,7 +83,7 @@ super(parent,modal);
 		getContentPane().setLayout(null);
 	
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(124, 150, 548, 350);
+		scrollPane.setBounds(127, 117, 548, 350);
 		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		scrollPane.setMinimumSize(new Dimension(10, 10));
 		scrollPane.setMaximumSize(new Dimension(500, 250));
@@ -113,14 +117,19 @@ super(parent,modal);
 		
 		pedidos.CargarTablaPedidos(model, table_1);
 		
-		JButton btnNewButton = new JButton("Volver");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton volver = new JButton("Volver");
+		volver.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		volver.setForeground(new Color(192, 192, 192));
+		volver.setOpaque(false);
+		volver.setBorderPainted(false);
+		volver.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
+		volver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(10, 25, 89, 23);
-		getContentPane().add(btnNewButton);
+		volver.setBounds(10, 25, 89, 23);
+		getContentPane().add(volver);
 		  
 		
 		
@@ -147,6 +156,7 @@ super(parent,modal);
 
                         // aceptamos la solicitud que no estaba aceptada y como esta aceptada la borrar de base de datos y la tabla
                         pedidos.AceptarSolicitud(idpedidos);
+                        pedidos.Actualizarmateriales((int)idpedidos);
 
                         // Eliminar la fila de la tabla
                         model.removeRow(filaSeleccionada);
@@ -155,7 +165,14 @@ super(parent,modal);
             }
         });
 		 Insets margenes = new Insets(15, 15, 15, 15);
-		 
+		 JLabel fondo = new JLabel();
+			fondo.setForeground(Color.LIGHT_GRAY);
+			fondo.setBorder(null);
+			fondo.setBounds(0, 0, 884, 661);
+			ImageIcon imagen3= new ImageIcon(getClass().getResource("fondologin.jpg"));
+			ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
+			fondo.setIcon(imagen4);
+			getContentPane().add(fondo);
 		 
 		}			
 }

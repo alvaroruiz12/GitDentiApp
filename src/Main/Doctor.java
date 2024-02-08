@@ -60,7 +60,6 @@ public class Doctor {
 				String DNIdoctor = rs.getString("DNIdoctor");
 				String Nombre = rs.getString("nombre_doctor");
 
-				String idusuario = rs.getString("idusuarios");
 				String idespecialidad = rs.getString("idespecialidad");
 
 				// Agregar los datos a la tabla
