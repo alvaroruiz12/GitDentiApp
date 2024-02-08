@@ -106,7 +106,6 @@ public class TratamientosModificar extends JDialog {
 		// SEGUNDA SELECCION
 
 		tfCoste = new JTextField();
-		tfCoste.setForeground(new Color(192, 192, 192));
 		tfCoste.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfCoste.setBounds(195, 303, 189, 30);
 		contentPane.add(tfCoste);
@@ -122,7 +121,6 @@ public class TratamientosModificar extends JDialog {
 		ImageIcon i7 = new ImageIcon(getClass().getResource("volver.png"));
 
 		tfNombre = new JTextField();
-		tfNombre.setForeground(new Color(192, 192, 192));
 		tfNombre.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tfNombre.setBounds(195, 244, 189, 30);
 		contentPane.add(tfNombre);
