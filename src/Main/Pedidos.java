@@ -117,6 +117,46 @@ public ArrayList<String> CargarNombreMaterial() {
 
 	}
 
+
+
+public ArrayList<String> CargarIdpedidos() {
+
+	ArrayList<String> pedido = null;
+	try {
+		Connection cn = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		Conexion controlador = new Conexion();
+		cn = controlador.conectar();
+		stm = cn.createStatement();
+		String consulta = "select idpedidos from pedidos ORDER BY idpedidos ASC";
+		rs = stm.executeQuery(consulta);
+	
+
+		if (pedido == null) {
+			pedido= new ArrayList<>();
+		}
+		while (rs.next()) {
+			String idpedido = rs.getString("idpedidos");
+
+			
+			
+			pedido.add(idpedido);
+			System.out.println(pedido);
+			
+			// Agregar los datos a la tabla
+			// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+			// que va a recibir todo tipo de datos.
+		}
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return pedido;
+	
+
+}
+
 public int CargarCantidad(String nombre) {
 
 	int cantidad=0;
@@ -152,7 +192,40 @@ public int CargarCantidad(String nombre) {
 
 }
 
+public int CargarCantidadPedidos(int pedido) {
 
+	int cantidad=0;
+	try {
+		Connection cn = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		Conexion controlador = new Conexion();
+		cn = controlador.conectar();
+		stm = cn.createStatement();
+		String consulta = "Select cantidad from pedidos where  idpedidos = " + pedido + "";
+		rs = stm.executeQuery(consulta);
+	
+
+		while (rs.next()) {
+			String resultado = rs.getString("cantidad");
+
+			cantidad = Integer.parseInt(resultado);
+			
+		
+		
+			
+			// Agregar los datos a la tabla
+			// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+			// que va a recibir todo tipo de datos.
+		}
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return cantidad;
+	
+
+}
 
 
   public void AceptarSolicitud(Object idpedido) {
@@ -275,6 +348,48 @@ public int CargarCantidad(String nombre) {
 		}
 		
 	}
+  public String CargarNombrePedidos(int idpedido) {
+	  String nombre=null;
+	  int idmaterial=0;
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			
+			
+             String consulta1="select idmateriales from pedidos where idpedidos = "+idpedido+"";
+             rs = stm.executeQuery(consulta1);
+         	while (rs.next()) {
+				 idmaterial = rs.getInt("idmateriales");
+         	}
+			String consulta = "SELECT  materiales.nombre_material "
+					+ "FROM materiales  "
+					+ "JOIN pedidos  "
+					+ "ON "+idmaterial+" = materiales.idmateriales";
+			rs = stm.executeQuery(consulta);
+			while (rs.next()) {
+				 nombre = rs.getString("nombre_material");
+				
+			
+			
+				
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+			
+			}
+			// Crear un JTable con el modelo de tabla
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return nombre;
+		
+	}
+
   
   public void CargarTablaPedidosTodos(DefaultTableModel tableModel, JTable table_1) {
 		try {

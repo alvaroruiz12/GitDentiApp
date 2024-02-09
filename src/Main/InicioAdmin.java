@@ -150,7 +150,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Ver pedidos");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Ver Pedidos");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal = true;
@@ -160,6 +160,18 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_3.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem_3.setFont(new Font("Arial", Font.PLAIN, 25));
 		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Modificar Pedidos");
+		mntmNewMenuItem_13.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal=true;
+				ModificarPedido modificar = new ModificarPedido(a,con,padre,modal);
+				modificar.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_13.setFont(new Font("Arial", Font.PLAIN, 25));
+		mnNewMenu_1.add(mntmNewMenuItem_13);
 
 		JMenu mnNewMenu_2 = new JMenu("Consulta");
 		mnNewMenu_2.setMargin(margenes);
@@ -242,10 +254,6 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
 		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
 		mnNewMenu_3.add(mntmNewMenuItem_12);
-		
-		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Baja Material");
-		mntmNewMenuItem_13.setFont(new Font("Arial", Font.PLAIN, 25));
-		mnNewMenu_3.add(mntmNewMenuItem_13);
 		contentPane.setBackground(new Color(235, 235, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
