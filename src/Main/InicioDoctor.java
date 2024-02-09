@@ -10,7 +10,9 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -34,6 +36,7 @@ import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import com.toedter.calendar.JDateChooser;
 
 public class InicioDoctor extends JFrame {
 
@@ -43,6 +46,8 @@ public class InicioDoctor extends JFrame {
 	DefaultTableModel model;
 	Citas citas = new Citas();
 	Paciente paciente= new Paciente();
+	Date hoy = new Date();
+
 	/**
 	 * Launch the application.
 	 */
@@ -173,6 +178,16 @@ public class InicioDoctor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		SimpleDateFormat formatoBBDD = new SimpleDateFormat("dd-MM-yyyy");
+
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(815, 84, 158, 30);
+		dateChooser.setMinSelectableDate(hoy);
+
+		contentPane.add(dateChooser);
+		
+		
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(42, 150, 1223, 529);
 		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
@@ -253,8 +268,21 @@ public class InicioDoctor extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String DNI=paciente.BuscarPaciente(textoNombre.getText().toString(), textoApellidos.getText().toString());
-				citas.CargarTablaBusqueda(model, table_1, DNI);
-				lblDNI.setText(DNI);
+				if(dateChooser.getDate() == null) {
+					model.setRowCount(0);
+					citas.CargarTablaBusqueda(model, table_1, DNI);
+					
+					lblDNI.setText(DNI);
+				}else {
+					
+					String fecha = formatoBBDD.format(dateChooser.getDate());
+					
+					model.setRowCount(0);
+					citas.CargarTablaDoctorFecha(model, table_1, fecha);
+				}
+
+				
+				
 			}
 		});
 		btnBuscar.setBounds(474, 75, 120, 44);
@@ -299,6 +327,7 @@ public class InicioDoctor extends JFrame {
 				imagen8.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen9);
 		contentPane.add(fondo);
+
 
 	}
 }

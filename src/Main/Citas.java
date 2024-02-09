@@ -159,8 +159,9 @@ public class Citas {
 		}
 
 	}
+
 	public int conseguirIDcitas(String DNI, String fecha) {
-		int id=0;
+		int id = 0;
 		try {
 
 			Connection cn = null;
@@ -169,8 +170,8 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select idcitas from citas WHERE DNIpaciente='" + DNI + "' AND "
-					+ "fecha='"+fecha+"'";
+			String consulta = "Select idcitas from citas WHERE DNIpaciente='" + DNI + "' AND " + "fecha='" + fecha
+					+ "'";
 			rs = stm.executeQuery(consulta);
 
 			while (rs.next()) {
@@ -182,13 +183,12 @@ public class Citas {
 			e.printStackTrace();
 		}
 		return id;
-		
-	
+
 	}
-	
-	public ArrayList <String> conseguirPagos(int idcitas) {
-		ArrayList <String> datos=null;
-		
+
+	public ArrayList<String> conseguirPagos(int idcitas) {
+		ArrayList<String> datos = null;
+
 		try {
 
 			Connection cn = null;
@@ -197,7 +197,7 @@ public class Citas {
 			Conexion controlador = new Conexion();
 			cn = controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "Select precio, abonado from pagos WHERE idcitas=" + idcitas + "" ;
+			String consulta = "Select precio, abonado from pagos WHERE idcitas=" + idcitas + "";
 			rs = stm.executeQuery(consulta);
 			if (datos == null) {
 				datos = new ArrayList<>();
@@ -206,22 +206,18 @@ public class Citas {
 				int precio = rs.getInt("precio");
 				int abonado = rs.getInt("abonado");
 				System.out.println(precio);
-				String precioString=String.valueOf(precio);
-				String abonadoString=String.valueOf(abonado);
+				String precioString = String.valueOf(precio);
+				String abonadoString = String.valueOf(abonado);
 				datos.add(precioString);
 				datos.add(abonadoString);
-				
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return datos;
-		
-	
+
 	}
-	
-	
 
 	public void EliminarCitas(JTable jTable, Conexion conexion) throws SQLException {
 		// voy a coger la fila selecccionada.
@@ -312,7 +308,6 @@ public class Citas {
 		return datos;
 	}
 
-	
 	public ArrayList<String> CargarPagos(String DNI, String fecha) {
 		ArrayList<String> datos = null;
 		try {
@@ -352,6 +347,40 @@ public class Citas {
 			e.printStackTrace();
 		}
 		return datos;
+	}
+
+	public void CargarTablaDoctorFecha(DefaultTableModel tableModel, JTable table_1,String fecha) {
+		try {
+			Connection cn = null;
+			Statement stm = null;
+			ResultSet rs = null;
+			Conexion controlador = new Conexion();
+			cn = controlador.conectar();
+			stm = cn.createStatement();
+			String consulta = "Select hora,fecha,DNIpaciente," + "DNIdoctor,observaciones_cita"
+					+ " from citas WHERE fecha='"+fecha+"'";
+			rs = stm.executeQuery(consulta);
+
+			while (rs.next()) {
+				String Hora = rs.getString("hora");
+				String Fecha = rs.getString("fecha");
+				String DNIpacientes = rs.getString("DNIpaciente");
+				String DNIdoctor = rs.getString("DNIdoctor");
+				String Observaciones = rs.getString("observaciones_cita");
+
+				// Agregar los datos a la tabla
+				// tiene que ser de tipo Object porque el DefaultTableModel espera un Object ya
+				// que va a recibir todo tipo de datos.
+				Object[] rowData = { Hora, Fecha, DNIpacientes, DNIdoctor, Observaciones };
+				tableModel.addRow(rowData);
+			}
+
+			// Crear un JTable con el modelo de tabla
+			table_1 = new JTable(tableModel);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

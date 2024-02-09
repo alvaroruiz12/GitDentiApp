@@ -341,7 +341,7 @@ public class EditarCitas extends JDialog {
 
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(766, 63, 150, 30);
-
+		dateChooser_1.setMinSelectableDate(hoy);
 		getContentPane().add(dateChooser_1);
 
 		JButton btnRellenar = new JButton("Rellenar");

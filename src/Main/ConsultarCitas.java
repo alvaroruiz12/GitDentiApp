@@ -151,7 +151,7 @@ public class ConsultarCitas extends JDialog {
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(484, 83, 120, 30);
-		
+		dateChooser.setMinSelectableDate(hoy);
 		getContentPane().add(dateChooser);
 		
 		
