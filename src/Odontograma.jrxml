@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Odontograma" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba622fca-058b-4e19-9d3f-be28f0780ae8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dentiapp"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[ZGVudGlhcHAuZGllbnRlICwxNSwxNSxkYjIxYTM5NS1lNjE2LTQ5MDQtOTI3Yi01NTllYjFlMjY1
+MDM7]]>
+	</property>
+	<parameter name="DNIpaciente" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM dentiapp.diente
+WHERE 
+	 dentiapp.diente.`DNIpaciente` = $P{DNIpaciente}]]>
+	</queryString>
+	<field name="iddiente" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="iddiente"/>
+		<property name="com.jaspersoft.studio.field.label" value="iddiente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="diente"/>
+	</field>
+	<field name="observaciones_diente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="observaciones_diente"/>
+		<property name="com.jaspersoft.studio.field.label" value="observaciones_diente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="diente"/>
+	</field>
+	<field name="DNIpaciente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DNIpaciente"/>
+		<property name="com.jaspersoft.studio.field.label" value="DNIpaciente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="diente"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField textAdjust="ScaleFont">
+				<reportElement x="117" y="20" width="320" height="30" uuid="51afdd9d-9b5e-47e7-9593-2c6c5e967396"/>
+				<box padding="0">
+					<pen lineWidth="1.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ODONTOGRAMA"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="100" height="30" uuid="f30d65d4-8e2d-47ab-9af1-79775ae02c95">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca12411b-7321-4724-9e12-210016f79b0a"/>
+				</reportElement>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Diente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="100" height="30" uuid="c74dda4d-77df-4950-a1b1-de7c00401c3c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e3e7d312-6190-4919-8fad-f33ec0134569"/>
+				</reportElement>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[informacion del diente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="0" width="100" height="30" uuid="1dc665d6-97d3-41f2-887d-45c134e89c8c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca12411b-7321-4724-9e12-210016f79b0a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{iddiente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="100" height="30" uuid="8e870ba8-2d57-483e-a383-4e8ac39c0b89">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e3e7d312-6190-4919-8fad-f33ec0134569"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{observaciones_diente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

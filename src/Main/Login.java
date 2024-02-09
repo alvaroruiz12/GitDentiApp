@@ -10,12 +10,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import BBDD.Conexion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -155,7 +164,44 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(597, 157, 89, 23);
+		
+		JButton btnNewButton_1 = new JButton("PRUEBA JASPER");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Map parametros = new HashMap();
+
+				parametros.put("DNIpaciente", "123456789A"); //El nombre debe ser si o si el del parametro en el informe
+
+				try {
+
+					Connection con;
+
+					con=conexion.conectar();
+
+					JasperReport reporte= JasperCompileManager.compileReport("src/Historial.jrxml");
+
+					JasperPrint jp= JasperFillManager.fillReport(reporte,parametros,con);
+
+					JasperViewer.viewReport(jp,false);
+
+					JasperExportManager.exportReportToPdfFile(jp,"informe.pdf");
+
+
+
+				} catch (JRException e1) {
+
+					// TODO Auto-generated catch block
+
+					e1.printStackTrace();
+
+				}
+				
+			}
+		});
+		btnNewButton_1.setBounds(588, 142, 174, 23);
+		contentPane.add(btnNewButton_1);
+		btnNewButton.setBounds(588, 99, 174, 23);
 		contentPane.add(btnNewButton);
 
 		// TEXTFIELD
