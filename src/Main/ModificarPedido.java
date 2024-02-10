@@ -42,7 +42,7 @@ import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
 import java.awt.Rectangle;
 
-public class SolicitarMaterial extends JDialog {
+public class ModificarPedido extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -51,6 +51,9 @@ public class SolicitarMaterial extends JDialog {
 	private JTextField tfcantidad;
 	private Conexion con = new Conexion();
 	private JTable table_1;
+	private JTextField tfnombre;
+	private int idmaterial;
+	private int idpedido;
 
 	/**
 	 * Launch the application.
@@ -59,7 +62,7 @@ public class SolicitarMaterial extends JDialog {
 		ArrayList<String> b = null;
 		Conexion con = null;
 		try {
-			SolicitarMaterial dialog = new SolicitarMaterial(b, con, null, true);
+			ModificarPedido dialog = new ModificarPedido(b, con, null, true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -71,7 +74,7 @@ public class SolicitarMaterial extends JDialog {
 	 /**
 	 * Create the dialog.
 	 */
-	public SolicitarMaterial(ArrayList<String> a, Conexion con, InicioDoctor parent, boolean modal) {
+	public ModificarPedido(ArrayList<String> a, Conexion con, InicioAdmin parent, boolean modal) {
 		super(parent, modal);
 		setBounds(new Rectangle(62, 0, 854, 480));
 		getContentPane().setBounds(new Rectangle(0, 0, 900, 800));
@@ -80,7 +83,7 @@ public class SolicitarMaterial extends JDialog {
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
 
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 800, 493);
 		
 		contentPanel.setBounds(0, 0, 0, 0);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,12 +95,28 @@ public class SolicitarMaterial extends JDialog {
 		contentPanel.setLayout(null);
 		
 		DefaultTableModel model = null;
+		
+		tfnombre = new JTextField();
+		tfnombre.setOpaque(false);
+		tfnombre.setForeground(Color.LIGHT_GRAY);
+		tfnombre.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		tfnombre.setColumns(10);
+		tfnombre.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
+		tfnombre.setBounds(180, 170, 105, 24);
+		contentPanel.add(tfnombre);
+		
+		JLabel lblIdpedido = new JLabel("IdPedido");
+		lblIdpedido.setForeground(Color.LIGHT_GRAY);
+		lblIdpedido.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblIdpedido.setBackground(Color.LIGHT_GRAY);
+		lblIdpedido.setBounds(49, 106, 100, 25);
+		contentPanel.add(lblIdpedido);
 		tfcantidad = new JTextField();
 		tfcantidad.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		tfcantidad.setForeground(new Color(192, 192, 192));
 		tfcantidad.setOpaque(false);
 		tfcantidad.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
-		tfcantidad.setBounds(256, 225, 40, 19);
+		tfcantidad.setBounds(245, 224, 40, 19);
 		contentPanel.add(tfcantidad);
 		tfcantidad.setColumns(10);
 
@@ -106,21 +125,25 @@ public class SolicitarMaterial extends JDialog {
 		combomaterial.setBorder(null);
 		combomaterial.setBackground(new Color(192, 192, 192));
 		combomaterial.setToolTipText("");
-		combomaterial.setBounds(157, 138, 160, 30);
+		combomaterial.setBounds(234, 103, 51, 30);
 		contentPanel.add(combomaterial);
 	
-		ArrayList<String> nombrematerial = pedido1.CargarNombreMaterial();
+		ArrayList<String> nombrematerial = pedido1.CargarIdpedidos();
 		
 		
 		
 		combomaterial.addActionListener(new ActionListener()  {
 			public void actionPerformed(ActionEvent e) {
 				
-				String datos= (String)combomaterial.getSelectedItem();
-             
-           int cantidad = pedido1.CargarCantidad(datos);
+				String datos=(String)combomaterial.getSelectedItem();
+         
+           int cantidad = pedido1.CargarCantidadPedidos(Integer.parseInt(datos));
                 String resultado=String.valueOf(cantidad);
                 tfcantidad.setText(resultado);
+            String nombre = pedido1.CargarNombrePedidos(Integer.parseInt(datos));
+                     tfnombre.setText(nombre);     
+            
+                
        
 			}
 		});
@@ -143,7 +166,7 @@ public class SolicitarMaterial extends JDialog {
 		lblNewLabel.setBackground(new Color(192, 192, 192));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel.setForeground(new Color(192, 192, 192));
-		lblNewLabel.setBounds(49, 142, 100, 25);
+		lblNewLabel.setBounds(49, 168, 100, 25);
 		contentPanel.add(lblNewLabel);
 
 	
@@ -157,9 +180,11 @@ public class SolicitarMaterial extends JDialog {
 				String datos= (String)combomaterial.getSelectedItem();
 	            
 		                int resultado1=Integer.parseInt(tfcantidad.getText());
-		                insertarid(datos,resultado1);
-            			
-
+		                String nombre = pedido1.CargarNombrePedidos(Integer.parseInt(datos));
+		                String nombre1= tfnombre.getText(); 
+		                int datos1=Integer.parseInt((String) combomaterial.getSelectedItem());
+            			actualizarpedido(nombre,resultado1,nombre1,datos1);
+         
             	
         			
         		
@@ -193,7 +218,7 @@ public class SolicitarMaterial extends JDialog {
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane);
-		scrollPane.setBounds(374, 76, 437, 330);
+		scrollPane.setBounds(337, 76, 437, 330);
 		scrollPane.setBorder(new LineBorder((new Color(0,0,0)), 2, true));
 
 		// Personalizo la tabla
@@ -213,14 +238,14 @@ public class SolicitarMaterial extends JDialog {
 		table_1_1.setSelectionBackground(new Color(217, 217, 217));
 		table_1_1.setSelectionForeground(Color.BLACK);
 		table_1_1.setModel(model = new DefaultTableModel(new Object[][] {},
-				new String[] {  "Nombrematerial", "Cantidad", "Precio","Proveedor"}));
+				new String[] {  "IdPedidos", "NombreMaterial", "Cantidad","Aceptado"}));
 
 		table_1_1.getColumnModel().getColumn(1).setMinWidth(23);
 		scrollPane.setViewportView(table_1_1);
-		pedido.CargarTabla(model, table_1_1);
+		pedido.CargarTablaPedidosTodos(model, table_1_1);
 
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 838, 482);
+		fondo.setBounds(0, 0, 794, 561);
 
 		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondologin.jpg"));
 		ImageIcon imagen6 = new ImageIcon(
@@ -229,8 +254,9 @@ public class SolicitarMaterial extends JDialog {
 		contentPanel.add(fondo);
 
 	}
-	private void  insertarid(String nombrematerial,int cantidad) {
+private void  actualizarpedido(String nombre,int cantidad,String nombre1,int idpedido) {
 
+        
 		
 		try {
 			Connection cn = null;
@@ -239,42 +265,30 @@ public class SolicitarMaterial extends JDialog {
 			Conexion controlador = new Conexion();
 			cn = (Connection) controlador.conectar();
 			stm = cn.createStatement();
-			String consulta = "select idmateriales from materiales where nombre_material = '"+nombrematerial+"'";
-			 rs = stm.executeQuery(consulta);
-			 int resultadomaterial=0;
-	   		 while (rs.next()) {
-	   			  resultadomaterial = Integer.parseInt(rs.getString("idmateriales"));
-	   			
-
-	   		
-	   		 }
+			String consulta1 = "SELECT  materiales.idmateriales "
+					+ "FROM materiales  "
+					+ "JOIN pedidos  "
+					+ "ON pedidos.idmateriales = materiales.idmateriales where nombre_material ='"+nombre+"' ";
 			
-	   		String consulta1 = "insert into pedidos(cantidad,aceptado,idmateriales) values("+cantidad+",false,"+resultadomaterial+");";
-			
-			
-		
-		
-		
-			boolean status = false;
-			System.out.println(consulta1);
-			status = controlador.insertar(controlador, consulta1);
-		
-				if (status==true) {
-					  int opcion = JOptionPane.showConfirmDialog(
-					            null,
-					            "¿Quieres realizar esta acción?",
-					            "Confirmación",
-					            JOptionPane.OK_CANCEL_OPTION
-					        );
-				}
+			rs = stm.executeQuery(consulta1);
+			while (rs.next()) {
+				idmaterial= rs.getInt("idmateriales");
 				
+				
+			}
 			
 
+			String consulta2 ="UPDATE materiales set nombre_material='"+nombre1+"' where idmateriales = "+idmaterial+" ";
+			
+		
+			stm.executeUpdate(consulta2);
+			String consulta ="UPDATE pedidos set cantidad="+cantidad+" where idpedidos = "+idpedido+"";
+			
+			stm.executeUpdate(consulta);
+			
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		
-
-	}
+}
 }
