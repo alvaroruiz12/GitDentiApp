@@ -47,6 +47,9 @@ public class InicioDoctor extends JFrame {
 	Citas citas = new Citas();
 	Paciente paciente= new Paciente();
 	Date hoy = new Date();
+	private ArrayList<String> usuario;
+	private Conexion conexion;
+	private InicioDoctor padre;
 
 	/**
 	 * Launch the application.
@@ -54,8 +57,10 @@ public class InicioDoctor extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				ArrayList<String> b = null;
+				Conexion con = null;
 				try {
-					InicioDoctor frame = new InicioDoctor();
+					InicioDoctor frame = new InicioDoctor(b,con);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setSize(1920, 1080);
 					// Maximiza la ventana
@@ -71,8 +76,10 @@ public class InicioDoctor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioDoctor() {
-
+	public InicioDoctor(ArrayList<String> a, Conexion con) {
+		padre = this;
+		usuario = a;
+		conexion = con;
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +111,6 @@ public class InicioDoctor extends JFrame {
 		mntmNewMenuItem.setForeground(Color.black);
 		mntmNewMenuItem.setFont(new Font("Arial", Font.PLAIN, 25));
 		
-		// SOLICITAR MATERIALES
 		JMenu mnNewMenu_1 = new JMenu("Solicitar material");
 		//cambiar vista
 		mnNewMenu_1.setBackground(new Color(207, 241, 255));
@@ -115,6 +121,13 @@ public class InicioDoctor extends JFrame {
 
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Crear solicitud");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				SolicitarMaterial solicitar = new SolicitarMaterial(a,con,padre,modal);
+				solicitar.setVisible(true);
+			}
+		});
 		//CAMBIAR VISTA
 		mntmNewMenuItem_1.setMargin(margenes);
 		mntmNewMenuItem_1.setBackground(new Color(207, 241, 255));
@@ -129,7 +142,6 @@ public class InicioDoctor extends JFrame {
 		mntmNewMenuItem_2.setForeground(Color.black);
 		mntmNewMenuItem_2.setFont(new Font("Arial", Font.PLAIN, 25));
 		mnNewMenu_1.add(mntmNewMenuItem_2);
-		
 		// TRATAMIENTOS
 		JMenu mnNewMenu_2 = new JMenu("Tratamientos");
 		//vista

@@ -202,14 +202,25 @@ public class InicioAdmin extends JFrame implements ActionListener {
 
 		JMenu mnNewMenu_3 = new JMenu("Inventario");
 		mnNewMenu_3.setMargin(margenes);
-		//hola mi nombre es pepe
-		
-		//pabloesfeo
 
 		mnNewMenu_3.setBackground(new Color(207, 241, 255));
 		mnNewMenu_3.setForeground(Color.black);
 		mnNewMenu_3.setFont(new Font("Arial", Font.PLAIN, 25));
 		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Consultar Inventario");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean modal1 = true;
+				Inventario inventario = new Inventario(a, con, padre, modal1);
+				inventario.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
+		mnNewMenu_3.add(mntmNewMenuItem_12);
+		contentPane.setBackground(new Color(235, 235, 235));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		JMenu mnNewMenu_11 = new JMenu("Pedidos");
 		
@@ -466,13 +477,13 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		menuBar.add(mnNewMenu_8);
 		
 		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Alta tratamiento");
-		mntmNewMenuItem_12.setMargin(margenes);
+		JMenuItem mntmNewMenuItem_121 = new JMenuItem("Alta tratamiento");
+		mntmNewMenuItem_121.setMargin(margenes);
 
-		mntmNewMenuItem_12.setBackground(new Color(207, 241, 255));
-		mntmNewMenuItem_12.setForeground(Color.black);
-		mntmNewMenuItem_12.setFont(new Font("Arial", Font.PLAIN, 25));
-		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+		mntmNewMenuItem_121.setBackground(new Color(207, 241, 255));
+		mntmNewMenuItem_121.setForeground(Color.black);
+		mntmNewMenuItem_121.setFont(new Font("Arial", Font.PLAIN, 25));
+		mntmNewMenuItem_121.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean modal = true;
 				AltaTratamiento at = new AltaTratamiento(a, con, padre, modal);
@@ -480,7 +491,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 			}
 		});
 		
-		mnNewMenu_8.add(mntmNewMenuItem_12);
+		mnNewMenu_8.add(mntmNewMenuItem_121);
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Editar tratamientos");
 		mntmNewMenuItem_11.setMargin(margenes);
 

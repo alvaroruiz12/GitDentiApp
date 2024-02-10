@@ -73,14 +73,14 @@ public class SolicitarMaterial extends JDialog {
 	 */
 	public SolicitarMaterial(ArrayList<String> a, Conexion con, InicioDoctor parent, boolean modal) {
 		super(parent, modal);
-		setBounds(new Rectangle(62, 0, 854, 480));
+		setBounds(new Rectangle(62, 0, 900, 400));
 		getContentPane().setBounds(new Rectangle(0, 0, 900, 800));
 		Conexion solicitar = new Conexion();
 		Pedidos pedido = new Pedidos();
 		ArrayList<String> usuario = a;
 		Conexion conexion = con;
 
-		setBounds(100, 100, 800, 600);
+		setBounds(100, 100, 850, 500);
 		
 		contentPanel.setBounds(0, 0, 0, 0);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
