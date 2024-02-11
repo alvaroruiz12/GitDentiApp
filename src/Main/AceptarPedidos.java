@@ -87,7 +87,7 @@ super(parent,modal);
 		scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		scrollPane.setMinimumSize(new Dimension(10, 10));
 		scrollPane.setMaximumSize(new Dimension(500, 250));
-		scrollPane.setBorder(new LineBorder((new Color(86, 151, 153)), 2, true));
+		scrollPane.setBorder(new LineBorder(new Color(0, 128, 255), 2, true));
 		getContentPane().add(scrollPane);
 
 		// creamos la tabla
@@ -119,7 +119,7 @@ super(parent,modal);
 		
 		JButton volver = new JButton("Volver");
 		volver.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		volver.setForeground(new Color(192, 192, 192));
+		volver.setForeground(new Color(255, 255, 255));
 		volver.setOpaque(false);
 		volver.setBorderPainted(false);
 		volver.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
@@ -168,8 +168,8 @@ super(parent,modal);
 		 JLabel fondo = new JLabel();
 			fondo.setForeground(Color.LIGHT_GRAY);
 			fondo.setBorder(null);
-			fondo.setBounds(0, 0, 884, 661);
-			ImageIcon imagen3= new ImageIcon(getClass().getResource("fondologin.jpg"));
+			fondo.setBounds(0, 0, 797, 526);
+			ImageIcon imagen3= new ImageIcon(getClass().getResource("fondo.jpg"));
 			ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 			fondo.setIcon(imagen4);
 			getContentPane().add(fondo);

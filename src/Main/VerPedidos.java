@@ -91,7 +91,7 @@ public class VerPedidos extends JDialog {
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 7, 58, 51);
-		btnVolver.setBackground(new Color(192, 192, 192));
+		btnVolver.setBackground(new Color(105, 215, 226));
 		btnVolver.setForeground(new Color(255, 255, 255));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,7 +110,7 @@ public class VerPedidos extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane);
 		scrollPane.setBounds(89, 77, 519, 330);
-		scrollPane.setBorder(new LineBorder((new Color(0,0,0)), 2, true));
+		scrollPane.setBorder(new LineBorder(new Color(0, 128, 192), 1, true));
 
 		// Personalizo la tabla
 	
@@ -137,7 +137,7 @@ public class VerPedidos extends JDialog {
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 684, 482);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondologin.jpg"));
+		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6 = new ImageIcon(
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);

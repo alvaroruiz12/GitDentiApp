@@ -316,21 +316,38 @@ public class InicioDoctor extends JFrame {
 		btnBuscar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		getContentPane().add(btnBuscar);
 		
-		// boton cerrar sesion
-				JButton btnCerra = new JButton("");
-				btnCerrarSesion.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Login login = new Login();
-						dispose();
-						login.setVisible(true);
-					}
-				});
-				btnCerrarSesion.setBounds(1639, 913, 55, 55);
-				ImageIcon ca = new ImageIcon(getClass().getResource("botonapagarsolo.png"));
-				ImageIcon sasa = new ImageIcon(ca.getImage().getScaledInstance(btnCerrarSesion.getWidth(),
-						btnCerrarSesion.getHeight(), Image.SCALE_SMOOTH));
-				btnCerrarSesion.setIcon(sesion);
-		// JLabel de fondo
+		JButton btnCerrarSesion1 = new JButton("");
+		btnCerrarSesion1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login();
+				dispose();
+				login.setVisible(true);
+			}
+		});
+		btnCerrarSesion1.setBounds(1839, 913, 55, 55);
+		ImageIcon cerra1 = new ImageIcon(getClass().getResource("botonapagarsolo.png"));
+		ImageIcon sesion1 = new ImageIcon(cerra.getImage().getScaledInstance(btnCerrarSesion1.getWidth(),
+				btnCerrarSesion1.getHeight(), Image.SCALE_SMOOTH));
+		
+		 // Eliminar el borde del botón para que la imagen sea visible
+		btnCerrarSesion1.setBorderPainted(false);
+		btnCerrarSesion1.setContentAreaFilled(false);
+
+        // Establecer el texto sobre la imagen
+		btnCerrarSesion1.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnCerrarSesion1.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		btnCerrarSesion1.setForeground(Color.WHITE); // Color del texto
+		btnCerrarSesion1.setIcon(sesion1);
+		
+		contentPane.add(btnCerrarSesion1);
+
+		
+				
+				
+				
+				// JLabel de fondo
 		JLabel fondo = new JLabel();
 		fondo.setBounds(0, 0, 1920, 1080);
 

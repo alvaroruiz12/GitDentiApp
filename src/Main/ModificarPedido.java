@@ -98,24 +98,24 @@ public class ModificarPedido extends JDialog {
 		
 		tfnombre = new JTextField();
 		tfnombre.setOpaque(false);
-		tfnombre.setForeground(Color.LIGHT_GRAY);
+		tfnombre.setForeground(new Color(255, 255, 255));
 		tfnombre.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		tfnombre.setColumns(10);
-		tfnombre.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
+		tfnombre.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(255, 255, 255)));
 		tfnombre.setBounds(180, 170, 105, 24);
 		contentPanel.add(tfnombre);
 		
 		JLabel lblIdpedido = new JLabel("IdPedido");
-		lblIdpedido.setForeground(Color.LIGHT_GRAY);
+		lblIdpedido.setForeground(new Color(255, 255, 255));
 		lblIdpedido.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblIdpedido.setBackground(Color.LIGHT_GRAY);
 		lblIdpedido.setBounds(49, 106, 100, 25);
 		contentPanel.add(lblIdpedido);
 		tfcantidad = new JTextField();
 		tfcantidad.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		tfcantidad.setForeground(new Color(192, 192, 192));
+		tfcantidad.setForeground(new Color(255, 255, 255));
 		tfcantidad.setOpaque(false);
-		tfcantidad.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
+		tfcantidad.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(255, 255, 255)));
 		tfcantidad.setBounds(245, 224, 40, 19);
 		contentPanel.add(tfcantidad);
 		tfcantidad.setColumns(10);
@@ -165,15 +165,13 @@ public class ModificarPedido extends JDialog {
 		JLabel lblNewLabel = new JLabel("Nombre");
 		lblNewLabel.setBackground(new Color(192, 192, 192));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setForeground(new Color(192, 192, 192));
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(49, 168, 100, 25);
 		contentPanel.add(lblNewLabel);
 
 	
 		JButton btnNewButton_1 = new JButton("ACEPTAR");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
             	//
@@ -192,11 +190,26 @@ public class ModificarPedido extends JDialog {
             });
 		
 		btnNewButton_1.setBounds(134, 320, 120, 25);
+		ImageIcon imagen3= new ImageIcon(getClass().getResource("boton.png"));
+        ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(btnNewButton_1.getWidth(), btnNewButton_1.getHeight(), Image.SCALE_SMOOTH));
+        btnNewButton_1.setIcon(imagen4);
+
+        // Eliminar el borde del botón para que la imagen sea visible
+        btnNewButton_1.setBorderPainted(false);
+        btnNewButton_1.setContentAreaFilled(false);
+
+        // Establecer el texto sobre la imagen
+        btnNewButton_1.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnNewButton_1.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+        btnNewButton_1.setForeground(Color.WHITE); // Color del texto
+        btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 		contentPanel.add(btnNewButton_1);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 7, 58, 51);
-		btnVolver.setBackground(new Color(192, 192, 192));
+		btnVolver.setBackground(new Color(105, 188, 205));
 		btnVolver.setForeground(new Color(255, 255, 255));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,14 +225,14 @@ public class ModificarPedido extends JDialog {
 
 		JLabel lblNewLabel_1 = new JLabel("Cantidad");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_1.setForeground(new Color(192, 192, 192));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(49, 220, 130, 25);
 		contentPanel.add(lblNewLabel_1);
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPanel.add(scrollPane);
 		scrollPane.setBounds(337, 76, 437, 330);
-		scrollPane.setBorder(new LineBorder((new Color(0,0,0)), 2, true));
+		scrollPane.setBorder(new LineBorder(new Color(0, 128, 255), 1, true));
 
 		// Personalizo la tabla
 	
@@ -245,9 +258,9 @@ public class ModificarPedido extends JDialog {
 		pedido.CargarTablaPedidosTodos(model, table_1_1);
 
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 794, 561);
+		fondo.setBounds(0, 0, 794, 474);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondologin.jpg"));
+		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6 = new ImageIcon(
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);

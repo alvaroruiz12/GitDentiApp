@@ -60,7 +60,7 @@ public class CrearCuenta extends JDialog {
 		ArrayList<String> b = null;
 		Conexion con = null;
 		try {
-			CrearCuenta dialog = new CrearCuenta(b, con, null, true);
+			CrearCuenta dialog = new CrearCuenta();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -72,17 +72,17 @@ public class CrearCuenta extends JDialog {
 	 /**
 	 * Create the dialog.
 	 */
-	public CrearCuenta(ArrayList<String> a, Conexion con, InicioDoctor parent, boolean modal) {
-		super(parent, modal);
+	public CrearCuenta() {
+
 		setBounds(new Rectangle(62, 0, 854, 480));
 		getContentPane().setBounds(new Rectangle(0, 0, 900, 800));
 		Conexion solicitar = new Conexion();
 		Pedidos pedido = new Pedidos();
-		ArrayList<String> usuario = a;
+	
 		Conexion conexion = con;
 		txtIntroduzcaNombre = new JTextField();
 		tfpassword = new JTextField();
-		setBounds(100, 100, 800, 514);
+		setBounds(100, 100, 760, 514);
 		
 		contentPanel.setBounds(0, 0, 0, 0);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -110,10 +110,10 @@ public class CrearCuenta extends JDialog {
 		txtIntroduzcaNombre.setHorizontalAlignment(txtIntroduzcaNombre.CENTER);
 			
 		txtIntroduzcaNombre.setOpaque(false);
-		txtIntroduzcaNombre.setForeground(Color.LIGHT_GRAY);
+		txtIntroduzcaNombre.setForeground(new Color(255, 255, 255));
 		txtIntroduzcaNombre.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		txtIntroduzcaNombre.setColumns(10);
-		txtIntroduzcaNombre.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
+		txtIntroduzcaNombre.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(255, 255, 255)));
 		txtIntroduzcaNombre.setBounds(260, 210, 202, 25);
 		contentPanel.add(txtIntroduzcaNombre);
 		tfpassword = new JTextField();
@@ -121,9 +121,9 @@ public class CrearCuenta extends JDialog {
 		tfpassword.setHorizontalAlignment(tfpassword.CENTER);
 
 		tfpassword.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		tfpassword.setForeground(new Color(192, 192, 192));
+		tfpassword.setForeground(new Color(255, 255, 255));
 		tfpassword.setOpaque(false);
-		tfpassword.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(192, 192, 192)));
+		tfpassword.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(255, 255, 255)));
 		tfpassword.setBounds(260, 287, 202, 25);
 		contentPanel.add(tfpassword);
 		tfpassword.setColumns(10);
@@ -136,8 +136,9 @@ public class CrearCuenta extends JDialog {
 
 
 	
-		JButton btnNewButton_1 = new JButton("ACEPTAR");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton aceptar = new JButton("ACEPTAR");
+		aceptar.setForeground(new Color(255, 255, 255));
+		aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedItem()=="Admin") {
 					String nombre=txtIntroduzcaNombre.getText();
@@ -155,17 +156,29 @@ public class CrearCuenta extends JDialog {
 				}
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBackground(new Color(192, 192, 192));
+	
+
+        // Eliminar el borde del botón para que la imagen sea visible
+		aceptar.setBorderPainted(false);
+		aceptar.setContentAreaFilled(false);
+
+        // Establecer el texto sobre la imagen
+		aceptar.setHorizontalTextPosition(SwingConstants.CENTER);
+		aceptar.setVerticalTextPosition(SwingConstants.CENTER);
+
+        // Personalizar el estilo del texto
+		aceptar.setForeground(Color.WHITE); // Color del texto
+		aceptar.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
+		aceptar.setBounds(306, 361, 120, 25);
+		ImageIcon imagen3= new ImageIcon(getClass().getResource("boton.png"));
+        ImageIcon imagen4= new ImageIcon(imagen3.getImage().getScaledInstance(aceptar.getWidth(), aceptar.getHeight(), Image.SCALE_SMOOTH));
+        aceptar.setIcon(imagen4);
 		
-		
-		btnNewButton_1.setBounds(306, 363, 120, 25);
-		contentPanel.add(btnNewButton_1);
+		contentPanel.add(aceptar);
 
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 7, 58, 51);
-		btnVolver.setBackground(new Color(192, 192, 192));
+		btnVolver.setBackground(new Color(148, 223, 239));
 		btnVolver.setForeground(new Color(255, 255, 255));
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,16 +194,16 @@ public class CrearCuenta extends JDialog {
 
 		JLabel lblNewLabel_1 = new JLabel("SIGN UP");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel_1.setForeground(new Color(192, 192, 192));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setBounds(320, 87, 130, 38);
 		contentPanel.add(lblNewLabel_1);
 
 	
 
 		JLabel fondo = new JLabel();
-		fondo.setBounds(0, 0, 784, 482);
+		fondo.setBounds(0, 0, 751, 482);
 
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondologin.jpg"));
+		ImageIcon imagen5 = new ImageIcon(getClass().getResource("fondo.jpg"));
 		ImageIcon imagen6 = new ImageIcon(
 				imagen5.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen6);

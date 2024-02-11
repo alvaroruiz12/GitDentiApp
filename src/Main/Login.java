@@ -215,24 +215,29 @@ public class Login extends JFrame {
 		btnNewButton.setBounds(280, 581, 130, 18);
 		contentPane.add(btnNewButton);
 		
-		boton_personalizado boton_personalizado_ = new boton_personalizado((JFrame) null);
-		boton_personalizado_.setFocusable(false);
-		boton_personalizado_.addActionListener(new ActionListener() {
+JButton crearcuenta = new JButton("Crear Cuenta");
+		
+		crearcuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean modal = true;
+				CrearCuenta crear = new CrearCuenta();
+				crear.setVisible(modal);
+				
 				
 			}
 		});
-		boton_personalizado_.setFocusPainted(false);
-		boton_personalizado_.setSelected(true);
-		boton_personalizado_.setOpaque(false);
-		boton_personalizado_.setBorderPainted(false);
-		boton_personalizado_.setBackground(Color.RED);
-		boton_personalizado_.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 14));
-		boton_personalizado_.setBorder(null);
-		boton_personalizado_.setForeground(Color.LIGHT_GRAY);
-		boton_personalizado_.setText("Crear Cuenta");
-		boton_personalizado_.setBounds(502, 580, 99, 19);
-		contentPane.add(boton_personalizado_);
+		crearcuenta.setFocusable(false);
+		crearcuenta.setDoubleBuffered(true);
+		crearcuenta.setFocusPainted(false);
+		crearcuenta.setSelected(true);
+		crearcuenta.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 15));
+		crearcuenta.setOpaque(false);
+		crearcuenta.setBackground(new Color(240, 240, 240));
+		crearcuenta.setBorder(null);
+		crearcuenta.setForeground(Color.LIGHT_GRAY);
+		crearcuenta.setBounds(479, 581, 145, 18);
+		contentPane.add(crearcuenta);
+		
 		
 
 

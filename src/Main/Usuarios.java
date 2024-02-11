@@ -51,7 +51,7 @@ public void InsertarAdmin(String nombre,String contrasenia) {
 		stm = cn.createStatement();
 	
 		
-		String consulta1 = "INSERT INTO usuarios (usuario, contrasenia, rol) VALUES ('" + nombre + "','" + contrasenia + "', 0)";
+		String consulta1 = "INSERT INTO usuarios (usuario, contrasenia, rol) VALUES ('" + nombre + "','" + contrasenia + "', 1)";
 		
 		
 	
@@ -87,7 +87,7 @@ public void InsertarDoctor(String nombre,String contrasenia) {
 		stm = cn.createStatement();
 	
 		
-		String consulta1 = "INSERT INTO usuarios (nombre, contrasenia, rol) VALUES ('" + nombre + "','" + contrasenia + "', 1)";
+		String consulta1 = "INSERT INTO usuarios (usuario, contrasenia, rol) VALUES ('" + nombre + "','" + contrasenia + "', 0)";
 		
 		
 	
