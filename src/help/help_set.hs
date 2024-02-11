@@ -3,7 +3,7 @@
     <maps>
         <!--home id es para ver el primero que me abre-->
         <!--map ref es la localizacion-->
-        <homeID>prueba</homeID>
+        <homeID>main</homeID>
         <mapref location="mapa.jhm"></mapref>
     </maps>
 

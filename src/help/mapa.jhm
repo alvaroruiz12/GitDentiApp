@@ -1,4 +1,13 @@
 <map version="1.0">
     <!--tantos mapID como paginas tenga cada html es un id-->
-    <mapID target="prueba" url="html/main.html"/>
+    <mapID target="main" url="html/main.html"/>
+    <mapID target="doctor" url="html/doctor.html"/>
+    <mapID target="especialidad" url="html/especialidad.html"/>
+    <mapID target="inventario" url="html/inventario.html"/>
+    <mapID target="login" url="html/login.html"/>
+    <mapID target="paciente" url="html/paciente.html"/>
+    <mapID target="citas" url="html/citas.html"/>
+    <mapID target="pedidos" url="html/pedidos.html"/>
+    <mapID target="proveedores" url="html/proveedores.html"/>
+    <mapID target="tratamiento" url="html/tratamiento.html"/>
 </map>
