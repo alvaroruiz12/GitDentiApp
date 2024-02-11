@@ -76,6 +76,8 @@ public class ConsultarEspecialidad extends JDialog {
 				DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
 				tcr.setHorizontalAlignment(SwingConstants.CENTER);
 
+				table_1.setDefaultEditor(Object.class, null);
+				
 				table_1.getColumnModel().getColumn(0).setCellRenderer(tcr);
 				scrollPane.setViewportView(table_1);
 				especialidad.CargarTabla(model, table_1);
