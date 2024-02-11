@@ -183,6 +183,26 @@ public class Login extends JFrame {
 		contentPane.add(nombre1);
 		
 		JButton btnNewButton = new JButton("Recuperar Contraseña");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				nombre = txUsuario.getText();
+				contra = pfContra.getText();
+				String sentenciaSQL = "Select contrasenia from usuarios where usuario = '" + nombre + "';";
+
+				ArrayList<String> res = new ArrayList<String>();
+				res = conexion.seleccionarUsuarios(conexion, sentenciaSQL);
+				System.out.println(res);
+
+				if (res.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Tu contraseña es: "+res.get(0)+" ", "Contraseña",
+							JOptionPane.INFORMATION_MESSAGE);
+				
+				}
+			}
+		});
 		btnNewButton.setFocusable(false);
 		btnNewButton.setDoubleBuffered(true);
 		btnNewButton.setFocusPainted(false);
