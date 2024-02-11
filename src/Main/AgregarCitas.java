@@ -338,27 +338,29 @@ public class AgregarCitas extends JDialog {
 				if (observaciones.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Escribe un observacion", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				boolean comprobarDoctor = con.comprobarCitasDoctor(horadeverdad, fecha, doc);
-				boolean comprobarPaciente = con.comprobarCitasPaciente(horadeverdad, fecha,
-						doc);
-				System.out.print(comprobarDoctor);
-				System.out.print(comprobarPaciente);
-				if (comprobarDoctor == false && comprobarPaciente == false) {
-					// sentencia sql
+				String DNIpaciente=txPacientes.getText().toString();
+				ArrayList <String> datos=con.ConsultarCitas(fecha, horadeverdad,DNIpaciente,doc);
+				boolean comprobacion=false;
+				System.out.println(datos);
+				if (datos.isEmpty()) {
 					String sentencia = "INSERT into citas (hora,fecha,"
 							+ "observaciones_cita,DNIpaciente,idtratamiento,DNIdoctor)values('" + horadeverdad + "'," + "'"
 							+ fecha + "' ,'"
-							+ txObservaciones.getText().toString() + "','" + txPacientes.getText().toString()
+							+ txObservaciones.getText().toString() + "','" + DNIpaciente
 							+ "', "+ NumeroTratamiento +" ,'" + doc + "')";
 
 
 					boolean status = false;
 					status = conexion.insertar(conexion, sentencia);
-				} else {
+				}else {
+
+
+					comprobacion=true;
 					JOptionPane.showMessageDialog(null, "Ya existe una cita con ese doctor o ese paciente a esa hora",
 							"Error", JOptionPane.ERROR_MESSAGE);
+					// sentencia sql
 
-				}
+				} 
 
 			}
 

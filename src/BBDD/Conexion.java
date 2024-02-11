@@ -509,10 +509,12 @@ public boolean insertar(Conexion con, String sentencia) {
 	}
 	public boolean comprobarCitasDoctor(String horaIn, String fechaIn,String doctorIn) {
 	    ArrayList<String> res = new ArrayList<>();
-	    res=null;
 	    Connection cn = null;
 	    Statement stm = null;
 	    ResultSet rs = null;
+	    if (res == null) {
+	    	res= new ArrayList<>();
+		}
 	    try {
 	        cn = this.conectar();
 	        stm = cn.createStatement();
@@ -536,6 +538,7 @@ public boolean insertar(Conexion con, String sentencia) {
 	            res.add(String.valueOf(idTratamientos));
 	            int idPacientes = rs.getInt("DNIpaciente");
 	            res.add(String.valueOf(idPacientes));
+	            
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -549,7 +552,7 @@ public boolean insertar(Conexion con, String sentencia) {
 	        }
 	    }
 	    boolean existe=false;
-	    if (res!=null) {
+	    if (rs!=null) {
 	    	existe=true;
 	    	return existe;
 	    }else {
@@ -557,20 +560,23 @@ public boolean insertar(Conexion con, String sentencia) {
 	    	return existe;
 	    }
 	}
-	public boolean comprobarCitasPaciente(String horaIn, String fechaIn,String doctorIn) {
+	public boolean comprobarCitasPaciente(String horaIn, String fechaIn,String doctorIn,String paciente) {
 	    ArrayList<String> res = new ArrayList<>();
 	    res=null;
 	    Connection cn = null;
 	    Statement stm = null;
 	    ResultSet rs = null;
+	    if (res == null) {
+	    	res= new ArrayList<>();
+		}
 	    try {
 	        cn = this.conectar();
 	        stm = cn.createStatement();
 	        rs = stm.executeQuery("SELECT * FROM citas "
 	        		+ "WHERE hora = '"+horaIn+"' AND "
 	        		+ "fecha = '"+fechaIn+"' AND "
-	        		+ "DNIpaciente = '"+doctorIn+"'");
-
+	        		+ "DNIpaciente = '"+paciente+"' AND DNIdoctor='"+doctorIn+"'");
+	        System.out.println();
 	        while (rs.next()) {
 	            int idCitas = rs.getInt("idcitas");
 	            res.add(String.valueOf(idCitas));
@@ -606,6 +612,43 @@ public boolean insertar(Conexion con, String sentencia) {
 	    }
 	}
 
+	 public ArrayList<String> ConsultarCitas( String fecha, String hora, String DNIpaciente, String DNIdoctor) {
+	      	ArrayList<String> datos=null; 
+	    	try {
+	      		 Connection cn = null;
+	      		 Statement stm = null;
+	      		 ResultSet rs = null;
+	      		 Conexion controlador = new Conexion();
+	      		 cn = controlador.conectar();
+	      		 stm = cn.createStatement();
+	      		 String consulta ="SELECT * FROM citas "
+	 	        		+ "WHERE hora = '"+hora+"' AND "
+		        		+ "fecha = '"+fecha+"' AND "
+		        		+ "DNIpaciente = '"+DNIpaciente+"' AND DNIdoctor='"+DNIdoctor+"'";
+	      		 System.out.println(consulta);
+	      		 rs = stm.executeQuery(consulta);
+	     		if (datos == null) {
+	     			datos= new ArrayList<>();
+				}
+	      		 while (rs.next()) {
+	      			String Shora=rs.getString("hora");
+	      			datos.add(Shora);
+	      			String Sfecha=rs.getString("fecha");
+	      			datos.add(Sfecha);
+	      			String SDNIpaciente=rs.getString("DNIpaciente");
+	      			datos.add(SDNIpaciente);
+	      			String SDNIdoctor=rs.getString("DNIdoctor");
+	      			datos.add(SDNIdoctor);
+	      		 }
+
+	      	 } catch (SQLException e) {
+	      		 e.printStackTrace();
+	      	 }  		
+	    	System.out.println("dentro del metodo "+datos);
+	      	 return datos;
+
+
+	       }
 
 	
 }
