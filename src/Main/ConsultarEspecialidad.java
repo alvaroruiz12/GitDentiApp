@@ -74,7 +74,6 @@ public class ConsultarEspecialidad extends JDialog {
 				}, new String[] {"Nombre"}));
 				table_1.getColumnModel().getColumn(0).setMinWidth(23);
 				DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-
 				tcr.setHorizontalAlignment(SwingConstants.CENTER);
 
 				table_1.getColumnModel().getColumn(0).setCellRenderer(tcr);

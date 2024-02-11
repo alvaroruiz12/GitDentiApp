@@ -33,7 +33,6 @@ public class AltaDoctor extends JDialog {
 			stf3 = "Introduzca DNI",stf4 = "Introduzca correo",stf5 = "Introduzca telefono",stf6="Introduzca edad";
 	private JTextField tf1;
 	private JTextField tf2;
-	private JTextField tf3;
 	Especialidad especialidad= new Especialidad();
 	/**
 	 * Launch the application.
@@ -61,7 +60,7 @@ public class AltaDoctor extends JDialog {
 		ArrayList <String> nombreEspecialidad=especialidad.CargarNombreEspecialidad();
 		ArrayList <String> idEspecialidad=especialidad.CargarNumeroEspecialidad();
 		JComboBox comboNombre = new JComboBox();
-		comboNombre.setBounds(494, 332, 189, 30);
+		comboNombre.setBounds(494, 260, 189, 30);
 		contentPanel.add(comboNombre);
 		
 		// mete los nombres en el combobox
@@ -78,7 +77,6 @@ public class AltaDoctor extends JDialog {
 		contentPanel.setLayout(null);
 		
 		tf1 = new JTextField();
-		tf1.setForeground(new Color(192, 192, 192));
 		tf1.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf1.setBounds(494, 125, 189, 30);
 		contentPanel.add(tf1);
@@ -92,7 +90,6 @@ public class AltaDoctor extends JDialog {
 		//SEGUNDA SELECCION
 		//text field apellidos
 		tf2 = new JTextField();
-		tf2.setForeground(new Color(192, 192, 192));
 		tf2.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf2.setBounds(494, 194, 189, 30);
 		contentPanel.add(tf2);
@@ -112,15 +109,8 @@ public class AltaDoctor extends JDialog {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Id usuarios");
-		lblNewLabel_2.setBounds(356, 265, 96, 30);
-		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblNewLabel_2.setForeground(Color.white);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPanel.add(lblNewLabel_2);
-		
 		JLabel lblNewLabel_3 = new JLabel("Especialidad");
-		lblNewLabel_3.setBounds(354, 333, 120, 22);
+		lblNewLabel_3.setBounds(365, 261, 120, 22);
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_3.setForeground(Color.white);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -156,7 +146,7 @@ public class AltaDoctor extends JDialog {
 		//BOTON FUNCIONALIDAD
 		
 		JButton btnAnadir = new JButton("DAR DE ALTA DOCTOR");
-		btnAnadir.setBounds(450, 400, 254, 38);
+		btnAnadir.setBounds(435, 322, 254, 38);
 		btnAnadir.setFont(new Font("Calibri", Font.PLAIN, 28));
 		btnAnadir.setForeground(new Color(0, 0, 0));
 		btnAnadir.setBackground(new Color (207, 241, 255));
@@ -175,8 +165,8 @@ public class AltaDoctor extends JDialog {
 				
 
 		
-					String sentencia2="Insert into dentiapp.doctor (DNI,Nombre,usuarios_idusuarios,especialidad_idespecialidad)values('"
-							+tf2.getText()+"','"+tf1.getText()+"',"+tf3.getText()+"," + nid +");";
+					String sentencia2="Insert into dentiapp.doctor (DNIdoctor,nombre_doctor,idespecialidad)values('"
+							+tf1.getText()+"','"+tf2.getText()+"'," + nid +");";
 				
 					
 					boolean status2 = false;
@@ -210,15 +200,6 @@ public class AltaDoctor extends JDialog {
 		ImageIcon imagen2= new ImageIcon(imagen.getImage().getScaledInstance(lblFotoUser.getWidth(), lblFotoUser.getHeight(), Image.SCALE_SMOOTH));
 		lblFotoUser.setIcon(imagen2);
 		contentPanel.add(lblFotoUser);
-		
-		
-		
-		tf3 = new JTextField();
-		tf3.setForeground(new Color(192, 192, 192));
-		tf3.setFont(new Font("Calibri", Font.PLAIN, 15));
-		tf3.setBounds(494, 265, 189, 30);
-		contentPanel.add(tf3);
-		tf3.setColumns(10);
 
 		
 		

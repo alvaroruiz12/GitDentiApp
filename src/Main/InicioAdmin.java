@@ -173,18 +173,7 @@ public class InicioAdmin extends JFrame implements ActionListener {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_5);
 
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Eliminar citas");
-		mntmNewMenuItem_6.setBackground(new Color(207, 241, 255));
-		mntmNewMenuItem_6.setForeground(Color.black);
-		mntmNewMenuItem_6.setFont(new Font("Arial", Font.PLAIN, 25));
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boolean modal3 = true;
-				EliminarCitas eliminarCitas = new EliminarCitas(a, con, padre, modal3);
-				eliminarCitas.setVisible(true);
-			}
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
 		
 		JMenuItem  mntmNewMenuItem_1= new JMenuItem("Consultar citas");
 		mntmNewMenuItem_1.setBackground(new Color(207, 241, 255));

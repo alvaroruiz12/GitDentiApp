@@ -73,7 +73,6 @@ public class AltaProveedor extends JDialog {
 		
 
 		txCIF = new JTextField();
-		txCIF.setForeground(new Color(192, 192, 192));
 		txCIF.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txCIF.setBounds(497, 125, 189, 30);
 		contentPanel.add(txCIF);
@@ -87,7 +86,6 @@ public class AltaProveedor extends JDialog {
 		//SEGUNDA SELECCION
 		//text field apellidos
 		txNombre = new JTextField();
-		txNombre.setForeground(new Color(192, 192, 192));
 		txNombre.setFont(new Font("Calibri", Font.PLAIN, 15));
 		txNombre.setBounds(497, 193, 189, 30);
 		contentPanel.add(txNombre);
@@ -175,14 +173,12 @@ public class AltaProveedor extends JDialog {
 				
 		
 		textoTelefono = new JTextField();
-		textoTelefono.setForeground(new Color(192, 192, 192));
 		textoTelefono.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textoTelefono.setBounds(497, 253, 189, 30);
 		contentPanel.add(textoTelefono);
 		textoTelefono.setColumns(10);
 		
 		textoCorreo = new JTextField();
-		textoCorreo.setForeground(new Color(192, 192, 192));
 		textoCorreo.setFont(new Font("Calibri", Font.PLAIN, 15));
 		textoCorreo.setBounds(497, 316, 189, 30);
 		contentPanel.add(textoCorreo);

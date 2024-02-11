@@ -99,7 +99,7 @@ public class DoctorModificar extends JDialog {
 				tfNombre = new JTextField();
 				tfNombre.setText("Introduzca Nombre");
 				tfNombre.setFont(new Font("Calibri", Font.PLAIN, 15));
-				tfNombre.setBounds(124, 304, 189, 30);
+				tfNombre.setBounds(186, 307, 189, 30);
 				contentPane.add(tfNombre);
 				tfNombre.setColumns(10);
 				
@@ -110,19 +110,31 @@ public class DoctorModificar extends JDialog {
 				lblFotoUser.setIcon(imagen2);
 				contentPane.add(lblFotoUser);
 				
-				JButton btnVolver = new JButton("Volver");
-				btnVolver.setBounds(23, 10, 76, 64);
-				btnVolver.setBackground(new Color(207, 241, 255));
-				btnVolver.setForeground(new Color(255, 255, 255));
+				JButton btnVolver = new JButton("VOLVER");
+
 				btnVolver.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
 						dispose();
 					}
 				});
-				ImageIcon i7 = new ImageIcon(getClass().getResource("volver.png"));
-				ImageIcon i8 = new ImageIcon(i7.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
-				btnVolver.setIcon(i8);
+				btnVolver.setBounds(934, 11, 140, 47);
+				ImageIcon imagen34 = new ImageIcon(getClass().getResource("boton.png"));
+
+				ImageIcon imagen63 = new ImageIcon(
+						imagen34.getImage().getScaledInstance(btnVolver.getWidth(), btnVolver.getHeight(), Image.SCALE_SMOOTH));
+				btnVolver.setIcon(imagen63);
+
+				// Eliminar el borde del botón para que la imagen sea visible
+				btnVolver.setBorderPainted(false);
+				btnVolver.setContentAreaFilled(false);
+
+				// Establecer el texto sobre la imagen
+				btnVolver.setHorizontalTextPosition(SwingConstants.CENTER);
+				btnVolver.setVerticalTextPosition(SwingConstants.CENTER);
+
+				// Personalizar el estilo del texto
+				btnVolver.setForeground(Color.WHITE); // Color del texto
+				btnVolver.setFont(new Font("Arial", Font.BOLD, 16)); // Tipo de letra y tamaño
 				contentPane.add(btnVolver);
 				
 				
@@ -170,7 +182,7 @@ public class DoctorModificar extends JDialog {
 				}
 
 				
-				comboEspecialidad.setBounds(124, 361, 189, 30);
+				comboEspecialidad.setBounds(186, 364, 189, 30);
 				contentPane.add(comboEspecialidad);
 				
 				
@@ -227,7 +239,7 @@ public class DoctorModificar extends JDialog {
 						
 					}
 				});
-				btnRelleno.setBounds(572, 112, 89, 23);
+				btnRelleno.setBounds(573, 107, 120, 33);
 				contentPane.add(btnRelleno);
 		
                 
@@ -270,12 +282,17 @@ public class DoctorModificar extends JDialog {
                 
 				
 				JLabel lblNewLabel = new JLabel("Nombre");
-				lblNewLabel.setBounds(23, 310, 46, 14);
-				
+				lblNewLabel.setBounds(23, 310, 128, 27);
+				lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+				lblNewLabel.setForeground(Color.white);
+				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				contentPane.add(lblNewLabel);
 				
 				JLabel lblNewLabel_2 = new JLabel("Especialidad");
-				lblNewLabel_2.setBounds(23, 369, 76, 14);
+				lblNewLabel_2.setBounds(23, 369, 128, 25);
+				lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
+				lblNewLabel_2.setForeground(Color.white);
+				lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 				contentPane.add(lblNewLabel_2);
 
                 JLabel fondo = new JLabel();

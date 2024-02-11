@@ -75,7 +75,6 @@ public class AltaPacientes extends JDialog {
 		//
 		tf1 = new JTextField();
 		tf1.setText(" ");
-		tf1.setForeground(new Color(192, 192, 192));
 
 		tf1.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf1.setBounds(456, 135, 189, 30);
@@ -85,7 +84,6 @@ public class AltaPacientes extends JDialog {
 		//SEGUNDA SELECCION
 		//text field apellidos
 		tf2 = new JTextField();
-		tf2.setForeground(new Color(192, 192, 192));
 		tf2.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf2.setBounds(456, 195, 189, 30);
 		contentPanel.add(tf2);
@@ -129,8 +127,8 @@ public class AltaPacientes extends JDialog {
 				
 				
 					
-					String sentencia="Insert into dentiapp.pacientes (DNIpaciente,Nombre,Apellidos,correo,telefono,edad)values('"
-							+tf3.getText()+"','"+tf1.getText()+"','"+tf2.getText()+"','"+tf4.getText()+"',"+tf5.getText()+","+tf6.getText()+");";
+					String sentencia="Insert into dentiapp.pacientes (DNIpaciente,nombre_paciente,apellido_paciente,correo,telefono,edad)values('"
+							+tf3.getText().trim()+"','"+tf1.getText().trim()+"','"+tf2.getText().trim()+"','"+tf4.getText()+"',"+tf5.getText()+","+tf6.getText()+");";
 				
 					
 					
@@ -168,28 +166,24 @@ public class AltaPacientes extends JDialog {
 		
 		
 		tf3 = new JTextField();
-		tf3.setForeground(new Color(192, 192, 192));
 		tf3.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf3.setBounds(456, 265, 189, 30);
 		contentPanel.add(tf3);
 		tf3.setColumns(10);
 		
 		tf4 = new JTextField();
-		tf4.setForeground(new Color(192, 192, 192));
 		tf4.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf4.setBounds(456, 333, 189, 30);
 		contentPanel.add(tf4);
 		tf4.setColumns(10);
 		
 		tf5 = new JTextField();
-		tf5.setForeground(new Color(192, 192, 192));
 		tf5.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf5.setBounds(456, 403, 189, 30);
 		contentPanel.add(tf5);
 		tf5.setColumns(10);
 		
 		tf6 = new JTextField();
-		tf6.setForeground(new Color(192, 192, 192));
 		tf6.setFont(new Font("Calibri", Font.PLAIN, 15));
 		tf6.setBounds(456, 473, 189, 30);
 		contentPanel.add(tf6);

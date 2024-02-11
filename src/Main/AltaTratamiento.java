@@ -148,7 +148,7 @@ public class AltaTratamiento extends JDialog {
 							}
 						}
 						
-						float precio=0;
+						int precio=Integer.parseInt(CosteTexto.getText().toString());
 						
 						String sentencia="INSERT INTO tratamientos (coste_tratamiento,nombre_tratamiento,idmateriales)"
 								+ " values ("+precio+",'"+NombreTexto.getText().toString()
