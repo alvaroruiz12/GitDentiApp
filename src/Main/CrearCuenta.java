@@ -60,7 +60,7 @@ public class CrearCuenta extends JDialog {
 		ArrayList<String> b = null;
 		Conexion con = null;
 		try {
-			CrearCuenta dialog = new CrearCuenta(b, con, null, true);
+			CrearCuenta dialog = new CrearCuenta();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -72,13 +72,13 @@ public class CrearCuenta extends JDialog {
 	 /**
 	 * Create the dialog.
 	 */
-	public CrearCuenta(ArrayList<String> a, Conexion con, InicioDoctor parent, boolean modal) {
-		super(parent, modal);
+	public CrearCuenta() {
+
 		setBounds(new Rectangle(62, 0, 854, 480));
 		getContentPane().setBounds(new Rectangle(0, 0, 900, 800));
 		Conexion solicitar = new Conexion();
 		Pedidos pedido = new Pedidos();
-		ArrayList<String> usuario = a;
+	
 		Conexion conexion = con;
 		txtIntroduzcaNombre = new JTextField();
 		tfpassword = new JTextField();
